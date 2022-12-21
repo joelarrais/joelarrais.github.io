@@ -11388,6 +11388,7 @@ p {
   background: #fff;
   padding: 20px 20px 20px 60px;
   border-radius: 0;
+  min-height: 220px;
 }
 
 .testimonial-card-title {
