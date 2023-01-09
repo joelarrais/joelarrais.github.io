@@ -11382,6 +11382,14 @@ p {
   border-radius: 50%;
 }
 
+.testimonial-card-img2 {
+  background: #fff;
+  padding: 4px;
+  width: 65px;
+  height: 65px;
+  border-radius: 0%;
+}
+
 .testimonial-card-body {
   text-align: left;
   border: 1px solid #dee2e6;
