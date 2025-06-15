@@ -1,16 +1,80 @@
-O Rui tem 16 anos. O Pedro tem menos 6 anos. Quantos anos tem o Pedro? === 10
-O João tinha 15 figurinhas. Perdeu 4. Quantos tem agora? === 11
-A Rita tinha 17 euros. Recebeu mais 5 euros. Quanto tem agora? === 22
-A biblioteca tinha 20 livros. Emprestaram 6. Quantos ficaram? === 14
-Uma turma do 1.º ano tem 27 alunos. 13 são raparigas. Quantos rapazes há na turma? === 14
-A Aldemira tinha 18 pilhas recarregáveis. Agora só encontra 12. Quantas perdeu? === 6
-O Pedro tinha 21 livros. Deu 4 à Ana. Quantos ficaram com o Pedro? === 17
-A Carolina tem 14 anos. O Tiago tem mais 5 anos. Quantos anos tem o Tiago? === 19
-A Marta tinha 12 canetas. Ganhou mais 6. Quantos tem agora? === 18
-O Miguel tinha 16 euros. Gastou 7 euros. Com quanto ficou? === 9
-A Sofia leu 10 livros esta semana e mais 2 no fim de semana. Quantos leu no total? === 12
-O André tinha 23 cromos. Perdeu 3. Quantos tem agora? === 20
-A biblioteca tinha 18 livros. Emprestaram 9. Quantos ficaram? === 9
-O Ricardo tinha 14 ovos. Usou 6. Quantos restam? === 8
-A Carolina tem 13 anos. A Rita tem menos 4 anos. Quantos anos tem a Rita? === 9
-A estante tem 25 livros. 7 são de aventuras. Quantos são de outro tipo?
+A Ana tem 12 anos. A Marta tem mais 3 anos. Quantos anos tem a Marta? === 15
+O Carlos tinha 14 euros. Gastou 5 euros. Com quanto ficou? === 9
+A Inês tinha 18 figurinhas. Deu 6 à Sofia. Quantas ficaram com a Inês? === 12
+O Miguel tem 10 anos. O João tem menos 4 anos. Quantos anos tem o João? === 6
+A Beatriz tinha 20 maçãs. Usou 7 para fazer um bolo. Quantas tem agora? === 13
+O Tiago caminhou 5 km de manhã e 3 km à tarde. Quantos km caminhou no total? === 8
+A Carolina tinha 16 lápis. Perdeu 4. Quantos tem agora? === 12
+O Diogo tem 11 anos. O Ricardo tem mais 5 anos. Quantos anos tem o Ricardo? === 16
+A Rita tinha 15 pilhas recarregáveis. Agora só encontra 9. Quantas perdeu? === 6
+O João tinha 22 carrinhos. Deu 7 ao Pedro. Quantos ficaram com o João? === 15
+A Sofia leu 8 livros esta semana e mais 3 no fim de semana. Quantos leu no total? === 11
+O Rui tinha 19 ovos. Usou 8. Quantos ovos ainda restam? === 11
+A Luísa tem 13 anos. A Aldemira tem menos 6 anos. Quantos anos tem a Aldemira? === 7
+O Pedro tinha 17 canetas. Ganhou mais 5. Quantas tem agora? === 22
+A Carolina tinha 10 bolas. Perdeu 4. Quantas tem agora? === 6
+O Miguel tinha 20 euros. Gastou 12 euros. Com quanto ficou? === 8
+A Inês tinha 14 figurinhas. Deu 3 à Ana. Quantas ficaram com a Inês? === 11
+O Ricardo tem 9 anos. O André tem mais 6 anos. Quantos anos tem o André? === 15
+A Marta tinha 12 livros. Emprestou 5 à Beatriz. Quantos ficaram com a Marta? === 7
+O João tinha 16 cromos. Perdeu 6. Quantos tem agora? === 10
+O Tiago tem 15 anos. O Miguel tem menos 7 anos. Quantos anos tem o Miguel? === 8
+A Sofia tem 13 anos. A Carolina tem mais 4 anos. Quantos anos tem a Carolina? === 17
+O André tinha 18 euros. Gastou 9 euros. Com quanto ficou? === 9
+A Inês tinha 14 lápis. Perdeu 5. Quantos tem agora? === 9
+O Pedro tinha 21 carrinhos. Deu 6 ao João. Quantos ficaram com o Pedro? === 15
+A Rita leu 10 livros durante a semana e mais 2 no fim de semana. Quantos leu no total? === 12
+O Ricardo tinha 20 pilhas recarregáveis. Agora só encontra 11. Quantas perdeu? === 9
+A Luísa tinha 12 figurinhas. Ganhou mais 4. Quantas tem agora? === 16
+O Rui tem 16 anos. O Diogo tem mais 5 anos. Quantos anos tem o Diogo? === 21
+A Marta tinha 18 ovos. Usou 6. Quantos restam? === 12
+O Carlos tinha 25 euros. Gastou 10 euros. Com quanto ficou? === 15
+A Beatriz tinha 11 livros. Emprestou 3 à Ana. Quantos ficaram com a Beatriz? === 8
+O João tinha 14 cromos. Perdeu 5. Quantos tem agora? === 9
+A Carolina tem 17 anos. A Sofia tem menos 8 anos. Quantos anos tem a Sofia? === 9
+O Pedro tinha 22 figurinhas. Deu 4 ao Tiago. Quantos ficaram com o Pedro? === 18
+A Rita tinha 19 canetas. Perdeu 7. Quantas tem agora? === 12
+O Miguel tinha 16 euros. Recebeu mais 6 euros. Quanto tem agora? === 22
+A Ana tinha 20 bolas. Usou 5. Quantas tem agora? === 15
+O André tem 11 anos. O Carlos tem mais 6 anos. Quantos anos tem o Carlos? === 17
+A Sofia tinha 13 pilhas recarregáveis. Agora só encontra 9. Quantas perdeu? === 4
+O João tinha 15 carrinhos. Deu 5 ao Rui. Quantos ficaram com o João? === 10
+A Marta tem 12 anos. A Beatriz tem mais 3 anos. Quantos anos tem a Beatriz? === 15
+O Tiago tinha 18 livros. Emprestou 4 ao Miguel. Quantos ficaram com o Tiago? === 14
+A Luísa tinha 16 ovos. Usou 8. Quantos restam? === 8
+O Ricardo tinha 10 cromos. Ganhou mais 7. Quantos tem agora? === 17
+A Inês tem 14 anos. A Carolina tem menos 6 anos. Quantos anos tem a Carolina? === 8
+O Rui tinha 13 canetas. Perdeu 3. Quantas tem agora? === 10
+A Ana tinha 15 lápis. Deu 5 à Marta. Quantos ficaram com a Ana? === 10
+O João leu 9 livros esta semana e mais 4 no fim de semana. Quantos leu no total? === 13
+A Sofia tinha 18 figurinhas. Perdeu 6. Quantas tem agora? === 12
+O Miguel tinha 18 legos. Perdeu 5. Quantos legos ficaram com o Miguel? === 13  
+A Ana tinha 25 legos. Recebeu mais 4. Quantos legos tem agora? === 29  
+O Tiago tinha 28 legos. Deu 3 legos à Marta. Quantos ficaram com o Tiago? === 25  
+A Sofia tinha 22 legos. Agora só encontra 17. Quantos legos perdeu? === 5  
+O Carlos tem 19 legos. A Rita tem mais 6. Quantos legos tem a Rita? === 25  
+A Beatriz tinha 20 legos. Perdeu 7. Quantos legos ficaram com a Beatriz? === 13  
+O João tinha 26 legos. Recebeu mais 3. Quantos legos tem agora? === 29  
+A Carolina tinha 23 legos. Deu 4 legos à Inês. Quantos ficaram com a Carolina? === 19  
+Para construir um castelo, o Pedro precisa de 30 legos. Já tem 24. Quantos legos faltam? === 6  
+O Rui tinha 21 legos. Agora só encontra 14. Quantos legos perdeu? === 7  
+A Marta tem 17 legos. A Sofia tem mais 5. Quantos legos tem a Sofia? === 22  
+O Ricardo tinha 15 legos. Perdeu 6. Quantos legos ficaram com o Ricardo? === 9  
+A Inês tinha 20 legos. Recebeu mais 8. Quantos legos tem agora? === 28  
+O Diogo tinha 16 legos. Deu 4 legos ao Tiago. Quantos ficaram com o Diogo? === 12  
+A Rita tinha 19 legos. Agora só encontra 11. Quantos legos perdeu? === 8  
+O André tem 13 legos. O João tem mais 7. Quantos legos tem o João? === 20  
+A Ana tinha 24 legos. Perdeu 5. Quantos legos ficaram com a Ana? === 19  
+O Pedro tinha 22 legos. Deu 6 legos ao Carlos. Quantos ficaram com o Pedro? === 16  
+Para construir um castelo, a Carolina precisa de 29 legos. Já tem 21. Quantos legos faltam? === 8  
+O Miguel tinha 27 legos. Agora só encontra 18. Quantos legos perdeu? === 9  
+A Beatriz tem 14 legos. A Marta tem mais 6. Quantos legos tem a Marta? === 20  
+O Rui tinha 23 legos. Perdeu 7. Quantos legos ficaram com o Rui? === 16  
+A Luísa tinha 26 legos. Recebeu mais 3. Quantos legos tem agora? === 29  
+O João tinha 25 legos. Deu 5 legos ao Tiago. Quantos ficaram com o João? === 20  
+A Sofia tinha 29 legos. Agora só encontra 22. Quantos legos perdeu? === 7  
+O Ricardo tem 18 legos. O Diogo tem mais 4. Quantos legos tem o Diogo? === 22  
+A Marta tinha 20 legos. Perdeu 6. Quantos legos ficaram com a Marta? === 14  
+O Carlos tinha 19 legos. Recebeu mais 5. Quantos legos tem agora? === 24  
+Para construir um castelo, a Inês precisa de 28 legos. Já tem 20. Quantos legos faltam? === 8  
+O Tiago tinha 24 legos. Deu 4 legos ao Rui. Quantos ficaram com o Tiago? === 20
