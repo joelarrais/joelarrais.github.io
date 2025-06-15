@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Treino de Matemática</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f9ff;
+      color: #333;
+      text-align: center;
+      padding: 30px;
+    }
+    h1 { font-size: 2em; }
+    #pergunta { font-size: 1.8em; margin: 30px 0; }
+    input[type="number"], input[type="text"] {
+      font-size: 1.5em;
+      padding: 10px;
+      width: 200px;
+      text-align: center;
+    }
+    button {
+      font-size: 1.2em;
+      padding: 10px 20px;
+      margin-top: 20px;
+    }
+    #pontuacao { margin-top: 30px; font-size: 1.2em; color: green; }
+  </style>
+</head>
+<body>
+
+  <h1 id="titulo">Vamos praticar!</h1>
+  <div id="pergunta">Carregando...</div>
+  <input id="resposta" type="text" placeholder="?" />
+  <br>
+  <button onclick="verificarResposta()">Verificar</button>
+  <div id="pontuacao"></div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const nome = params.get("nome") || "Francisco";
+    const digitos = parseInt(params.get("digitos") || "2");
+    const modo = params.get("modo") || "soma";
+
+    let pontos = 0;
+    let numero1 = 0, numero2 = 0;
+    let resposta_correta = null;
+
+    let perguntas = [];
+    let pergunta_atual = "";
+
+    document.getElementById("titulo").textContent = `Treino de Matemática - ${nome}`;
+
+    function gerarNumeros(op) {
+      numero1 = Math.floor(Math.random() * Math.pow(10, digitos));
+      numero2 = Math.floor(Math.random() * Math.pow(10, digitos));
+      if (op === "subtracao" && numero2 > numero1) [numero1, numero2] = [numero2, numero1];
+
+      const operador = op === "soma" ? "+" : "-";
+      resposta_correta = op === "soma" ? numero1 + numero2 : numero1 - numero2;
+      document.getElementById("pergunta").textContent = `${numero1} ${operador} ${numero2} = ?`;
+    }
+
+    function atualizarPontuacao() {
+      const estrelas = "⭐".repeat(pontos);
+      document.getElementById("pontuacao").textContent = `Pontuação de ${nome}: ${pontos} ${estrelas}`;
+    }
+
+    function verificarResposta() {
+      const resposta = document.getElementById("resposta").value.trim();
+      const correta = resposta_correta.toString();
+      if (resposta === correta) {
+        alert("Muito bem! 😊");
+        pontos++;
+      } else {
+        alert(`Resposta incorreta. A resposta certa era ${correta}.`);
+        pontos = Math.max(0, pontos - 1);
+      }
+      atualizarPontuacao();
+      document.getElementById("resposta").value = "";
+      if (modo === "soma" || modo === "subtracao") {
+        gerarNumeros(modo);
+      } else {
+        mostrarNovaPergunta();
+      }
+    }
+
+    function mostrarNovaPergunta() {
+      if (perguntas.length === 0) {
+        document.getElementById("pergunta").textContent = "Sem mais perguntas. Recarrega a página.";
+        resposta_correta = "";
+        return;
+      }
+      const idx = Math.floor(Math.random() * perguntas.length);
+      const [texto, resp] = perguntas[idx];
+      perguntas.splice(idx, 1); // remove usada
+      pergunta_atual = texto;
+      resposta_correta = resp;
+      document.getElementById("pergunta").textContent = texto;
+    }
+
+    function carregarFicheiroServidor() {
+      fetch("perguntas.txt")
+        .then(response => {
+          if (!response.ok) throw new Error("Erro ao carregar o ficheiro.");
+          return response.text();
+        })
+        .then(text => {
+          const linhas = text.split("\n").filter(l => l.includes("==="));
+          perguntas = linhas.map(linha => {
+            const [pergunta, resposta] = linha.split("===").map(s => s.trim());
+            return [pergunta, resposta];
+          });
+          pontos = 0;
+          atualizarPontuacao();
+          mostrarNovaPergunta();
+        })
+        .catch(err => {
+          document.getElementById("pergunta").textContent = "Erro ao carregar o ficheiro de perguntas.";
+          console.error(err);
+        });
+    }
+
+    function iniciar() {
+      if (modo === "soma" || modo === "subtracao") {
+        gerarNumeros(modo);
+        atualizarPontuacao();
+      } else if (modo === "pergunta") {
+        carregarFicheiroServidor();
+      }
+    }
+
+    iniciar();
+  </script>
+</body>
+</html>

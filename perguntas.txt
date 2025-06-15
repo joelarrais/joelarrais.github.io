@@ -1,0 +1,16 @@
+O Rui tem 16 anos. O Pedro tem menos 6 anos. Quantos anos tem o Pedro? === 10
+O João tinha 15 figurinhas. Perdeu 4. Quantos tem agora? === 11
+A Rita tinha 17 euros. Recebeu mais 5 euros. Quanto tem agora? === 22
+A biblioteca tinha 20 livros. Emprestaram 6. Quantos ficaram? === 14
+Uma turma do 1.º ano tem 27 alunos. 13 são raparigas. Quantos rapazes há na turma? === 14
+A Aldemira tinha 18 pilhas recarregáveis. Agora só encontra 12. Quantas perdeu? === 6
+O Pedro tinha 21 livros. Deu 4 à Ana. Quantos ficaram com o Pedro? === 17
+A Carolina tem 14 anos. O Tiago tem mais 5 anos. Quantos anos tem o Tiago? === 19
+A Marta tinha 12 canetas. Ganhou mais 6. Quantos tem agora? === 18
+O Miguel tinha 16 euros. Gastou 7 euros. Com quanto ficou? === 9
+A Sofia leu 10 livros esta semana e mais 2 no fim de semana. Quantos leu no total? === 12
+O André tinha 23 cromos. Perdeu 3. Quantos tem agora? === 20
+A biblioteca tinha 18 livros. Emprestaram 9. Quantos ficaram? === 9
+O Ricardo tinha 14 ovos. Usou 6. Quantos restam? === 8
+A Carolina tem 13 anos. A Rita tem menos 4 anos. Quantos anos tem a Rita? === 9
+A estante tem 25 livros. 7 são de aventuras. Quantos são de outro tipo?
