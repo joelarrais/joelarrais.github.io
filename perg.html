@@ -2,135 +2,126 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <title>Treino de Matemática</title>
+  <title>Perguntas Matemáticas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f4f9ff;
-      color: #333;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: #e6f7ff;
       text-align: center;
-      padding: 30px;
+      padding: 20px;
     }
-    h1 { font-size: 2em; }
-    #pergunta { font-size: 1.8em; margin: 30px 0; }
-    input[type="number"], input[type="text"] {
+    h1 {
+      font-size: 2.2em;
+      color: #003366;
+    }
+    #pergunta {
+      font-size: 1.8em;
+      margin: 30px 0;
+      color: #333;
+    }
+    input {
       font-size: 1.5em;
       padding: 10px;
-      width: 200px;
+      width: 80%;
       text-align: center;
+      margin-bottom: 20px;
+      border: 2px solid #aaa;
+      border-radius: 10px;
     }
     button {
-      font-size: 1.2em;
+      font-size: 1.3em;
       padding: 10px 20px;
-      margin-top: 20px;
+      margin: 10px;
+      background-color: #0066cc;
+      color: white;
+      border: none;
+      border-radius: 10px;
     }
-    #pontuacao { margin-top: 30px; font-size: 1.2em; color: green; }
+    #pontuacao {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: green;
+    }
   </style>
 </head>
 <body>
-
-  <h1 id="titulo">Vamos praticar!</h1>
-  <div id="pergunta">Carregando...</div>
-  <input id="resposta" type="text" placeholder="?" />
+  <h1 id="titulo">Desafio de Perguntas</h1>
+  <div id="pergunta">A carregar perguntas...</div>
+  <input id="resposta" type="text" placeholder="Escreve a resposta" />
   <br>
   <button onclick="verificarResposta()">Verificar</button>
+  <button onclick="reiniciarPontuacao()">Reiniciar</button>
   <div id="pontuacao"></div>
+
+  <audio id="somAcerto" src="acerto.mp3" preload="auto"></audio>
+  <audio id="somErro" src="erro.mp3" preload="auto"></audio>
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const nome = params.get("nome") || "Francisco";
-    const digitos = parseInt(params.get("digitos") || "2");
-    const modo = params.get("modo") || "soma";
-
-    let pontos = 0;
-    let numero1 = 0, numero2 = 0;
-    let resposta_correta = null;
+    const nome = params.get("nome") || "Aluno";
+    let pontos = parseInt(localStorage.getItem("pontos_perguntas_" + nome)) || 0;
 
     let perguntas = [];
-    let pergunta_atual = "";
-
-    document.getElementById("titulo").textContent = `Treino de Matemática - ${nome}`;
-
-    function gerarNumeros(op) {
-      numero1 = Math.floor(Math.random() * Math.pow(10, digitos));
-      numero2 = Math.floor(Math.random() * Math.pow(10, digitos));
-      if (op === "subtracao" && numero2 > numero1) [numero1, numero2] = [numero2, numero1];
-
-      const operador = op === "soma" ? "+" : "-";
-      resposta_correta = op === "soma" ? numero1 + numero2 : numero1 - numero2;
-      document.getElementById("pergunta").textContent = `${numero1} ${operador} ${numero2} = ?`;
-    }
+    let perguntaAtual = null;
 
     function atualizarPontuacao() {
+      localStorage.setItem("pontos_perguntas_" + nome, pontos);
       const estrelas = "⭐".repeat(pontos);
       document.getElementById("pontuacao").textContent = `Pontuação de ${nome}: ${pontos} ${estrelas}`;
     }
 
+    function reiniciarPontuacao() {
+      pontos = 0;
+      localStorage.removeItem("pontos_perguntas_" + nome);
+      atualizarPontuacao();
+    }
+
+    function novaPergunta() {
+      if (perguntas.length === 0) {
+        document.getElementById("pergunta").textContent = "Sem mais perguntas.";
+        return;
+      }
+      const idx = Math.floor(Math.random() * perguntas.length);
+      perguntaAtual = perguntas[idx];
+      document.getElementById("pergunta").textContent = perguntaAtual.q;
+    }
+
     function verificarResposta() {
       const resposta = document.getElementById("resposta").value.trim();
-      const correta = resposta_correta.toString();
-      if (resposta === correta) {
+      if (resposta === perguntaAtual.a) {
+        document.getElementById("somAcerto").play();
         alert("Muito bem! 😊");
         pontos++;
       } else {
-        alert(`Resposta incorreta. A resposta certa era ${correta}.`);
+        document.getElementById("somErro").play();
+        alert(`Resposta errada! A resposta certa era ${perguntaAtual.a}`);
         pontos = Math.max(0, pontos - 1);
       }
       atualizarPontuacao();
       document.getElementById("resposta").value = "";
-      if (modo === "soma" || modo === "subtracao") {
-        gerarNumeros(modo);
-      } else {
-        mostrarNovaPergunta();
-      }
+      novaPergunta();
     }
 
-    function mostrarNovaPergunta() {
-      if (perguntas.length === 0) {
-        document.getElementById("pergunta").textContent = "Sem mais perguntas. Recarrega a página.";
-        resposta_correta = "";
-        return;
-      }
-      const idx = Math.floor(Math.random() * perguntas.length);
-      const [texto, resp] = perguntas[idx];
-      perguntas.splice(idx, 1); // remove usada
-      pergunta_atual = texto;
-      resposta_correta = resp;
-      document.getElementById("pergunta").textContent = texto;
-    }
-
-    function carregarFicheiroServidor() {
-      fetch("perguntas.txt")
-        .then(response => {
-          if (!response.ok) throw new Error("Erro ao carregar o ficheiro.");
-          return response.text();
-        })
-        .then(text => {
-          const linhas = text.split("\n").filter(l => l.includes("==="));
-          perguntas = linhas.map(linha => {
-            const [pergunta, resposta] = linha.split("===").map(s => s.trim());
-            return [pergunta, resposta];
-          });
-          pontos = 0;
-          atualizarPontuacao();
-          mostrarNovaPergunta();
-        })
-        .catch(err => {
-          document.getElementById("pergunta").textContent = "Erro ao carregar o ficheiro de perguntas.";
-          console.error(err);
+    async function carregarPerguntas() {
+      try {
+        const resp = await fetch("perguntas.txt");
+        const texto = await resp.text();
+        const linhas = texto.split("\n").map(l => l.trim()).filter(l => l.includes("==="));
+        perguntas = linhas.map(l => {
+          const [q, a] = l.split("===").map(x => x.trim());
+          return { q, a };
         });
-    }
-
-    function iniciar() {
-      if (modo === "soma" || modo === "subtracao") {
-        gerarNumeros(modo);
-        atualizarPontuacao();
-      } else if (modo === "pergunta") {
-        carregarFicheiroServidor();
+        novaPergunta();
+      } catch (err) {
+        document.getElementById("pergunta").textContent = "Erro ao carregar perguntas.";
+        console.error("Erro a carregar perguntas:", err);
       }
     }
 
-    iniciar();
+    document.getElementById("titulo").textContent = `Olá, ${nome}! Responde às perguntas!`;
+    atualizarPontuacao();
+    carregarPerguntas();
   </script>
 </body>
 </html>
