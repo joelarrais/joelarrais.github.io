@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Jogo de Contas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: #fffbe6;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 2.2em;
+      color: #004d99;
+    }
+    #pergunta {
+      font-size: 2.5em;
+      margin: 30px 0;
+      color: #333;
+    }
+    input {
+      font-size: 2em;
+      padding: 10px;
+      width: 80%;
+      text-align: center;
+      margin-bottom: 20px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+    }
+    button {
+      font-size: 1.5em;
+      padding: 10px 20px;
+      margin: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 10px;
+    }
+    #pontuacao {
+      margin-top: 20px;
+      font-size: 1.3em;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="titulo">Vamos fazer contas!</h1>
+  <div id="pergunta">A carregar...</div>
+  <input id="resposta" type="text" placeholder="Resposta" />
+  <br>
+  <button onclick="verificarResposta()">Verificar</button>
+  <div id="pontuacao"></div>
+
+  <audio id="somAcerto" src="acerto.mp3" preload="auto"></audio>
+  <audio id="somErro" src="erro.mp3" preload="auto"></audio>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const nome = params.get("nome") || "Aluno";
+    let pontos = parseInt(localStorage.getItem("pontos_" + nome)) || 0;
+
+    let numero1 = 0, numero2 = 0;
+    let operador = "+";
+    let resposta_correta = null;
+
+    function gerarDigitoSemVaiUm() {
+      let d1 = Math.floor(Math.random() * 10);
+      let d2 = Math.floor(Math.random() * (10 - d1));
+      return [d1, d2];
+    }
+
+    function gerarConta() {
+      let tipo = Math.random() < 0.5 ? "soma" : "subtracao";
+      let n1 = 0, n2 = 0;
+      for (let i = 0; i < 2; i++) {
+        let [d1, d2] = gerarDigitoSemVaiUm();
+        n1 += d1 * (10 ** i);
+        n2 += d2 * (10 ** i);
+      }
+      if (tipo === "soma") {
+        if (n1 + n2 > 100) return gerarConta();
+        numero1 = n1;
+        numero2 = n2;
+        operador = "+";
+        resposta_correta = numero1 + numero2;
+      } else {
+        if (n2 > n1) [n1, n2] = [n2, n1];
+        numero1 = n1;
+        numero2 = n2;
+        operador = "-";
+        resposta_correta = numero1 - numero2;
+      }
+      document.getElementById("pergunta").textContent = `${numero1} ${operador} ${numero2} = ?`;
+    }
+
+    function atualizarPontuacao() {
+      localStorage.setItem("pontos_" + nome, pontos);
+      const estrelas = "⭐".repeat(pontos);
+      document.getElementById("pontuacao").textContent = `Pontuação de ${nome}: ${pontos} ${estrelas}`;
+    }
+
+    function verificarResposta() {
+      const resposta = document.getElementById("resposta").value.trim();
+      if (resposta === resposta_correta.toString()) {
+        document.getElementById("somAcerto").play();
+        alert("Muito bem! 😊");
+        pontos++;
+      } else {
+        document.getElementById("somErro").play();
+        alert(`Ops! A resposta certa era ${resposta_correta}.`);
+        pontos = Math.max(0, pontos - 1);
+      }
+      atualizarPontuacao();
+      document.getElementById("resposta").value = "";
+      gerarConta();
+    }
+
+    function reiniciarPontuacao() {
+      pontos = 0;
+      localStorage.removeItem("pontos_" + nome);
+      atualizarPontuacao();
+    }
+
+    document.getElementById("titulo").textContent = `Olá, ${nome}! Vamos fazer contas!`;
+    atualizarPontuacao();
+    gerarConta();
+  </script>
+</body>
+</html>
