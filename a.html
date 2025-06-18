@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <title>Aprenda Somar e Subtrair - Versão Melhorada</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800&display=swap');
+    
+    :root {
+      --cor-primaria: #ff6f91;
+      --cor-secundaria: #3b82f6;
+      --cor-sucesso: #16a34a;
+      --cor-erro: #dc2626;
+      --cor-fundo: linear-gradient(135deg, #a8edea, #fed6e3);
+      --cor-container: white;
+      --sombra-container: 0 8px 30px rgba(0,0,0,0.15);
+      --cor-texto: #333;
+      --cor-texto-claro: #666;
+    }
+    
+    .modo-alto-contraste {
+      --cor-primaria: #ff3b3b;
+      --cor-secundaria: #0066cc;
+      --cor-sucesso: #00a651;
+      --cor-erro: #ff0000;
+      --cor-fundo: linear-gradient(135deg, #222, #444);
+      --cor-container: #111;
+      --sombra-container: 0 8px 30px rgba(255,255,255,0.1);
+      --cor-texto: #fff;
+      --cor-texto-claro: #ccc;
+    }
+
+    body {
+      font-family: 'Nunito', 'Fredoka One', Arial, sans-serif;
+      background: var(--cor-fundo);
+      text-align: center;
+      padding: 20px 10px;
+      color: var(--cor-texto);
+      user-select: none;
+      min-height: 100vh;
+      transition: background 0.5s ease;
+    }
+    
+    .container {
+      background: var(--cor-container);
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: var(--sombra-container);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: linear-gradient(90deg, var(--cor-primaria), var(--cor-secundaria));
+    }
+    
+    h1 {
+      font-size: 2.2em;
+      margin: 10px 0 15px;
+      color: var(--cor-primaria);
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      font-family: 'Fredoka One', cursive;
+    }
+    
+    .info-usuario {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding: 10px 15px;
+      background: rgba(59, 130, 246, 0.1);
+      border-radius: 12px;
+      font-size: 1.1em;
+    }
+    
+    .niveis {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px 0;
+      padding: 15px 0;
+      border-top: 2px dashed #eee;
+      border-bottom: 2px dashed #eee;
+    }
+    
+    .nivel {
+      text-align: center;
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: bold;
+      background: #f5f7ff;
+    }
+    
+    .nivel.ativo {
+      background: var(--cor-secundaria);
+      color: white;
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+    }
+    
+    .nivel i {
+      display: block;
+      font-size: 1.8em;
+      margin-bottom: 5px;
+    }
+    
+    .questao-container {
+      position: relative;
+      margin: 25px 0;
+    }
+    
+    .sequencia {
+      position: absolute;
+      top: -15px;
+      right: 0;
+      background: var(--cor-sucesso);
+      color: white;
+      padding: 3px 10px;
+      border-radius: 15px;
+      font-size: 0.9em;
+      font-weight: bold;
+      box-shadow: 0 3px 8px rgba(22, 163, 74, 0.3);
+    }
+    
+    .questao {
+      font-size: 3em;
+      margin: 20px 0;
+      color: var(--cor-secundaria);
+      font-weight: 800;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .entrada-resposta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
+    input[type="number"] {
+      font-size: 2em;
+      width: 140px;
+      padding: 12px;
+      border-radius: 15px;
+      border: 3px solid var(--cor-secundaria);
+      text-align: center;
+      outline: none;
+      transition: all 0.3s;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(59, 130, 246, 0.1);
+    }
+    
+    input[type="number"]:focus {
+      border-color: var(--cor-primaria);
+      box-shadow: 0 0 15px rgba(255, 111, 145, 0.3);
+    }
+    
+    .teclado-numerico {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    
+    .tecla-numero {
+      font-size: 1.8em;
+      padding: 15px;
+      background: #f0f5ff;
+      border: 2px solid #dbeafe;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: bold;
+    }
+    
+    .tecla-numero:hover {
+      background: #dbeafe;
+      transform: translateY(-2px);
+    }
+    
+    .tecla-numero:active {
+      transform: translateY(2px);
+    }
+    
+    .botoes-acao {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    
+    button {
+      font-size: 1.3em;
+      background: var(--cor-primaria);
+      border: none;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 15px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(255, 111, 145, 0.3);
+      transition: all 0.3s;
+      user-select: none;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    button:hover {
+      background: #d94f70;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 111, 145, 0.4);
+    }
+    
+    button:active {
+      transform: translateY(1px);
+    }
+    
+    .btn-secundario {
+      background: var(--cor-secundaria);
+      box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+    }
+    
+    .btn-secundario:hover {
+      background: #2563eb;
+    }
+    
+    .feedback {
+      font-size: 1.5em;
+      margin: 25px 0 15px;
+      min-height: 50px;
+      font-weight: 700;
+      transition: all 0.5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px;
+      border-radius: 12px;
+    }
+    
+    .feedback.correto {
+      color: var(--cor-sucesso);
+      background: rgba(22, 163, 74, 0.1);
+      animation: pulse 1s ease;
+    }
+    
+    .feedback.errado {
+      color: var(--cor-erro);
+      background: rgba(220, 38, 38, 0.1);
+      animation: shake 0.5s ease;
+    }
+    
+    .pontuacao-container {
+      background: rgba(59, 130, 246, 0.08);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 25px 0;
+    }
+    
+    .pontuacao {
+      font-size: 1.5em;
+      color: var(--cor-secundaria);
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    
+    .progresso {
+      height: 20px;
+      background: #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 15px 0;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .barra-progresso {
+      height: 100%;
+      background: linear-gradient(90deg, var(--cor-primaria), var(--cor-secundaria));
+      border-radius: 10px;
+      transition: width 0.5s ease;
+    }
+    
+    .estrelas {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      margin: 15px 0;
+    }
+    
+    .estrela {
+      font-size: 2em;
+      color: #e2e8f0;
+    }
+    
+    .estrela.ativa {
+      color: #fbbf24;
+      text-shadow: 0 0 10px #fbbf24;
+    }
+    
+    .conquistas {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    
+    .conquista {
+      width: 60px;
+      height: 60px;
+      background: #f1f5f9;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8em;
+      color: #cbd5e1;
+      position: relative;
+    }
+    
+    .conquista.ativa {
+      background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+      color: white;
+      box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+      transform: scale(1.1);
+    }
+    
+    .conquista .dica {
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--cor-container);
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 0.7em;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      pointer-events: none;
+    }
+    
+    .conquista:hover .dica {
+      opacity: 1;
+    }
+    
+    .grafico-container {
+      margin: 20px 0;
+      padding: 15px;
+      background: #f8fafc;
+      border-radius: 15px;
+    }
+    
+    .grafico-titulo {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: var(--cor-secundaria);
+    }
+    
+    .grafico-barras {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      height: 150px;
+      gap: 10px;
+      padding: 10px 0;
+    }
+    
+    .barra {
+      width: 30px;
+      background: var(--cor-secundaria);
+      border-radius: 5px 5px 0 0;
+      position: relative;
+      transition: height 0.5s ease;
+    }
+    
+    .barra-dia {
+      position: absolute;
+      bottom: -25px;
+      left: 0;
+      right: 0;
+      font-size: 0.8em;
+    }
+    
+    .barra-valor {
+      position: absolute;
+      top: -25px;
+      left: 0;
+      right: 0;
+      font-size: 0.8em;
+      font-weight: bold;
+    }
+    
+    .opcoes-acessibilidade {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .btn-acessibilidade {
+      padding: 8px 15px;
+      font-size: 0.9em;
+      background: #f1f5f9;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .btn-acessibilidade.ativo {
+      background: var(--cor-secundaria);
+      color: white;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-8px); }
+      75% { transform: translateX(8px); }
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes celebrate {
+      0% { transform: scale(0); opacity: 0; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    .particulas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+    
+    .particula {
+      position: absolute;
+      font-size: 1.5em;
+      animation: float 3s ease-in-out infinite;
+      opacity: 0.8;
+    }
+    
+    @media (max-width: 500px) {
+      .container {
+        padding: 15px;
+      }
+      
+      h1 {
+        font-size: 1.8em;
+      }
+      
+      .questao {
+        font-size: 2.5em;
+      }
+      
+      input[type="number"] {
+        font-size: 1.8em;
+        width: 120px;
+      }
+      
+      button {
+        font-size: 1.1em;
+        padding: 10px 20px;
+      }
+      
+      .nivel {
+        padding: 6px 10px;
+        font-size: 0.9em;
+      }
+      
+      .nivel i {
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="titulo">Aprenda Somar e Subtrair</h1>
+    
+    <div class="info-usuario">
+      <div id="nome-usuario">Olá, Aluno!</div>
+      <div id="data-atual">18/06/2025</div>
+    </div>
+    
+    <div class="niveis">
+      <div class="nivel ativo" data-nivel="1" onclick="mudarNivel(1)">
+        <i class="fas fa-star"></i>
+        Fácil
+      </div>
+      <div class="nivel" data-nivel="2" onclick="mudarNivel(2)">
+        <i class="fas fa-star-half-alt"></i>
+        Médio
+      </div>
+      <div class="nivel" data-nivel="3" onclick="mudarNivel(3)">
+        <i class="fas fa-star"></i>
+        Difícil
+      </div>
+      <div class="nivel" data-nivel="4" onclick="mudarNivel(4)">
+        <i class="fas fa-crown"></i>
+        Mestre
+      </div>
+    </div>
+    
+    <div class="questao-container">
+      <div class="sequencia" id="sequencia">Sequência: 0</div>
+      <div class="questao" id="questao">Carregando...</div>
+    </div>
+    
+    <div class="entrada-resposta">
+      <input type="number" id="resposta" autocomplete="off" aria-label="Resposta" />
+      
+      <div class="teclado-numerico">
+        <div class="tecla-numero" onclick="inserirNumero(1)">1</div>
+        <div class="tecla-numero" onclick="inserirNumero(2)">2</div>
+        <div class="tecla-numero" onclick="inserirNumero(3)">3</div>
+        <div class="tecla-numero" onclick="inserirNumero(4)">4</div>
+        <div class="tecla-numero" onclick="inserirNumero(5)">5</div>
+        <div class="tecla-numero" onclick="inserirNumero(6)">6</div>
+        <div class="tecla-numero" onclick="inserirNumero(7)">7</div>
+        <div class="tecla-numero" onclick="inserirNumero(8)">8</div>
+        <div class="tecla-numero" onclick="inserirNumero(9)">9</div>
+        <div class="tecla-numero" onclick="inserirNumero(0)">0</div>
+        <div class="tecla-numero" onclick="apagarNumero()">
+          <i class="fas fa-backspace"></i>
+        </div>
+        <div class="tecla-numero" onclick="limparResposta()">
+          <i class="fas fa-eraser"></i>
+        </div>
+      </div>
+    </div>
+    
+    <div class="botoes-acao">
+      <button onclick="verificar()">
+        <i class="fas fa-check-circle"></i> Responder
+      </button>
+      <button class="btn-secundario" onclick="gerarQuestao()">
+        <i class="fas fa-redo-alt"></i> Próxima
+      </button>
+    </div>
+    
+    <div class="feedback" id="feedback"></div>
+    
+    <div class="pontuacao-container">
+      <div class="pontuacao" id="pontuacao">Pontuação: ✅ 0 | ❌ 0</div>
+      
+      <div class="progresso">
+        <div class="barra-progresso" id="barra-progresso" style="width: 0%"></div>
+      </div>
+      
+      <div class="estrelas">
+        <div class="estrela"><i class="far fa-star"></i></div>
+        <div class="estrela"><i class="far fa-star"></i></div>
+        <div class="estrela"><i class="far fa-star"></i></div>
+        <div class="estrela"><i class="far fa-star"></i></div>
+        <div class="estrela"><i class="far fa-star"></i></div>
+      </div>
+    </div>
+    
+    <div class="conquistas">
+      <div class="conquista" id="conquista-10">
+        <i class="fas fa-medal"></i>
+        <div class="dica">10 acertos seguidos</div>
+      </div>
+      <div class="conquista" id="conquista-50">
+        <i class="fas fa-trophy"></i>
+        <div class="dica">50 acertos totais</div>
+      </div>
+      <div class="conquista" id="conquista-mestre">
+        <i class="fas fa-crown"></i>
+        <div class="dica">Nível mestre</div>
+      </div>
+    </div>
+    
+    <div class="grafico-container">
+      <div class="grafico-titulo">Seu Desempenho (últimos 7 dias)</div>
+      <div class="grafico-barras" id="grafico-barras">
+        <!-- As barras serão geradas por JavaScript -->
+      </div>
+    </div>
+    
+    <div class="opcoes-acessibilidade">
+      <button class="btn-acessibilidade" id="btn-alto-contraste" onclick="alternarAltoContraste()">
+        <i class="fas fa-adjust"></i> Alto Contraste
+      </button>
+      <button class="btn-acessibilidade" onclick="ajustarFonte('aumentar')">
+        <i class="fas fa-text-height"></i> A+
+      </button>
+      <button class="btn-acessibilidade" onclick="ajustarFonte('diminuir')">
+        <i class="fas fa-text-height"></i> A-
+      </button>
+    </div>
+    
+    <div class="particulas" id="particulas"></div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const nome = params.get('nome') || 'Aluno';
+    const hoje = new Date().toISOString().split('T')[0];
+    const chaveBase = `pontuacao_${nome}_${hoje}`;
+    const mostrarHistorico = params.get('pontuacao') === '1';
+
+    let corretas = 0;
+    let erradas = 0;
+    let valor1, valor2, operador, resultado;
+    let sequenciaAtual = 0;
+    let nivelAtual = 1;
+    let totalAcertos = 0;
+    
+    // Formatador de data
+    function formatarData(dataStr) {
+      const data = new Date(dataStr);
+      return `${data.getDate().toString().padStart(2, '0')}/${(data.getMonth()+1).toString().padStart(2, '0')}/${data.getFullYear()}`;
+    }
+
+    function carregarPontuacao() {
+      const dados = JSON.parse(localStorage.getItem(chaveBase)) || { c: 0, e: 0 };
+      corretas = dados.c;
+      erradas = dados.e;
+      atualizarPontuacao();
+    }
+
+    function salvarPontuacao() {
+      localStorage.setItem(chaveBase, JSON.stringify({ c: corretas, e: erradas }));
+    }
+    
+    function carregarHistorico() {
+      const historico = {};
+      const chaves = Object.keys(localStorage).filter(k => k.startsWith(`pontuacao_${nome}_`));
+      
+      chaves.forEach(chave => {
+        const data = chave.split('_').pop();
+        const dados = JSON.parse(localStorage.getItem(chave));
+        historico[data] = dados;
+      });
+      
+      return historico;
+    }
+    
+    function gerarGraficoHistorico() {
+      const historico = carregarHistorico();
+      const datas = Object.keys(historico).sort().slice(-7); // Últimos 7 dias
+      const container = document.getElementById('grafico-barras');
+      container.innerHTML = '';
+      
+      if (datas.length === 0) {
+        container.innerHTML = '<p>Nenhum dado histórico disponível</p>';
+        return;
+      }
+      
+      let maxValor = 0;
+      const dadosGrafico = [];
+      
+      datas.forEach(data => {
+        const item = historico[data];
+        const total = item.c + item.e;
+        const percentual = total > 0 ? Math.round((item.c / total) * 100) : 0;
+        dadosGrafico.push({ data, percentual });
+        if (percentual > maxValor) maxValor = percentual;
+      });
+      
+      // Garantir que maxValor seja pelo menos 10 para exibição
+      maxValor = Math.max(maxValor, 10);
+      
+      dadosGrafico.forEach(item => {
+        const altura = (item.percentual / maxValor) * 100;
+        
+        const barra = document.createElement('div');
+        barra.className = 'barra';
+        barra.style.height = `${altura}%`;
+        
+        const barraValor = document.createElement('div');
+        barraValor.className = 'barra-valor';
+        barraValor.textContent = `${item.percentual}%`;
+        
+        const barraDia = document.createElement('div');
+        barraDia.className = 'barra-dia';
+        barraDia.textContent = formatarData(item.data).split('/')[0];
+        
+        barra.appendChild(barraValor);
+        barra.appendChild(barraDia);
+        container.appendChild(barra);
+      });
+    }
+
+    function atualizarPontuacao() {
+      document.getElementById('pontuacao').textContent = `Pontuação: ✅ ${corretas} | ❌ ${erradas}`;
+      
+      // Atualizar progresso
+      const total = corretas + erradas;
+      const percentual = total > 0 ? Math.round((corretas / total) * 100) : 0;
+      document.getElementById('barra-progresso').style.width = `${percentual}%`;
+      
+      // Atualizar estrelas
+      const estrelas = document.querySelectorAll('.estrela');
+      const estrelasAtivas = Math.min(5, Math.floor(corretas / 2));
+      
+      estrelas.forEach((estrela, index) => {
+        if (index < estrelasAtivas) {
+          estrela.innerHTML = '<i class="fas fa-star"></i>';
+          estrela.classList.add('ativa');
+        } else {
+          estrela.innerHTML = '<i class="far fa-star"></i>';
+          estrela.classList.remove('ativa');
+        }
+      });
+      
+      // Verificar conquistas
+      verificarConquistas();
+    }
+    
+    function verificarConquistas() {
+      // Conquista: 10 acertos seguidos
+      if (sequenciaAtual >= 10) {
+        document.getElementById('conquista-10').classList.add('ativo');
+      }
+      
+      // Conquista
