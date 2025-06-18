@@ -1,131 +1,211 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <title>Jogo de Contas</title>
+  <meta charset="UTF-8" />
+  <title>Aprenda Somar e Subtrair</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
     body {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      background: #fffbe6;
+      font-family: 'Fredoka One', cursive, Arial, sans-serif;
+      background: linear-gradient(135deg, #a8edea, #fed6e3);
       text-align: center;
-      padding: 20px;
+      padding: 40px 20px;
+      color: #333;
+      user-select: none;
+    }
+    .container {
+      background: white;
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 30px 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
     h1 {
-      font-size: 2.2em;
-      color: #004d99;
+      font-size: 2.4em;
+      margin-bottom: 10px;
+      color: #ff6f91;
+      text-shadow: 1px 1px 2px #d94f70;
     }
-    #pergunta {
+    .questao {
       font-size: 2.5em;
-      margin: 30px 0;
-      color: #333;
+      margin: 30px 0 20px;
+      color: #3b82f6;
     }
-    input {
+    input[type="number"] {
       font-size: 2em;
-      padding: 10px;
-      width: 80%;
+      width: 120px;
+      padding: 8px;
+      border-radius: 12px;
+      border: 2px solid #3b82f6;
       text-align: center;
-      margin-bottom: 20px;
-      border: 2px solid #ccc;
-      border-radius: 10px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    input[type="number"]:focus {
+      border-color: #ff6f91;
+      box-shadow: 0 0 8px #ff6f91;
     }
     button {
-      font-size: 1.5em;
-      padding: 10px 20px;
-      margin: 10px;
-      background-color: #4CAF50;
-      color: white;
+      margin-left: 15px;
+      font-size: 1.4em;
+      background: #ff6f91;
       border: none;
-      border-radius: 10px;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 15px;
+      cursor: pointer;
+      box-shadow: 0 5px 12px rgba(255,111,145,0.5);
+      transition: background 0.3s;
+      user-select: none;
     }
-    #pontuacao {
+    button:hover {
+      background: #d94f70;
+    }
+    .pontuacao {
+      font-size: 1.4em;
+      margin-top: 30px;
+      color: #16a34a;
+      font-weight: bold;
+    }
+    .feedback {
+      font-size: 1.4em;
       margin-top: 20px;
-      font-size: 1.3em;
-      color: green;
+      min-height: 40px;
+      font-weight: 600;
+      transition: opacity 0.5s ease;
+    }
+    .feedback.correto {
+      color: #16a34a;
+      animation: pulse 1s ease;
+    }
+    .feedback.errado {
+      color: #dc2626;
+      animation: shake 0.5s ease;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
     }
   </style>
 </head>
 <body>
-  <h1 id="titulo">Vamos fazer contas!</h1>
-  <div id="pergunta">A carregar...</div>
-  <input id="resposta" type="text" placeholder="Resposta" />
-  <br>
-  <button onclick="verificarResposta()">Verificar</button>
-  <div id="pontuacao"></div>
+  <div class="container">
+    <h1 id="titulo"></h1>
+    <div class="questao" id="questao">Carregando...</div>
+    <input type="number" id="resposta" autocomplete="off" aria-label="Resposta" />
+    <button onclick="verificar()">Responder</button>
+    <div class="feedback" id="feedback"></div>
+    <div class="pontuacao" id="pontuacao">Pontuação: 0</div>
+    <div id="historico"></div>
+  </div>
 
   <audio id="somAcerto" src="acerto.mp3" preload="auto"></audio>
   <audio id="somErro" src="erro.mp3" preload="auto"></audio>
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const nome = params.get("nome") || "Aluno";
-    let pontos = parseInt(localStorage.getItem("pontos_" + nome)) || 0;
+    const nome = params.get('nome') || 'Aluno';
+    const hoje = new Date().toISOString().split('T')[0];
+    const chaveBase = `pontuacao_${nome}_${hoje}`;
+    const mostrarHistorico = params.get('pontuacao') === '1';
 
-    let numero1 = 0, numero2 = 0;
-    let operador = "+";
-    let resposta_correta = null;
+    let corretas = 0;
+    let erradas = 0;
+    let valor1, valor2, operador, resultado;
 
-    function gerarDigitoSemVaiUm() {
-      let d1 = Math.floor(Math.random() * 10);
-      let d2 = Math.floor(Math.random() * (10 - d1));
-      return [d1, d2];
+    function carregarPontuacao() {
+      const dados = JSON.parse(localStorage.getItem(chaveBase)) || { c: 0, e: 0 };
+      corretas = dados.c;
+      erradas = dados.e;
+      atualizarPontuacao();
     }
 
-    function gerarConta() {
-      let tipo = Math.random() < 0.5 ? "soma" : "subtracao";
-      let n1 = 0, n2 = 0;
-      for (let i = 0; i < 2; i++) {
-        let [d1, d2] = gerarDigitoSemVaiUm();
-        n1 += d1 * (10 ** i);
-        n2 += d2 * (10 ** i);
-      }
-      if (tipo === "soma") {
-        if (n1 + n2 > 100) return gerarConta();
-        numero1 = n1;
-        numero2 = n2;
-        operador = "+";
-        resposta_correta = numero1 + numero2;
-      } else {
-        if (n2 > n1) [n1, n2] = [n2, n1];
-        numero1 = n1;
-        numero2 = n2;
-        operador = "-";
-        resposta_correta = numero1 - numero2;
-      }
-      document.getElementById("pergunta").textContent = `${numero1} ${operador} ${numero2} = ?`;
+    function salvarPontuacao() {
+      localStorage.setItem(chaveBase, JSON.stringify({ c: corretas, e: erradas }));
     }
 
     function atualizarPontuacao() {
-      localStorage.setItem("pontos_" + nome, pontos);
-      const estrelas = "⭐".repeat(pontos);
-      document.getElementById("pontuacao").textContent = `Pontuação de ${nome}: ${pontos} ${estrelas}`;
+      document.getElementById('pontuacao').textContent = `Pontuação de ${nome}: ✅ ${corretas} | ❌ ${erradas}`;
     }
 
-    function verificarResposta() {
-      const resposta = document.getElementById("resposta").value.trim();
-      if (resposta === resposta_correta.toString()) {
-        document.getElementById("somAcerto").play();
-        alert("Muito bem! 😊");
-        pontos++;
+    function gerarQuestao() {
+      operador = Math.random() < 0.5 ? '+' : '-';
+      if (operador === '+') {
+        do {
+          valor1 = Math.floor(Math.random() * 90) + 1;
+          valor2 = Math.floor(Math.random() * 90);
+        } while (valor1 + valor2 >= 100 || valor1 % 10 + valor2 % 10 >= 10);
+        resultado = valor1 + valor2;
       } else {
-        document.getElementById("somErro").play();
-        alert(`Ops! A resposta certa era ${resposta_correta}.`);
-        pontos = Math.max(0, pontos - 1);
+        do {
+          valor1 = Math.floor(Math.random() * 90) + 10;
+          valor2 = Math.floor(Math.random() * 10);
+        } while (valor1 - valor2 <= 0 || valor1 % 10 - valor2 % 10 < 0);
+        resultado = valor1 - valor2;
+      }
+      document.getElementById('questao').textContent = `${valor1} ${operador} ${valor2} = ?`;
+      const respostaInput = document.getElementById('resposta');
+      respostaInput.value = '';
+      respostaInput.focus();
+      const feedback = document.getElementById('feedback');
+      feedback.textContent = '';
+      feedback.className = 'feedback';
+    }
+
+    function verificar() {
+      const respostaInput = document.getElementById('resposta');
+      const resposta = Number(respostaInput.value);
+      const feedback = document.getElementById('feedback');
+
+      if (respostaInput.value.trim() === '') {
+        feedback.textContent = 'Por favor, digite um número!';
+        feedback.className = 'feedback errado';
+        return;
+      }
+
+      if (resposta === resultado) {
+        corretas++;
+        feedback.textContent = 'Correto! 🎉';
+        feedback.className = 'feedback correto';
+        document.getElementById('somAcerto').play();
+      } else {
+        erradas++;
+        feedback.textContent = `Errado. A resposta certa era ${resultado}. ❌`;
+        feedback.className = 'feedback errado';
+        document.getElementById('somErro').play();
       }
       atualizarPontuacao();
-      document.getElementById("resposta").value = "";
-      gerarConta();
+      salvarPontuacao();
+      setTimeout(gerarQuestao, 1500);
     }
 
-    function reiniciarPontuacao() {
-      pontos = 0;
-      localStorage.removeItem("pontos_" + nome);
-      atualizarPontuacao();
+    function mostrarPontuacoesAntigas() {
+      const historico = document.getElementById('historico');
+      historico.innerHTML = '<h3>Histórico de pontuações</h3>';
+      const dias = Object.keys(localStorage).filter(k => k.startsWith(`pontuacao_${nome}_`));
+      dias.sort().reverse().forEach(k => {
+        const data = k.split('_').slice(-1)[0];
+        const { c, e } = JSON.parse(localStorage.getItem(k));
+        const el = document.createElement('div');
+        el.textContent = `${data}: ✅ ${c} | ❌ ${e}`;
+        historico.appendChild(el);
+      });
     }
 
-    document.getElementById("titulo").textContent = `Olá, ${nome}! Vamos fazer contas!`;
-    atualizarPontuacao();
-    gerarConta();
+    window.onload = () => {
+      document.getElementById('titulo').textContent = `Olá, ${nome}! Vamos praticar 🎯`;
+      carregarPontuacao();
+      gerarQuestao();
+      if (mostrarHistorico) mostrarPontuacoesAntigas();
+    };
   </script>
 </body>
 </html>
