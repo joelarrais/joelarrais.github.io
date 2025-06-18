@@ -2,107 +2,507 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <title>Perguntas Matemáticas</title>
+  <title>Desafio Matemático</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      background: #e6f7ff;
-      text-align: center;
-      padding: 20px;
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800&display=swap');
+    
+    :root {
+      --cor-primaria: #ff6f91;
+      --cor-secundaria: #3b82f6;
+      --cor-sucesso: #16a34a;
+      --cor-erro: #dc2626;
+      --cor-fundo: linear-gradient(135deg, #a8edea, #fed6e3);
+      --cor-container: white;
+      --sombra-container: 0 8px 30px rgba(0,0,0,0.15);
+      --cor-texto: #333;
+      --cor-texto-claro: #666;
     }
+    
+    .modo-alto-contraste {
+      --cor-primaria: #ff3b3b;
+      --cor-secundaria: #0066cc;
+      --cor-sucesso: #00a651;
+      --cor-erro: #ff0000;
+      --cor-fundo: linear-gradient(135deg, #222, #444);
+      --cor-container: #111;
+      --sombra-container: 0 8px 30px rgba(255,255,255,0.1);
+      --cor-texto: #fff;
+      --cor-texto-claro: #ccc;
+    }
+
+    body {
+      font-family: 'Nunito', 'Fredoka One', Arial, sans-serif;
+      background: var(--cor-fundo);
+      text-align: center;
+      padding: 20px 10px;
+      color: var(--cor-texto);
+      user-select: none;
+      min-height: 100vh;
+      transition: background 0.5s ease;
+    }
+    
+    .container {
+      background: var(--cor-container);
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: var(--sombra-container);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: linear-gradient(90deg, var(--cor-primaria), var(--cor-secundaria));
+    }
+    
     h1 {
       font-size: 2.2em;
-      color: #003366;
+      margin: 10px 0 15px;
+      color: var(--cor-primaria);
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      font-family: 'Fredoka One', cursive;
     }
+    
+    .info-usuario {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding: 10px 15px;
+      background: rgba(59, 130, 246, 0.1);
+      border-radius: 12px;
+      font-size: 1.1em;
+    }
+    
+    .pergunta-container {
+      position: relative;
+      margin: 25px 0;
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
     #pergunta {
       font-size: 1.8em;
-      margin: 30px 0;
-      color: #333;
+      color: var(--cor-secundaria);
+      font-weight: 700;
+      line-height: 1.4;
     }
+    
+    .entrada-resposta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
     input {
       font-size: 1.5em;
-      padding: 10px;
-      width: 80%;
+      width: 90%;
+      padding: 12px;
+      border-radius: 15px;
+      border: 3px solid var(--cor-secundaria);
       text-align: center;
-      margin-bottom: 20px;
-      border: 2px solid #aaa;
-      border-radius: 10px;
+      outline: none;
+      transition: all 0.3s;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(59, 130, 246, 0.1);
     }
+    
+    input:focus {
+      border-color: var(--cor-primaria);
+      box-shadow: 0 0 15px rgba(255, 111, 145, 0.3);
+    }
+    
+    .teclado-numerico {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    
+    .tecla-numero {
+      font-size: 1.8em;
+      padding: 15px;
+      background: #f0f5ff;
+      border: 2px solid #dbeafe;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: bold;
+    }
+    
+    .tecla-numero:hover {
+      background: #dbeafe;
+      transform: translateY(-2px);
+    }
+    
+    .tecla-numero:active {
+      transform: translateY(2px);
+    }
+    
+    .botoes-acao {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    
     button {
       font-size: 1.3em;
-      padding: 10px 20px;
-      margin: 10px;
-      background-color: #0066cc;
-      color: white;
+      background: var(--cor-primaria);
       border: none;
-      border-radius: 10px;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 15px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(255, 111, 145, 0.3);
+      transition: all 0.3s;
+      user-select: none;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
+    
+    button:hover {
+      background: #d94f70;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 111, 145, 0.4);
+    }
+    
+    button:active {
+      transform: translateY(1px);
+    }
+    
+    .btn-secundario {
+      background: var(--cor-secundaria);
+      box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+    }
+    
+    .btn-secundario:hover {
+      background: #2563eb;
+    }
+    
+    .feedback {
+      font-size: 1.5em;
+      margin: 25px 0 15px;
+      min-height: 50px;
+      font-weight: 700;
+      transition: all 0.5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px;
+      border-radius: 12px;
+    }
+    
+    .feedback.correto {
+      color: var(--cor-sucesso);
+      background: rgba(22, 163, 74, 0.1);
+      animation: pulse 1s ease;
+    }
+    
+    .feedback.errado {
+      color: var(--cor-erro);
+      background: rgba(220, 38, 38, 0.1);
+      animation: shake 0.5s ease;
+    }
+    
+    .pontuacao-container {
+      background: rgba(59, 130, 246, 0.08);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 25px 0;
+    }
+    
     #pontuacao {
+      font-size: 1.5em;
+      color: var(--cor-secundaria);
+      font-weight: bold;
+    }
+    
+    .progresso {
+      height: 20px;
+      background: #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 15px 0;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .barra-progresso {
+      height: 100%;
+      background: linear-gradient(90deg, var(--cor-primaria), var(--cor-secundaria));
+      border-radius: 10px;
+      transition: width 0.5s ease;
+    }
+    
+    .opcoes-acessibilidade {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
       margin-top: 20px;
-      font-size: 1.2em;
-      color: green;
+    }
+    
+    .btn-acessibilidade {
+      padding: 8px 15px;
+      font-size: 0.9em;
+      background: #f1f5f9;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .btn-acessibilidade.ativo {
+      background: var(--cor-secundaria);
+      color: white;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-8px); }
+      75% { transform: translateX(8px); }
+    }
+    
+    .particulas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+    
+    .particula {
+      position: absolute;
+      font-size: 1.5em;
+      animation: float 3s ease-in-out infinite;
+      opacity: 0.8;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @media (max-width: 500px) {
+      .container {
+        padding: 15px;
+      }
+      
+      h1 {
+        font-size: 1.8em;
+      }
+      
+      #pergunta {
+        font-size: 1.5em;
+      }
+      
+      input {
+        font-size: 1.3em;
+      }
+      
+      button {
+        font-size: 1.1em;
+        padding: 10px 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <h1 id="titulo">Desafio de Perguntas</h1>
-  <div id="pergunta">A carregar perguntas...</div>
-  <input id="resposta" type="text" placeholder="Escreve a resposta" />
-  <br>
-  <button onclick="verificarResposta()">Verificar</button>
-  <button onclick="reiniciarPontuacao()">Reiniciar</button>
-  <div id="pontuacao"></div>
-
-  <audio id="somAcerto" src="acerto.mp3" preload="auto"></audio>
-  <audio id="somErro" src="erro.mp3" preload="auto"></audio>
+  <div class="container">
+    <h1 id="titulo">Desafio Matemático</h1>
+    
+    <div class="info-usuario">
+      <div id="nome-usuario">Olá, Aluno!</div>
+      <div id="data-atual">18/06/2025</div>
+    </div>
+    
+    <div class="pergunta-container">
+      <div id="pergunta">A carregar perguntas...</div>
+    </div>
+    
+    <div class="entrada-resposta">
+      <input id="resposta" type="text" placeholder="Escreve a resposta" autocomplete="off" />
+      
+      <div class="teclado-numerico">
+        <div class="tecla-numero" onclick="inserirTexto('0')">0</div>
+        <div class="tecla-numero" onclick="inserirTexto('1')">1</div>
+        <div class="tecla-numero" onclick="inserirTexto('2')">2</div>
+        <div class="tecla-numero" onclick="inserirTexto('3')">3</div>
+        <div class="tecla-numero" onclick="inserirTexto('4')">4</div>
+        <div class="tecla-numero" onclick="inserirTexto('5')">5</div>
+        <div class="tecla-numero" onclick="inserirTexto('6')">6</div>
+        <div class="tecla-numero" onclick="inserirTexto('7')">7</div>
+        <div class="tecla-numero" onclick="inserirTexto('8')">8</div>
+        <div class="tecla-numero" onclick="inserirTexto('9')">9</div>
+        <div class="tecla-numero" onclick="apagarTexto()">
+          <i class="fas fa-backspace"></i>
+        </div>
+        <div class="tecla-numero" onclick="limparResposta()">
+          <i class="fas fa-eraser"></i>
+        </div>
+      </div>
+    </div>
+    
+    <div class="botoes-acao">
+      <button onclick="verificarResposta()">
+        <i class="fas fa-check-circle"></i> Verificar
+      </button>
+      <button class="btn-secundario" onclick="reiniciarPontuacao()">
+        <i class="fas fa-redo"></i> Reiniciar
+      </button>
+    </div>
+    
+    <div class="feedback" id="feedback"></div>
+    
+    <div class="pontuacao-container">
+      <div id="pontuacao"></div>
+      <div class="progresso">
+        <div class="barra-progresso" id="barra-progresso" style="width: 0%"></div>
+      </div>
+    </div>
+    
+    <div class="opcoes-acessibilidade">
+      <button class="btn-acessibilidade" id="btn-alto-contraste" onclick="alternarAltoContraste()">
+        <i class="fas fa-adjust"></i> Alto Contraste
+      </button>
+      <button class="btn-acessibilidade" onclick="ajustarFonte('aumentar')">
+        <i class="fas fa-text-height"></i> A+
+      </button>
+      <button class="btn-acessibilidade" onclick="ajustarFonte('diminuir')">
+        <i class="fas fa-text-height"></i> A-
+      </button>
+    </div>
+    
+    <div class="particulas" id="particulas"></div>
+  </div>
 
   <script>
+    // Elementos DOM
+    const perguntaEl = document.getElementById('pergunta');
+    const respostaEl = document.getElementById('resposta');
+    const feedbackEl = document.getElementById('feedback');
+    const pontuacaoEl = document.getElementById('pontuacao');
+    const tituloEl = document.getElementById('titulo');
+    const nomeUsuarioEl = document.getElementById('nome-usuario');
+    const dataAtualEl = document.getElementById('data-atual');
+    const barraProgressoEl = document.getElementById('barra-progresso');
+    
+    // Configurações do jogo
     const params = new URLSearchParams(window.location.search);
-    const nome = params.get("nome") || "Aluno";
-    let pontos = parseInt(localStorage.getItem("pontos_perguntas_" + nome)) || 0;
-
+    const nome = params.get('nome') || 'Aluno';
+    const hoje = new Date().toISOString().split('T')[0];
+    const chavePontuacao = `pontos_perguntas_${nome}`;
+    
+    let pontos = parseInt(localStorage.getItem(chavePontuacao)) || 0;
     let perguntas = [];
     let perguntaAtual = null;
+    let totalPerguntas = 0;
+    let perguntasCorretas = 0;
 
+    // Formatador de data
+    function formatarData(dataStr) {
+      const data = new Date(dataStr);
+      return `${data.getDate().toString().padStart(2, '0')}/${(data.getMonth()+1).toString().padStart(2, '0')}/${data.getFullYear()}`;
+    }
+
+    // Atualizar pontuação
     function atualizarPontuacao() {
-      localStorage.setItem("pontos_perguntas_" + nome, pontos);
+      localStorage.setItem(chavePontuacao, pontos);
       const estrelas = "⭐".repeat(pontos);
-      document.getElementById("pontuacao").textContent = `Pontuação de ${nome}: ${pontos} ${estrelas}`;
+      
+      // Atualizar pontuação
+      pontuacaoEl.innerHTML = `Pontuação de ${nome}: ${pontos} ${estrelas}`;
+      
+      // Atualizar barra de progresso
+      const percentual = totalPerguntas > 0 ? Math.round((perguntasCorretas / totalPerguntas) * 100) : 0;
+      barraProgressoEl.style.width = `${percentual}%`;
     }
 
+    // Reiniciar pontuação
     function reiniciarPontuacao() {
-      pontos = 0;
-      localStorage.removeItem("pontos_perguntas_" + nome);
-      atualizarPontuacao();
+      if (confirm("Tens a certeza que queres reiniciar a pontuação?")) {
+        pontos = 0;
+        localStorage.removeItem(chavePontuacao);
+        atualizarPontuacao();
+        feedbackEl.textContent = "Pontuação reiniciada!";
+        feedbackEl.className = 'feedback';
+        setTimeout(() => feedbackEl.textContent = '', 2000);
+      }
     }
 
+    // Nova pergunta
     function novaPergunta() {
       if (perguntas.length === 0) {
-        document.getElementById("pergunta").textContent = "Sem mais perguntas.";
+        perguntaEl.textContent = "Sem mais perguntas.";
         return;
       }
       const idx = Math.floor(Math.random() * perguntas.length);
       perguntaAtual = perguntas[idx];
-      document.getElementById("pergunta").textContent = perguntaAtual.q;
+      perguntaEl.textContent = perguntaAtual.q;
+      respostaEl.value = '';
+      respostaEl.focus();
+      feedbackEl.textContent = '';
+      feedbackEl.className = 'feedback';
     }
 
+    // Verificar resposta
     function verificarResposta() {
-      const resposta = document.getElementById("resposta").value.trim();
-      if (resposta === perguntaAtual.a) {
-        document.getElementById("somAcerto").play();
-        alert("Muito bem! 😊");
-        pontos++;
-      } else {
-        document.getElementById("somErro").play();
-        alert(`Resposta errada! A resposta certa era ${perguntaAtual.a}`);
-        pontos = Math.max(0, pontos - 1);
+      if (!perguntaAtual) return;
+      
+      const resposta = respostaEl.value.trim();
+      if (resposta === '') {
+        feedbackEl.textContent = 'Por favor, escreve uma resposta!';
+        feedbackEl.className = 'feedback errado';
+        return;
       }
+      
+      totalPerguntas++;
+
+      if (resposta.toLowerCase() === perguntaAtual.a.toLowerCase()) {
+        pontos++;
+        perguntasCorretas++;
+        feedbackEl.innerHTML = 'Correto! 🎉 <i class="fas fa-check-circle"></i>';
+        feedbackEl.className = 'feedback correto';
+        criarParticulas();
+      } else {
+        pontos = Math.max(0, pontos - 1);
+        feedbackEl.innerHTML = `Errado. A resposta certa era: ${perguntaAtual.a} ❌ <i class="fas fa-times-circle"></i>`;
+        feedbackEl.className = 'feedback errado';
+      }
+      
       atualizarPontuacao();
-      document.getElementById("resposta").value = "";
-      novaPergunta();
+      
+      // Próxima pergunta após 2 segundos
+      setTimeout(novaPergunta, 2000);
     }
 
+    // Carregar perguntas
     async function carregarPerguntas() {
       try {
         const resp = await fetch("perguntas.txt");
@@ -114,14 +514,85 @@
         });
         novaPergunta();
       } catch (err) {
-        document.getElementById("pergunta").textContent = "Erro ao carregar perguntas.";
+        perguntaEl.textContent = "Erro ao carregar perguntas. Verifica o ficheiro 'perguntas.txt'.";
         console.error("Erro a carregar perguntas:", err);
       }
     }
+    
+    // Funções de entrada de texto
+    function inserirTexto(texto) {
+      respostaEl.value += texto;
+    }
+    
+    function apagarTexto() {
+      respostaEl.value = respostaEl.value.slice(0, -1);
+    }
+    
+    function limparResposta() {
+      respostaEl.value = '';
+    }
+    
+    // Funções de acessibilidade
+    function alternarAltoContraste() {
+      document.body.classList.toggle('modo-alto-contraste');
+      const btn = document.getElementById('btn-alto-contraste');
+      btn.classList.toggle('ativo');
+    }
+    
+    function ajustarFonte(acao) {
+      const corpo = document.body;
+      const tamanhoAtual = parseFloat(getComputedStyle(corpo).fontSize);
+      
+      if (acao === 'aumentar' && tamanhoAtual < 24) {
+        corpo.style.fontSize = (tamanhoAtual + 1) + 'px';
+      } else if (acao === 'diminuir' && tamanhoAtual > 14) {
+        corpo.style.fontSize = (tamanhoAtual - 1) + 'px';
+      }
+    }
+    
+    // Animações
+    function criarParticulas() {
+      const particulas = document.getElementById('particulas');
+      particulas.innerHTML = '';
+      
+      const emojis = ['🎉', '✨', '🌟', '⭐', '💯', '👍', '👏', '🎯'];
+      
+      for (let i = 0; i < 20; i++) {
+        const particula = document.createElement('div');
+        particula.className = 'particula';
+        particula.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        particula.style.left = `${Math.random() * 100}%`;
+        particula.style.top = `${Math.random() * 100}%`;
+        particula.style.animationDelay = `${Math.random() * 2}s`;
+        particula.style.fontSize = `${Math.random() * 2 + 1}em`;
+        
+        particulas.appendChild(particula);
+        
+        // Remover após a animação
+        setTimeout(() => {
+          particula.remove();
+        }, 3000);
+      }
+    }
 
-    document.getElementById("titulo").textContent = `Olá, ${nome}! Responde às perguntas!`;
-    atualizarPontuacao();
-    carregarPerguntas();
+    // Inicialização
+    window.onload = () => {
+      nomeUsuarioEl.textContent = `Olá, ${nome}!`;
+      dataAtualEl.textContent = formatarData(hoje);
+      tituloEl.textContent = `Desafio Matemático para ${nome}`;
+      atualizarPontuacao();
+      carregarPerguntas();
+      
+      // Evento para tecla Enter
+      respostaEl.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          verificarResposta();
+        }
+      });
+      
+      // Focar no campo de resposta
+      respostaEl.focus();
+    };
   </script>
 </body>
 </html>
