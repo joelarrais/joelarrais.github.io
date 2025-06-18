@@ -390,6 +390,11 @@
         font-size: 1.1em;
         padding: 10px 20px;
       }
+      
+      .historico-pontos {
+        flex-direction: column;
+        gap: 5px;
+      }
     }
   </style>
 </head>
@@ -503,10 +508,10 @@
       // Atualizar pontuação com detalhes de acertos/erros
       const percentual = totalPerguntas > 0 ? Math.round((perguntasCorretas / totalPerguntas) * 100) : 0;
       pontuacaoEl.innerHTML = `
-        Pontuação: ${pontos} 
-        | Total: ${totalPerguntas} 
-        | <span style="color:var(--cor-sucesso)">Acertos: ${perguntasCorretas}</span> 
-        | <span style="color:var(--cor-erro)">Erros: ${totalPerguntas - perguntasCorretas}</span>
+        <div>Pontuação: <strong>${pontos}</strong></div>
+        <div>Total: <strong>${totalPerguntas}</strong></div>
+        <div class="historico-acertos">✓ Acertos: <strong>${perguntasCorretas}</strong></div>
+        <div class="historico-erros">✗ Erros: <strong>${totalPerguntas - perguntasCorretas}</strong></div>
       `;
       
       // Atualizar barra de progresso
@@ -614,32 +619,32 @@
       setTimeout(novaPergunta, 2000);
     }
     
-    // Carregar perguntas
+    // Carregar perguntas do arquivo externo
     async function carregarPerguntas() {
       try {
-        // Perguntas embutidas para demonstração
-        const perguntasDemo = [
-          "Quanto é 7 + 8? === 15",
-          "Quanto é 12 - 5? === 7",
-          "Quanto é 6 × 9? === 54",
-          "Quanto é 48 ÷ 6? === 8",
-          "Quanto é 15 + 23? === 38",
-          "Quanto é 45 - 18? === 27",
-          "Quanto é 7 × 7? === 49",
-          "Quanto é 81 ÷ 9? === 9",
-          "Quanto é 25 + 17? === 42",
-          "Quanto é 63 - 29? === 34"
-        ];
+        const resp = await fetch("perguntas.txt");
+        const texto = await resp.text();
+        const linhas = texto.split("\n")
+          .map(l => l.trim())
+          .filter(l => l.includes("===") && l.length > 0);
         
-        perguntas = perguntasDemo.map(l => {
+        if (linhas.length === 0) {
+          throw new Error("O arquivo perguntas.txt está vazio ou formato inválido");
+        }
+        
+        perguntas = linhas.map(l => {
           const [q, a] = l.split("===").map(x => x.trim());
           return { q, a };
         });
         
         novaPergunta();
       } catch (err) {
-        perguntaEl.textContent = "Erro ao carregar perguntas.";
-        console.error("Erro a carregar perguntas:", err);
+        perguntaEl.textContent = "Erro ao carregar perguntas. Verifique o arquivo 'perguntas.txt'.";
+        console.error("Erro ao carregar perguntas:", err);
+        
+        // Mensagem detalhada para o usuário
+        feedbackEl.textContent = "Certifique-se que o arquivo 'perguntas.txt' existe e está no formato correto!";
+        feedbackEl.className = 'feedback errado';
       }
     }
     
@@ -708,7 +713,11 @@
       carregarPerguntas();
       
       // Carregar histórico se existir
-      exibirHistorico();
+      if (mostrarHistorico) {
+        exibirHistorico();
+      } else {
+        historicoContainer.style.display = 'none';
+      }
       
       // Evento para tecla Enter
       respostaEl.addEventListener('keypress', function(e) {
