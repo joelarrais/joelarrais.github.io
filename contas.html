@@ -2,125 +2,607 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <title>Aprenda Somar e Subtrair</title>
+  <title>Aprende a Somar e Subtrair - Versão Simplificada</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800&display=swap');
+    
+    :root {
+      --cor-primaria: #ff6f91;
+      --cor-secundaria: #3b82f6;
+      --cor-sucesso: #16a34a;
+      --cor-erro: #dc2626;
+      --cor-fundo: linear-gradient(135deg, #a8edea, #fed6e3);
+      --cor-container: white;
+      --sombra-container: 0 8px 30px rgba(0,0,0,0.15);
+      --cor-texto: #333;
+      --cor-texto-claro: #666;
+    }
+    
+    .modo-alto-contraste {
+      --cor-primaria: #ff3b3b;
+      --cor-secundaria: #0066cc;
+      --cor-sucesso: #00a651;
+      --cor-erro: #ff0000;
+      --cor-fundo: linear-gradient(135deg, #222, #444);
+      --cor-container: #111;
+      --sombra-container: 0 8px 30px rgba(255,255,255,0.1);
+      --cor-texto: #fff;
+      --cor-texto-claro: #ccc;
+    }
 
     body {
-      font-family: 'Fredoka One', cursive, Arial, sans-serif;
-      background: linear-gradient(135deg, #a8edea, #fed6e3);
+      font-family: 'Nunito', 'Fredoka One', Arial, sans-serif;
+      background: var(--cor-fundo);
       text-align: center;
-      padding: 40px 20px;
-      color: #333;
+      padding: 20px 10px;
+      color: var(--cor-texto);
       user-select: none;
+      min-height: 100vh;
+      transition: background 0.5s ease;
     }
+    
     .container {
-      background: white;
-      max-width: 400px;
+      background: var(--cor-container);
+      max-width: 500px;
       margin: 0 auto;
-      padding: 30px 20px;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: var(--sombra-container);
+      position: relative;
+      overflow: hidden;
     }
+    
+    .container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: linear-gradient(90deg, var(--cor-primaria), var(--cor-secundaria));
+    }
+    
     h1 {
-      font-size: 2.4em;
-      margin-bottom: 10px;
-      color: #ff6f91;
-      text-shadow: 1px 1px 2px #d94f70;
+      font-size: 2.2em;
+      margin: 10px 0 15px;
+      color: var(--cor-primaria);
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      font-family: 'Fredoka One', cursive;
     }
+    
+    .info-usuario {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding: 10px 15px;
+      background: rgba(59, 130, 246, 0.1);
+      border-radius: 12px;
+      font-size: 1.1em;
+    }
+    
+    .questao-container {
+      position: relative;
+      margin: 25px 0;
+    }
+    
     .questao {
-      font-size: 2.5em;
-      margin: 30px 0 20px;
-      color: #3b82f6;
+      font-size: 3em;
+      margin: 20px 0;
+      color: var(--cor-secundaria);
+      font-weight: 800;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     }
+    
+    .entrada-resposta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
     input[type="number"] {
       font-size: 2em;
-      width: 120px;
-      padding: 8px;
-      border-radius: 12px;
-      border: 2px solid #3b82f6;
+      width: 140px;
+      padding: 12px;
+      border-radius: 15px;
+      border: 3px solid var(--cor-secundaria);
       text-align: center;
       outline: none;
-      transition: border-color 0.3s;
+      transition: all 0.3s;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(59, 130, 246, 0.1);
     }
+    
     input[type="number"]:focus {
-      border-color: #ff6f91;
-      box-shadow: 0 0 8px #ff6f91;
+      border-color: var(--cor-primaria);
+      box-shadow: 0 0 15px rgba(255, 111, 145, 0.3);
     }
-    button {
-      margin-left: 15px;
-      font-size: 1.4em;
-      background: #ff6f91;
-      border: none;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 15px;
+    
+    .teclado-numerico {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    
+    .tecla-numero {
+      font-size: 1.8em;
+      padding: 15px;
+      background: #f0f5ff;
+      border: 2px solid #dbeafe;
+      border-radius: 12px;
       cursor: pointer;
-      box-shadow: 0 5px 12px rgba(255,111,145,0.5);
-      transition: background 0.3s;
-      user-select: none;
-    }
-    button:hover {
-      background: #d94f70;
-    }
-    .pontuacao {
-      font-size: 1.4em;
-      margin-top: 30px;
-      color: #16a34a;
+      transition: all 0.2s;
       font-weight: bold;
     }
-    .feedback {
-      font-size: 1.4em;
-      margin-top: 20px;
-      min-height: 40px;
-      font-weight: 600;
-      transition: opacity 0.5s ease;
+    
+    .tecla-numero:hover {
+      background: #dbeafe;
+      transform: translateY(-2px);
     }
+    
+    .tecla-numero:active {
+      transform: translateY(2px);
+    }
+    
+    .botoes-acao {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    
+    button {
+      font-size: 1.3em;
+      background: var(--cor-primaria);
+      border: none;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 15px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(255, 111, 145, 0.3);
+      transition: all 0.3s;
+      user-select: none;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    button:hover {
+      background: #d94f70;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 111, 145, 0.4);
+    }
+    
+    button:active {
+      transform: translateY(1px);
+    }
+    
+    .btn-secundario {
+      background: var(--cor-secundaria);
+      box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+    }
+    
+    .btn-secundario:hover {
+      background: #2563eb;
+    }
+    
+    .feedback {
+      font-size: 1.5em;
+      margin: 25px 0 15px;
+      min-height: 50px;
+      font-weight: 700;
+      transition: all 0.5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px;
+      border-radius: 12px;
+    }
+    
     .feedback.correto {
-      color: #16a34a;
+      color: var(--cor-sucesso);
+      background: rgba(22, 163, 74, 0.1);
       animation: pulse 1s ease;
     }
+    
     .feedback.errado {
-      color: #dc2626;
+      color: var(--cor-erro);
+      background: rgba(220, 38, 38, 0.1);
       animation: shake 0.5s ease;
     }
+    
+    .pontuacao-container {
+      background: rgba(59, 130, 246, 0.08);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 25px 0;
+    }
+    
+    .pontuacao {
+      font-size: 1.5em;
+      color: var(--cor-secundaria);
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    
+    .progresso {
+      height: 20px;
+      background: #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 15px 0;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .barra-progresso {
+      height: 100%;
+      background: linear-gradient(90deg, var(--cor-primaria), var(--cor-secundaria));
+      border-radius: 10px;
+      transition: width 0.5s ease;
+    }
+    
+    .conquistas {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    
+    .conquista {
+      width: 60px;
+      height: 60px;
+      background: #f1f5f9;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8em;
+      color: #cbd5e1;
+      position: relative;
+    }
+    
+    .conquista.ativa {
+      background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+      color: white;
+      box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+      transform: scale(1.1);
+    }
+    
+    .conquista .dica {
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--cor-container);
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 0.7em;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      pointer-events: none;
+    }
+    
+    .conquista:hover .dica {
+      opacity: 1;
+    }
+    
+    .historico-pontuacao {
+      margin-top: 25px;
+      padding: 20px;
+      background: rgba(59, 130, 246, 0.08);
+      border-radius: 15px;
+    }
+    
+    .historico-titulo {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: var(--cor-secundaria);
+      margin-bottom: 15px;
+    }
+    
+    .historico-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    
+    .historico-data {
+      font-weight: bold;
+    }
+    
+    .historico-pontos {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .opcoes-acessibilidade {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .btn-acessibilidade {
+      padding: 8px 15px;
+      font-size: 0.9em;
+      background: #f1f5f9;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .btn-acessibilidade.ativo {
+      background: var(--cor-secundaria);
+      color: white;
+    }
+    
+    .tutorial {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    
+    .tutorial-conteudo {
+      max-width: 500px;
+      background: white;
+      color: var(--cor-texto);
+      padding: 30px;
+      border-radius: 20px;
+      position: relative;
+    }
+    
+    .tutorial-conteudo h2 {
+      color: var(--cor-primaria);
+      margin-top: 0;
+    }
+    
+    .tutorial-conteudo p {
+      font-size: 1.2em;
+      line-height: 1.6;
+    }
+    
+    .tutorial-conteudo li {
+      text-align: left;
+      margin-bottom: 10px;
+    }
+    
+    .fechar-tutorial {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 1.5em;
+      cursor: pointer;
+      color: var(--cor-secundaria);
+    }
+    
     @keyframes pulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.1); }
     }
+    
     @keyframes shake {
       0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      75% { transform: translateX(5px); }
+      25% { transform: translateX(-8px); }
+      75% { transform: translateX(8px); }
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes celebrate {
+      0% { transform: scale(0); opacity: 0; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    .particulas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+    
+    .particula {
+      position: absolute;
+      font-size: 1.5em;
+      animation: float 3s ease-in-out infinite;
+      opacity: 0.8;
+    }
+    
+    .confete {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: var(--cor-primaria);
+      opacity: 0.7;
+      z-index: 1000;
+      animation: fall linear forwards;
+    }
+    
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+    
+    @media (max-width: 500px) {
+      .container {
+        padding: 15px;
+      }
+      
+      h1 {
+        font-size: 1.8em;
+      }
+      
+      .questao {
+        font-size: 2.5em;
+      }
+      
+      input[type="number"] {
+        font-size: 1.8em;
+        width: 120px;
+      }
+      
+      button {
+        font-size: 1.1em;
+        padding: 10px 20px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1 id="titulo"></h1>
-    <div class="questao" id="questao">Carregando...</div>
-    <input type="number" id="resposta" autocomplete="off" aria-label="Resposta" />
-    <button onclick="verificar()">Responder</button>
+    <h1 id="titulo">Aprende a Somar e Subtrair</h1>
+    
+    <div class="info-usuario">
+      <div id="nome-usuario">Olá, Aluno!</div>
+      <div id="data-atual">18/06/2025</div>
+    </div>
+    
+    <div class="questao-container">
+      <div class="questao" id="questao">5 + 3 = ?</div>
+    </div>
+    
+    <div class="entrada-resposta">
+      <input type="number" id="resposta" autocomplete="off" aria-label="Resposta" />
+      
+      <div class="teclado-numerico">
+        <div class="tecla-numero" onclick="inserirNumero(1)">1</div>
+        <div class="tecla-numero" onclick="inserirNumero(2)">2</div>
+        <div class="tecla-numero" onclick="inserirNumero(3)">3</div>
+        <div class="tecla-numero" onclick="inserirNumero(4)">4</div>
+        <div class="tecla-numero" onclick="inserirNumero(5)">5</div>
+        <div class="tecla-numero" onclick="inserirNumero(6)">6</div>
+        <div class="tecla-numero" onclick="inserirNumero(7)">7</div>
+        <div class="tecla-numero" onclick="inserirNumero(8)">8</div>
+        <div class="tecla-numero" onclick="inserirNumero(9)">9</div>
+        <div class="tecla-numero" onclick="inserirNumero(0)">0</div>
+        <div class="tecla-numero" onclick="apagarNumero()">
+          <i class="fas fa-backspace"></i>
+        </div>
+        <div class="tecla-numero" onclick="limparResposta()">
+          <i class="fas fa-eraser"></i>
+        </div>
+      </div>
+    </div>
+    
+    <div class="botoes-acao">
+      <button onclick="verificar()">
+        <i class="fas fa-check-circle"></i> Responder
+      </button>
+    </div>
+    
     <div class="feedback" id="feedback"></div>
-    <div class="pontuacao" id="pontuacao">Pontuação: 0</div>
-    <div id="historico"></div>
+    
+    <div class="pontuacao-container">
+      <div class="pontuacao" id="pontuacao">Pontuação: ✅ 0 | ❌ 0</div>
+      
+      <div class="progresso">
+        <div class="barra-progresso" id="barra-progresso" style="width: 0%"></div>
+      </div>
+    </div>
+    
+    <div class="historico-pontuacao" id="historico-pontuacao" style="display: none;">
+      <div class="historico-titulo">Histórico de Pontuações</div>
+      <div id="historico-lista"></div>
+    </div>
+    
+    <div class="opcoes-acessibilidade">
+      <button class="btn-acessibilidade" id="btn-alto-contraste" onclick="alternarAltoContraste()">
+        <i class="fas fa-adjust"></i> Alto Contraste
+      </button>
+      <button class="btn-acessibilidade" onclick="ajustarFonte('aumentar')">
+        <i class="fas fa-text-height"></i> A+
+      </button>
+      <button class="btn-acessibilidade" onclick="ajustarFonte('diminuir')">
+        <i class="fas fa-text-height"></i> A-
+      </button>
+    </div>
+    
+    <div class="particulas" id="particulas"></div>
+  </div>
+  
+  <div class="tutorial" id="tutorial">
+    <div class="tutorial-conteudo">
+      <span class="fechar-tutorial" onclick="fecharTutorial()">&times;</span>
+      <h2>Bem-vindo ao Aprenda Matemática!</h2>
+      <p>Este aplicativo vai te ajudar a praticar operações de soma e subtração de forma divertida.</p>
+      
+      <h3>Como Jogar:</h3>
+      <ul>
+        <li>Resolva a questão matemática apresentada</li>
+        <li>Use o teclado numérico ou digite sua resposta</li>
+        <li>Clique em "Responder" para verificar</li>
+        <li>Você pode ver seu progresso na barra de pontuação</li>
+      </ul>
+      
+      <button onclick="fecharTutorial()" style="margin-top: 20px;">Começar a Praticar!</button>
+    </div>
   </div>
 
-  <audio id="somAcerto" src="acerto.mp3" preload="auto"></audio>
-  <audio id="somErro" src="erro.mp3" preload="auto"></audio>
-
   <script>
+    // Elementos DOM
+    const questaoEl = document.getElementById('questao');
+    const respostaEl = document.getElementById('resposta');
+    const feedbackEl = document.getElementById('feedback');
+    const pontuacaoEl = document.getElementById('pontuacao');
+    const tutorialEl = document.getElementById('tutorial');
+    const historicoEl = document.getElementById('historico-pontuacao');
+    const historicoListaEl = document.getElementById('historico-lista');
+    
+    // Configurações do jogo
     const params = new URLSearchParams(window.location.search);
     const nome = params.get('nome') || 'Aluno';
     const hoje = new Date().toISOString().split('T')[0];
     const chaveBase = `pontuacao_${nome}_${hoje}`;
     const mostrarHistorico = params.get('pontuacao') === '1';
-
+    
     let corretas = 0;
     let erradas = 0;
     let valor1, valor2, operador, resultado;
+    let nivelAtual = 3; // Fixado em Difícil
+    
+    // Formatador de data
+    function formatarData(dataStr) {
+      const data = new Date(dataStr);
+      return `${data.getDate().toString().padStart(2, '0')}/${(data.getMonth()+1).toString().padStart(2, '0')}/${data.getFullYear()}`;
+    }
 
+    // Inicialização
     function carregarPontuacao() {
       const dados = JSON.parse(localStorage.getItem(chaveBase)) || { c: 0, e: 0 };
       corretas = dados.c;
@@ -131,80 +613,236 @@
     function salvarPontuacao() {
       localStorage.setItem(chaveBase, JSON.stringify({ c: corretas, e: erradas }));
     }
-
-    function atualizarPontuacao() {
-      document.getElementById('pontuacao').textContent = `Pontuação de ${nome}: ✅ ${corretas} | ❌ ${erradas}`;
+    
+    function carregarHistorico() {
+      const historico = {};
+      const chaves = Object.keys(localStorage).filter(k => k.startsWith(`pontuacao_${nome}_`));
+      
+      chaves.forEach(chave => {
+        const data = chave.split('_').pop();
+        const dados = JSON.parse(localStorage.getItem(chave));
+        historico[data] = dados;
+      });
+      
+      return historico;
     }
-
+    
+    function mostrarHistoricoPontuacao() {
+      if (!mostrarHistorico) return;
+      
+      historicoEl.style.display = 'block';
+      historicoListaEl.innerHTML = '';
+      
+      const historico = carregarHistorico();
+      const datas = Object.keys(historico).sort().reverse();
+      
+      if (datas.length === 0) {
+        historicoListaEl.innerHTML = '<p>Nenhum histórico disponível</p>';
+        return;
+      }
+      
+      datas.forEach(data => {
+        const item = historico[data];
+        const total = item.c + item.e;
+        const percentual = total > 0 ? Math.round((item.c / total) * 100) : 0;
+        
+        const itemEl = document.createElement('div');
+        itemEl.className = 'historico-item';
+        
+        const dataEl = document.createElement('div');
+        dataEl.className = 'historico-data';
+        dataEl.textContent = formatarData(data);
+        
+        const pontosEl = document.createElement('div');
+        pontosEl.className = 'historico-pontos';
+        pontosEl.innerHTML = `
+          <span>✅ ${item.c}</span>
+          <span>❌ ${item.e}</span>
+          <span>🎯 ${percentual}%</span>
+        `;
+        
+        itemEl.appendChild(dataEl);
+        itemEl.appendChild(pontosEl);
+        historicoListaEl.appendChild(itemEl);
+      });
+    }
+    
+    function atualizarPontuacao() {
+      pontuacaoEl.textContent = `Pontuação: ✅ ${corretas} | ❌ ${erradas}`;
+      
+      // Atualizar progresso
+      const total = corretas + erradas;
+      const percentual = total > 0 ? Math.round((corretas / total) * 100) : 0;
+      document.getElementById('barra-progresso').style.width = `${percentual}%`;
+    }
+    
     function gerarQuestao() {
+      // Limpar feedback
+      feedbackEl.textContent = '';
+      feedbackEl.className = 'feedback';
+      
+      // Definir limites para o nível Difícil (50-100)
+      const min = 50;
+      const max = 100;
+      
+      // Gerar operador aleatório (50% de chance para cada)
       operador = Math.random() < 0.5 ? '+' : '-';
+      
+      // Gerar números baseados na operação
       if (operador === '+') {
-        do {
-          valor1 = Math.floor(Math.random() * 90) + 1;
-          valor2 = Math.floor(Math.random() * 90);
-        } while (valor1 + valor2 >= 100 || valor1 % 10 + valor2 % 10 >= 10);
+        valor1 = Math.floor(Math.random() * (max - min)) + min;
+        valor2 = Math.floor(Math.random() * (max - valor1)) + 1;
         resultado = valor1 + valor2;
       } else {
-        do {
-          valor1 = Math.floor(Math.random() * 90) + 10;
-          valor2 = Math.floor(Math.random() * 10);
-        } while (valor1 - valor2 <= 0 || valor1 % 10 - valor2 % 10 < 0);
+        valor1 = Math.floor(Math.random() * (max - min)) + min + 1;
+        valor2 = Math.floor(Math.random() * (valor1 - min)) + 1;
         resultado = valor1 - valor2;
       }
-      document.getElementById('questao').textContent = `${valor1} ${operador} ${valor2} = ?`;
-      const respostaInput = document.getElementById('resposta');
-      respostaInput.value = '';
-      respostaInput.focus();
-      const feedback = document.getElementById('feedback');
-      feedback.textContent = '';
-      feedback.className = 'feedback';
+      
+      // Atualizar a questão na tela
+      questaoEl.textContent = `${valor1} ${operador} ${valor2} = ?`;
+      respostaEl.value = '';
+      respostaEl.focus();
     }
 
     function verificar() {
-      const respostaInput = document.getElementById('resposta');
-      const resposta = Number(respostaInput.value);
-      const feedback = document.getElementById('feedback');
+      const resposta = Number(respostaEl.value);
 
-      if (respostaInput.value.trim() === '') {
-        feedback.textContent = 'Por favor, digite um número!';
-        feedback.className = 'feedback errado';
+      if (respostaEl.value.trim() === '') {
+        feedbackEl.textContent = 'Por favor, digite um número!';
+        feedbackEl.className = 'feedback errado';
         return;
       }
 
       if (resposta === resultado) {
         corretas++;
-        feedback.textContent = 'Correto! 🎉';
-        feedback.className = 'feedback correto';
-        document.getElementById('somAcerto').play();
+        feedbackEl.innerHTML = 'Correto! 🎉 <i class="fas fa-check-circle"></i>';
+        feedbackEl.className = 'feedback correto';
+        criarParticulas();
+        criarConfetes();
       } else {
         erradas++;
-        feedback.textContent = `Errado. A resposta certa era ${resultado}. ❌`;
-        feedback.className = 'feedback errado';
-        document.getElementById('somErro').play();
+        feedbackEl.innerHTML = `Errado. A resposta certa era ${resultado}. ❌ <i class="fas fa-times-circle"></i>`;
+        feedbackEl.className = 'feedback errado';
       }
+      
       atualizarPontuacao();
       salvarPontuacao();
+      
+      // Gerar nova questão após 1.5 segundos
       setTimeout(gerarQuestao, 1500);
     }
-
-    function mostrarPontuacoesAntigas() {
-      const historico = document.getElementById('historico');
-      historico.innerHTML = '<h3>Histórico de pontuações</h3>';
-      const dias = Object.keys(localStorage).filter(k => k.startsWith(`pontuacao_${nome}_`));
-      dias.sort().reverse().forEach(k => {
-        const data = k.split('_').slice(-1)[0];
-        const { c, e } = JSON.parse(localStorage.getItem(k));
-        const el = document.createElement('div');
-        el.textContent = `${data}: ✅ ${c} | ❌ ${e}`;
-        historico.appendChild(el);
-      });
+    
+    // Funções de entrada
+    function inserirNumero(num) {
+      respostaEl.value += num;
+    }
+    
+    function apagarNumero() {
+      respostaEl.value = respostaEl.value.slice(0, -1);
+    }
+    
+    function limparResposta() {
+      respostaEl.value = '';
+    }
+    
+    // Funções de acessibilidade
+    function alternarAltoContraste() {
+      document.body.classList.toggle('modo-alto-contraste');
+      const btn = document.getElementById('btn-alto-contraste');
+      btn.classList.toggle('ativo');
+    }
+    
+    function ajustarFonte(acao) {
+      const corpo = document.body;
+      const tamanhoAtual = parseFloat(getComputedStyle(corpo).fontSize);
+      
+      if (acao === 'aumentar' && tamanhoAtual < 24) {
+        corpo.style.fontSize = (tamanhoAtual + 1) + 'px';
+      } else if (acao === 'diminuir' && tamanhoAtual > 14) {
+        corpo.style.fontSize = (tamanhoAtual - 1) + 'px';
+      }
+    }
+    
+    // Animações
+    function criarParticulas() {
+      const particulas = document.getElementById('particulas');
+      particulas.innerHTML = '';
+      
+      const emojis = ['🎉', '✨', '🌟', '⭐', '💯', '👍', '👏', '🎯'];
+      
+      for (let i = 0; i < 20; i++) {
+        const particula = document.createElement('div');
+        particula.className = 'particula';
+        particula.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        particula.style.left = `${Math.random() * 100}%`;
+        particula.style.top = `${Math.random() * 100}%`;
+        particula.style.animationDelay = `${Math.random() * 2}s`;
+        particula.style.fontSize = `${Math.random() * 2 + 1}em`;
+        
+        particulas.appendChild(particula);
+        
+        // Remover após a animação
+        setTimeout(() => {
+          particula.remove();
+        }, 3000);
+      }
+    }
+    
+    function criarConfetes() {
+      const colors = ['#ff6f91', '#3b82f6', '#16a34a', '#fbbf24', '#8b5cf6'];
+      
+      for (let i = 0; i < 100; i++) {
+        const confete = document.createElement('div');
+        confete.className = 'confete';
+        confete.style.left = `${Math.random() * 100}vw`;
+        confete.style.background = colors[Math.floor(Math.random() * colors.length)];
+        confete.style.animationDuration = `${Math.random() * 3 + 2}s`;
+        confete.style.width = `${Math.random() * 10 + 5}px`;
+        confete.style.height = `${Math.random() * 10 + 5}px`;
+        document.body.appendChild(confete);
+        
+        // Remover após a animação
+        setTimeout(() => {
+          confete.remove();
+        }, 3000);
+      }
+    }
+    
+    // Tutorial
+    function fecharTutorial() {
+      tutorialEl.style.display = 'none';
+      gerarQuestao();
     }
 
+    // Inicialização do jogo
     window.onload = () => {
-      document.getElementById('titulo').textContent = `Olá, ${nome}! Vamos praticar 🎯`;
+      document.getElementById('nome-usuario').textContent = `Olá, ${nome}!`;
+      document.getElementById('data-atual').textContent = formatarData(hoje);
       carregarPontuacao();
-      gerarQuestao();
-      if (mostrarHistorico) mostrarPontuacoesAntigas();
+      
+      // Verificar se é a primeira vez do usuário
+      const jaViuTutorial = localStorage.getItem('tutorial_visto');
+      if (!jaViuTutorial) {
+        tutorialEl.style.display = 'flex';
+        localStorage.setItem('tutorial_visto', 'true');
+      } else {
+        tutorialEl.style.display = 'none';
+        gerarQuestao();
+      }
+      
+      // Mostrar histórico se solicitado
+      mostrarHistoricoPontuacao();
+      
+      // Evento para tecla Enter
+      respostaEl.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          verificar();
+        }
+      });
+      
+      // Focar no campo de resposta
+      respostaEl.focus();
     };
   </script>
 </body>
