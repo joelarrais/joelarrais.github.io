@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Score Tracker</title>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+  <h1>Submit your score</h1>
+  <input id="name" placeholder="Name" />
+  <input id="score" type="number" placeholder="Score" />
+  <button onclick="submitScore()">Submit</button>
+
+  <h2>Top Scores:</h2>
+  <ul id="scoreList"></ul>
+
+  <script>
+    // 🔧 Replace with your Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyCxiJ2Ht4ri4F4XyhmMCDoA6LMpHX5KExQ",
+      authDomain: "stora-dcaac.firebaseapp.com",
+      projectId: "stora-dcaac",
+      storageBucket: "stora-dcaac.firebasestorage.app",
+      messagingSenderId: "592364096939",
+      appId: "1:592364096939:web:6f0e6a35b156975b5996ee",
+      measurementId: "G-7WXHVF8WQH"
+    };
+
+    // 🔌 Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // 📨 Submit score to Firestore
+    function submitScore() {
+      const name = document.getElementById("name").value;
+      const score = parseInt(document.getElementById("score").value);
+      if (!name || isNaN(score)) return alert("Enter valid data.");
+
+      db.collection("scores").add({
+        name,
+        score,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(() => {
+        alert("Score submitted!");
+        loadScores();
+      });
+    }
+
+    // 📤 Load scores from Firestore
+    function loadScores() {
+      db.collection("scores")
+        .orderBy("score", "desc")
+        .limit(10)
+        .get()
+        .then(snapshot => {
+          const list = document.getElementById("scoreList");
+          list.innerHTML = "";
+          snapshot.forEach(doc => {
+            const data = doc.data();
+            list.innerHTML += `<li>${data.name}: ${data.score}</li>`;
+          });
+        });
+    }
+
+    // Load scores on page load
+    loadScores();
+  </script>
+</body>
+</html>
