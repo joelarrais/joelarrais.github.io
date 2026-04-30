@@ -11036,7 +11036,7 @@ a.text-dark:hover, a.text-dark:focus {
 .list {
   list-style-type: none;
   padding-left: 0;
-  padding: 0 30px;
+  padding: 0 20px;
 }
 
 .list .list-head {
@@ -12180,8 +12180,8 @@ pre .code {
 }
 
 .about-img-holder {
-  min-width: 400px;
-  max-width: 400px;
+  min-width: 300px;
+  max-width: 300px;
   margin-right: 20px;
 }
 
