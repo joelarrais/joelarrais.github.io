@@ -12241,3 +12241,37 @@ pre .code {
 .section-lg {
   padding: 100px 0 !important;
 }
+
+/* equal-height team/highlight cards (replaces &emsp; padding hacks) */
+.row > [class*="col-"] > .testimonial-card { height: 100%; }
+
+/* touch devices have no hover: always show publication captions as a bottom strip */
+@media (hover: none) {
+  .portfolio-card .portfolio-card-overlay {
+    visibility: visible;
+    opacity: 1;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    -webkit-transform: none;
+    -ms-transform: none;
+    transform: none;
+    padding: 10px;
+  }
+  .portfolio-card .portfolio-card-overlay .portfolio-card-caption {
+    position: static;
+    -webkit-transform: none;
+    -ms-transform: none;
+    transform: none;
+  }
+  .portfolio-card .portfolio-card-caption h4 {
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+  }
+  .portfolio-card .portfolio-card-caption p {
+    font-size: 0.75rem;
+    margin-bottom: 0;
+  }
+}

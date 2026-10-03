@@ -3,38 +3,46 @@
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="Devcrud">
-	<meta name="description" content="Joel P. Arrais - Assistant Professor and Researcher in Deep Learning for Computational Biology at the University of Coimbra.">
+    <meta name="author" content="Joel P. Arrais">
+	<meta name="description" content="Joel P. Arrais - Associate Professor and Researcher in Deep Learning for Computational Biology at the University of Coimbra.">
 	<meta property="og:title" content="Joel P. Arrais - Computational Biology & Bioinformatics">
 	<meta property="og:description" content="Research group focusing on Deep Learning, Drug Discovery, and Pharmacogenomics.">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://joelarrais.github.io/">
+	<meta property="og:image" content="https://joelarrais.github.io/assets/imgs/man.png">
+	<meta name="twitter:card" content="summary">
     <title>Joel P. Arrais</title>
     <!-- font icons -->
     <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
     <!-- Bootstrap + Meyawo main styles -->
     <link rel="stylesheet" href="assets/css/meyawo.css">
 
-	
+    <!-- Google tag (gtag.js) - loaded only after the visitor accepts analytics cookies -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      function loadAnalytics(){
+        var t=document.createElement('script');
+        t.async=true;
+        t.src='https://www.googletagmanager.com/gtag/js?id=G-W9XHCK0310';
+        document.head.appendChild(t);
+        gtag('js', new Date());
+        gtag('config', 'G-W9XHCK0310');
+      }
+      try { if (localStorage.getItem('analytics-consent') === 'yes') loadAnalytics(); } catch(e) {}
+    </script>
 </head>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-W9XHCK0310"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-W9XHCK0310');
-</script>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
 
     <!-- Page Navbar -->
     <nav class="custom-navbar" data-spy="affix" data-offset-top="20">
         <div class="container">
-            <a class="logo" href="#">Joel P. Arrais</a>         
+            <a class="logo" href="#home">Joel P. Arrais</a>         
             <ul class="nav">
                 <li class="item">
-                    <a class="link" href="#home">About</a>
+                    <a class="link" href="#about">About</a>
                 </li>
                 <li class="item">
                     <a class="link" href="#highlights">Highlights</a>
@@ -43,7 +51,7 @@
                     <a class="link" href="#interests">Research interests</a>
                 </li>
                 <li class="item">
-                    <a class="link" href="#publications">Featured Publications</a>
+                    <a class="link" href="#publications">Publications</a>
                 </li>
                 <li class="item">
                     <a class="link" href="#team">Team</a>
@@ -52,7 +60,7 @@
             
              <!-- <a href="datasets.html" class="btn btn-primary">Learn Box</a> -->
 
-            <a href="javascript:void(0)" id="nav-toggle" class="hamburger hamburger--elastic">
+            <a href="#" id="nav-toggle" class="hamburger hamburger--elastic" role="button" aria-label="Toggle navigation">
                 <div class="hamburger-box">
                   <div class="hamburger-inner"></div>
               </div>
@@ -61,7 +69,7 @@
   </nav><!-- End of Page Navbar -->
 
   <!-- page header -->
-  <header id="home" class="header">
+  <header class="header" role="presentation">
     <div class="overlay"></div>
 </header><!-- end of page header -->
 
@@ -75,7 +83,7 @@
                 <img src="assets/imgs/man.png" class="about-img" alt="Joel P. Arrais">
             </div>
             <div class="about-caption">
-                <h2 class="section-title mb-3">Joel P. Arrais</h2>
+                <h1 class="section-title h6 mb-3">Joel P. Arrais</h1>
                 <p class="lead">
                     <b>Deep Learning | Drug Discovery | Computational Biology</b>
                 </p>
@@ -100,7 +108,7 @@
         <section class="section" id="highlights">
             <div class="container text-center">
                 <p class="section-subtitle"></p>
-                <h6 class="section-title mb-6">Highlights</h6>
+                <h2 class="section-title h6 mb-6">Highlights</h2>
 
                 <!-- row -->
                 <div class="row">
@@ -111,8 +119,8 @@
                                 <img src="assets/imgs/winner.png" class="testimonial-card-img2" alt="">                   
                             </div>
                             <div class="testimonial-card-body">
-                                <h6 class="testimonial-card-title"><a href="https://www.nature.com/articles/s41467-025-65869-8" target="_blank">Publication in Nature Communications!</a></h6>
-                                <p class="testimonial-card-subtitle">AI model for Enhancing kinase-inhibitor activity and selectivity. Joint work with <a href="https://mpusite.mpu.edu.mo/esca/en/liuhuanxiang.php" target="_blank">Liu Huanxiang</a> from MPU</p>
+                                <h6 class="testimonial-card-title"><a href="https://www.nature.com/articles/s41467-025-65869-8" target="_blank" rel="noopener">Publication in Nature Communications!</a></h6>
+                                <p class="testimonial-card-subtitle">AI model for Enhancing kinase-inhibitor activity and selectivity. Joint work with <a href="https://mpusite.mpu.edu.mo/esca/en/liuhuanxiang.php" target="_blank" rel="noopener">Liu Huanxiang</a> from MPU</p>
                                 
                             </div>
                         </div>
@@ -127,7 +135,7 @@
                                 <h6 class="testimonial-card-title">In the news!</h6>
                                 <p class="testimonial-card-subtitle">
                                     Our work was promoted by the main Portuguese media, such as 
-                                    <a href="https://www.publico.pt/2022/09/12/ciencia/noticia/usar-inteligencia-artificial-acelerar-descoberta-farmacos-2020228" target="_blank">Jornal Público</a>, <a href="https://observador.pt/2022/09/12/universidade-de-coimbra-cria-modelo-para-acelerar-descoberta-de-novos-farmacos" target="_blank">Jornal Observador </a> and <a href="https://expresso.pt/sociedade/2022-09-12-A-Universidade-de-Coimbra-recorreu-a-Inteligencia-Artificial-para-acelerar-a-descoberta-de-novos-farmacos-3a136078" target="_blank">Jornal Expresso</a>.
+                                    <a href="https://www.publico.pt/2022/09/12/ciencia/noticia/usar-inteligencia-artificial-acelerar-descoberta-farmacos-2020228" target="_blank" rel="noopener">Jornal Público</a>, <a href="https://observador.pt/2022/09/12/universidade-de-coimbra-cria-modelo-para-acelerar-descoberta-de-novos-farmacos" target="_blank" rel="noopener">Jornal Observador</a> and <a href="https://expresso.pt/sociedade/2022-09-12-A-Universidade-de-Coimbra-recorreu-a-Inteligencia-Artificial-para-acelerar-a-descoberta-de-novos-farmacos-3a136078" target="_blank" rel="noopener">Jornal Expresso</a>.
                                 </p>
                             </div>
                         </div>
@@ -155,7 +163,7 @@
         <section class="section" id="interests">
             <div class="container text-center">
                 <p class="section-subtitle"></p>
-                <h6 class="section-title mb-6">Research interests</h6>
+                <h2 class="section-title h6 mb-6">Research interests</h2>
                 <!-- row -->
                 <div class="row">
                     <div class="col-md-6 col-lg-3">
@@ -190,7 +198,7 @@
                             <div class="body">
                                 <img src="assets/myimgs/interest4.png" alt="" class="icon">
                                 <h6 class="title">Pharmacogenomics</h6>
-                                <p class="subtitle">Computational models of how genetic profiles influences the effect of drugs.</p>
+                                <p class="subtitle">Computational models of how genetic profiles influence the effect of drugs.</p>
                             </div>
                         </div>
                     </div>
@@ -203,57 +211,31 @@
         <section class="section" id="publications">
             <div class="container text-center">
                 <p class="section-subtitle"></p>
-                <h6 class="section-title mb-6">Featured Publications</h6>
+                <h2 class="section-title h6 mb-6">Featured Publications</h2>
                 <!-- row -->
                 <div class="row">
-                    <div class="col-md-3">
-                        <a href="https://doi.org/10.1093/bib/bbac270" target="_blank" class="portfolio-card" target="_blank">
-                            <img src="assets/myimgs/paper1.png" class="portfolio-card-img" alt="">    
-                            <span class="portfolio-card-overlay">
-                                <span class="portfolio-card-caption">
-                                    <h4>Deep Generative Model for Therapeutic Targets using Transcriptomic Disease-
-                                    Associated Data - USP7 case study</h4>
-                                    <p class="font-weight-normal">Briefings in Bioinformatics (IF:13.99)</p>
-                                </span>                         
-                            </span>                     
+                    <div class="col-md-6">
+                        <a href="https://doi.org/10.1186/s13321-022-00623-6" class="portfolio-card" target="_blank" rel="noopener">
+                            <img class="portfolio-card-img" loading="lazy" src="assets/myimgs/01-feedback-gan-drug-design.svg" alt="Visual abstract: Designing optimized drug candidates with generative adversarial network, Journal of Cheminformatics 2022">
                         </a>
                     </div>
-                    <div class="col-md-3">
-                        <a href="https://doi.org/10.1016/j.compbiomed.2022.105772" class="portfolio-card" target="_blank">
-                            <img class="portfolio-card-img" src="assets/myimgs/paper2.png" class="img-responsive rounded" alt="">
-                            <span class="portfolio-card-overlay">
-                                <span class="portfolio-card-caption">
-                                    <h4>DTITR: End-to-end drug–target binding affinity prediction with transformers</h4>
-                                    <p class="font-weight-normal">Computers in Biology and Medicine (IF:6.69)</p>
-                                </span>                         
-                            </span>                         
+                    <div class="col-md-6">
+                        <a href="https://doi.org/10.1016/j.jpha.2025.101533" class="portfolio-card" target="_blank" rel="noopener">
+                            <img class="portfolio-card-img" loading="lazy" src="assets/myimgs/02-deep-learning-review.svg" alt="Visual abstract: Deep learning for small-molecule drug discovery, Journal of Pharmaceutical Analysis 2025">
                         </a>
                     </div>
-                    <div class="col-md-3">
-                        <a href="https://doi.org/10.1186/s13321-022-00623-6" class="portfolio-card" target="_blank">
-                            <img class="portfolio-card-img" src="assets/myimgs/paper3.png" class="img-responsive rounded" alt="">    
-                            <span class="portfolio-card-overlay">
-                                <span class="portfolio-card-caption">
-                                    <h4>Designing Optimized Drug Candidates With Generative Adversarial Network</h4>
-                                    <p class="font-weight-normal">Journal of Cheminformatics (IF:8.48)</p>
-                                </span>                         
-                            </span>                     
+                    <div class="col-md-6">
+                        <a href="https://doi.org/10.1038/s41467-025-65869-8" class="portfolio-card" target="_blank" rel="noopener">
+                            <img class="portfolio-card-img" loading="lazy" src="assets/myimgs/03-mmclkin-kinase-inhibitor.svg" alt="Visual abstract: Enhancing kinase-inhibitor activity and selectivity prediction through contrastive learning, Nature Communications 2025">
                         </a>
                     </div>
-                    <div class="col-md-3">
-                        <a href="https://doi.org/10.1093/bioinformatics/btab301" class="portfolio-card" target="_blank">
-                            <img class="portfolio-card-img" src="assets/myimgs/paper4.png" class="img-responsive rounded" alt="">    
-                            <span class="portfolio-card-overlay">
-                                <span class="portfolio-card-caption">
-                                    <h4>Optimizing blood–brain barrier permeation through deep reinforcement learning for de novo drug design</h4>
-                                    <p class="font-weight-normal">Oxford Bioinformatics (IF:6.93)</p>
-                                </span>                         
-                            </span>                     
+                    <div class="col-md-6">
+                        <a href="https://doi.org/10.1016/j.compbiomed.2025.109740" class="portfolio-card" target="_blank" rel="noopener">
+                            <img class="portfolio-card-img" loading="lazy" src="assets/myimgs/04-abiet-explainable-transformer.svg" alt="Visual abstract: ABIET, an explainable transformer for identifying functional groups in bioactive molecules, Computers in Biology and Medicine 2025">
                         </a>
                     </div>
                 </div><!-- end of row -->
-            </div>
-        </div><!-- end of container -->
+            </div><!-- end of container -->
     </section> <!-- end of publications section -->
 
 
@@ -268,7 +250,7 @@
                 <p class="m-0 text-light"></p>
             </div>
             <div class="col-sm offset-sm-2 offset-md-0">
-             <a class="btn btn-lg my-font btn-light rounded" href="https://scholar.google.pt/citations?hl=en&user=0pEkBdwAAAAJ&view_op=list_works&sortby=pubdate" target="_blank">Google Scholar</a>
+             <a class="btn btn-lg my-font btn-light rounded" href="https://scholar.google.pt/citations?hl=en&user=0pEkBdwAAAAJ&view_op=list_works&sortby=pubdate" target="_blank" rel="noopener">Google Scholar</a>
          </div>
      </div> <!-- end of row -->
  </div> <!-- end of container -->
@@ -284,51 +266,28 @@
 <section class="section" id="team">
     <div class="container text-center">
         <p class="section-subtitle"></p>
-        <h6 class="section-title mb-6">Team</h6>
+        <h2 class="section-title h6 mb-6">Team</h2>
         <!-- row -->
         <div class="row">
             <div class="col-md-6">
                 <div class="testimonial-card">
                     <div class="testimonial-card-img-holder">
-                        <img src="assets/myimgs2/maryam.jpg" class="testimonial-card-img" alt="">
+                        <img loading="lazy" src="assets/myimgs2/maryam.jpg" class="testimonial-card-img" alt="Maryam Abbasi">
                     </div>
                     <div class="testimonial-card-body">
-                        <p class="testimonial-card-subtitle"><b>Colaborator</b></br>Invited Adjunt Professor at Polytechnic Institute of Santarém &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</p>
-                        <h6 class="testimonial-card-title"><a href="https://www.cisuc.uc.pt/en/people/maryam-abbasi" target="_blank">Maryam Abbasi</a></h6>
+                        <p class="testimonial-card-subtitle"><b>Collaborator</b><br>Invited Adjunct Professor at Polytechnic Institute of Santarém</p>
+                        <h6 class="testimonial-card-title"><a href="https://www.cisuc.uc.pt/en/people/maryam-abbasi" target="_blank" rel="noopener">Maryam Abbasi</a></h6>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="testimonial-card">
-                    <div class="testimonial-card-img-holder">
-                        <img src="assets/myimgs2/tiago.jpeg" class="testimonial-card-img" alt="">
-                    </div>
-                    <div class="testimonial-card-body">
-                        <p class="testimonial-card-subtitle"><b>Colaborator</b></br>Resercher at Center for Neuroscience and Cell Biology, University of Coimbra</p>
-                        <h6 class="testimonial-card-title"><a href="https://www.cisuc.uc.pt/en/people/tiago-pereira-1" target="_blank">Tiago Pereira</a></h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="testimonial-card">
-                    <div class="testimonial-card-img-holder">
-                        <img src="assets/myimgs2/daniel.jpeg" class="testimonial-card-img" alt="">
-                    </div>
-                    <div class="testimonial-card-body">
-                        <p class="testimonial-card-subtitle"><b>Colaborator</b></br>Researcher at Multidisciplinary Institute of Ageing, University of Coimbra</p>
-                        <h6 class="testimonial-card-title"><a href="https://www.cisuc.uc.pt/en/people/Daniel-Martins" target="_blank">Daniel Martins</a></h6>
-                    </div>
-                </div>
-            </div>
-
             <div class="col-md-6" >
                 <div class="testimonial-card">
                     <div class="testimonial-card-img-holder">
-                        <img src="assets/myimgs2/yousef.jpeg"  class="testimonial-card-img" alt="">                           
+                        <img loading="lazy" src="assets/myimgs2/yousef.jpeg"  class="testimonial-card-img" alt="Yousef Khan">                           
                     </div>
                     <div class="testimonial-card-body">
-                        <p class="testimonial-card-subtitle"><b>PhD student</b></br> AI-Driven Knowledge Graphs: Automating Adaptive Rule Discovery for Intelligent Systems</p>
-                        <h6 class="testimonial-card-title"><a href="https://www.cisuc.uc.pt/en/people/y-khan" target="_blank">Yousef Khan</a></h6>
+                        <p class="testimonial-card-subtitle"><b>PhD student</b><br> AI-Driven Knowledge Graphs: Automating Adaptive Rule Discovery for Intelligent Systems</p>
+                        <h6 class="testimonial-card-title"><a href="https://www.cisuc.uc.pt/en/people/y-khan" target="_blank" rel="noopener">Yousef Khan</a></h6>
                     </div>
                 </div>
             </div>
@@ -337,11 +296,11 @@
             <div class="col-md-6">
                 <div class="testimonial-card">
                     <div class="testimonial-card-img-holder">
-                        <img src="assets/myimgs2/sofia.jpeg" class="testimonial-card-img" alt="">
+                        <img loading="lazy" src="assets/myimgs2/sofia.jpeg" class="testimonial-card-img" alt="Sofia Monteiro">
                     </div>
                     <div class="testimonial-card-body">
-                        <p class="testimonial-card-subtitle"><b>PhD student</b></br>Classifying Functional Impairments in Foot Clinic Patients using Plantar Pressure Distributions</p>
-                        <h6 class="testimonial-card-title"><a href="https://www.linkedin.com/in/sofia-lopes-monteiro/" target="_blank">Sofia Monteiro</a></h6>
+                        <p class="testimonial-card-subtitle"><b>PhD student</b><br>Classifying Functional Impairments in Foot Clinic Patients using Plantar Pressure Distributions</p>
+                        <h6 class="testimonial-card-title"><a href="https://www.linkedin.com/in/sofia-lopes-monteiro/" target="_blank" rel="noopener">Sofia Monteiro</a></h6>
                     </div>
                 </div>
             </div>
@@ -349,56 +308,55 @@
             <div class="col-md-6">
                 <div class="testimonial-card">
                     <div class="testimonial-card-img-holder">
-                        <img src="assets/myimgs2/hayder.jpeg" class="testimonial-card-img" alt="">
+                        <img loading="lazy" src="assets/myimgs2/hayder.jpeg" class="testimonial-card-img" alt="Hayder Fadhil Ali">
                     </div>
                     <div class="testimonial-card-body">
-                        <p class="testimonial-card-subtitle"><b>PhD student</b></br>Machine Learning Models for Predicting Biodegradability in Bio-Based Polyesters</p>
-                        <h6 class="testimonial-card-title"><a href="https://www.linkedin.com/in/hayder-fadhil-ali/" target="_blank">Hayder Fadhil Ali</a></h6>
+                        <p class="testimonial-card-subtitle"><b>PhD student</b><br>Machine Learning Models for Predicting Biodegradability in Bio-Based Polyesters</p>
+                        <h6 class="testimonial-card-title"><a href="https://www.linkedin.com/in/hayder-fadhil-ali/" target="_blank" rel="noopener">Hayder Fadhil Ali</a></h6>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="testimonial-card">
                     <div class="testimonial-card-img-holder">
-                        <img src="assets/myimgs2/mohammed.jpeg" class="testimonial-card-img" alt="">
+                        <img loading="lazy" src="assets/myimgs2/mohammed.jpeg" class="testimonial-card-img" alt="Mohammed Khedr">
                     </div>
                     <div class="testimonial-card-body">
-                        <p class="testimonial-card-subtitle"><b>PhD student</b></br>Multi-agent framework for target-conditioned drug discovery.</p>
-                        <h6 class="testimonial-card-title"><a href="https://www.cisuc.uc.pt/en/people/mohammed-khedr" target="_blank">Mohammed Khedr</a></h6>
+                        <p class="testimonial-card-subtitle"><b>PhD student</b><br>Multi-agent framework for target-conditioned drug discovery.</p>
+                        <h6 class="testimonial-card-title"><a href="https://www.cisuc.uc.pt/en/people/mohammed-khedr" target="_blank" rel="noopener">Mohammed Khedr</a></h6>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="testimonial-card">
                     <div class="testimonial-card-img-holder">
-                        <img src="assets/myimgs2/joaquim.jpg" class="testimonial-card-img" alt="">
+                        <img loading="lazy" src="assets/myimgs2/joaquim.jpg" class="testimonial-card-img" alt="Joaquim Santos">
                     </div>
                     <div class="testimonial-card-body">
-                        <p class="testimonial-card-subtitle"><b>PhD student</b></br>Kownledge Graph for improved gene disease association</p>
-                        <h6 class="testimonial-card-title"><a href="" target="_blank">Joaquim Santos</a></h6>
+                        <p class="testimonial-card-subtitle"><b>PhD student</b><br>Knowledge Graph for improved gene disease association</p>
+                        <h6 class="testimonial-card-title">Joaquim Santos</h6>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="testimonial-card">
                     <div class="testimonial-card-img-holder">
-                        <img src="assets/myimgs2/paulo.png" class="testimonial-card-img" alt="">
+                        <img loading="lazy" src="assets/myimgs2/paulo.png" class="testimonial-card-img" alt="Paulo Correia">
                     </div>
                     <div class="testimonial-card-body">
-                        <p class="testimonial-card-subtitle"><b>PhD student</b></br>Interpretable SE(3)-Equivariant Models for Structure-Based Drug Discovery</p>
-                        <h6 class="testimonial-card-title"><a href="" target="_blank">Paulo Correia</a></h6>
+                        <p class="testimonial-card-subtitle"><b>PhD student</b><br>Interpretable SE(3)-Equivariant Models for Structure-Based Drug Discovery</p>
+                        <h6 class="testimonial-card-title">Paulo Correia</h6>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="testimonial-card">
                     <div class="testimonial-card-img-holder">
-                        <img src="assets/myimgs2/edgar.jpeg" class="testimonial-card-img" alt="">
+                        <img loading="lazy" src="assets/myimgs2/edgar.jpeg" class="testimonial-card-img" alt="Edgar Vicente">
                     </div>
                     <div class="testimonial-card-body">
-                        <p class="testimonial-card-subtitle"><b>PhD student</b></br>
-                        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; </p>
-                        <h6 class="testimonial-card-title"><a href="" target="_blank">Edgar Vicente</a></h6>
+                        <p class="testimonial-card-subtitle"><b>PhD student</b><br>Multi-Objective Alignment of Generative AI for the Design of Broad-Spectrum Antimicrobial Peptides</p>
+                        <h6 class="testimonial-card-title">Edgar Vicente</h6>
                     </div>
                 </div>
             </div>
@@ -407,53 +365,30 @@
                     <div class="testimonial-card-img-holder">
                     </div>
                     <div class="testimonial-card-body">
-                        <h6 class="testimonial-card-title"><a href="" target="_blank">Undergrad students:</a></h6>
+                        <h6 class="testimonial-card-title">Former PhD Students:</h6>
                         <p class="testimonial-card-subtitle">
-                            <!--
-                            <b>- Edgar Vicente</b>, Master in Biomedical Engineering, UC</br>
-                            <b>- Mariana Morais</b>, Master in Biomedical Engineering, UC</br>
-                            <b>- Guilherme Henriques</b>, Master in Computational Biology, UC</br>
-                            -->
-                            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                            <b>- Edgar Coelho</b>, former PhD student, Lead Data Scientist at MarketerHire<br>
+                            <b>- Fernanda Correia</b>, former PhD student, Adjunct Professor at ISEP, IPC<br>
+                            <b>- António Cruz</b>, former PhD student, Researcher at CISUC, UC<br>
+                            <b>- Nelson Monteiro</b>, former PhD student, Data Scientist at Orbis Medicines<br>
+                            <b>- Tiago Pereira</b>, former PhD student, Researcher at CNC, UC<br>
+                            <b>- Daniel Martins</b>, former PhD student, Researcher at MIA, UC<br>
+                            <b>- Luis Torres</b>, former PhD student, Artificial Intelligence Scientist at Sanofi<br>
+                            <b>- Anuschka da Silva Spínola</b>, former PhD student, Researcher at CNC, UC<br>
+                            <b>- Fabiano Papaiz</b>, former PhD student, Professor at IFRN, Brazil<br>
+                            <b>- Yanan Tian</b>, former PhD student, Researcher<br>
+                            <b>- Jianxiu Cai</b>, former PhD student, Researcher<br>
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
-                <div class="testimonial-card">
-                    <div class="testimonial-card-img-holder">
-                    </div>
-                    <div class="testimonial-card-body">
-                        <h6 class="testimonial-card-title"><a href="" target="_blank">Former PhD Students:</a></h6>
-                        <p class="testimonial-card-subtitle">
-                            <b>- Edgar Coelho</b>, former PhD student, Lead Data Scientist at MarketerHire</br>
-                            <b>- Fernanda Correia</b>, former PhD student, Adjunt Professor at ISEP, IPC</br>
-                            <b>- António Cruz</b>, former PhD student, Researcher at CISUC, UC</br>
-                            <b>- Nelson Monteiro</b>, former PhD student, Data Scientist at Orbis Medicines</br>
-                            <b>- Tiago Pereira</b>, former PhD student, Researcher at CNC, UC</br>
-                            <b>- Daniel Martins</b>, former PhD student, Researcher at MIA, UC</br>
-                            <b>- Luis Torres</b>, former PhD student, Artificial Intelligence Scientist at Sanofi</br>
-                            <b>- Anuschka da Silva Spínola</b>, former PhD student, Researcher at CNC, UC</br>
-                            <b>- Fabiano Papaiz</b>, Professor IFRN, Brasil</br>
-                            <b>- Yanan Tian</b>, former PhD student, Researcher</br>
-                            <b>- Jianxiu Cai</b>, former PhD student, Researcher</br>                            
-                            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                        </p>
-                    </div>
-                </div>
+        </div><!-- end of row -->
+        <div class="row">
+            <div class="col-12">
+                <img class="portfolio-card-img" loading="lazy" src="assets/myimgs/group1.jpg" alt="Research group photo">
             </div>
         </div>
-        <div class="col-md-14">
-            <a href="#" class="portfolio-card">
-                <img class="portfolio-card-img" src="assets/myimgs/group1.jpg" class="img-responsive rounded" alt="">    
-            </a>
-        </div>
-    </div>              
-</div><!-- end of about wrapper -->
-
-</div> <!-- end of container -->
+    </div><!-- end of container -->
 </section> <!-- end of Team section -->
 
 
@@ -468,7 +403,7 @@
                 <p class="m-0 text-light"></p>
             </div>
             <div class="col-sm offset-sm-2 offset-md-0" >
-             <a class="btn btn-lg my-font btn-light rounded" href=""><img src="assets/myimgs/eml.png" alt="" class="icon" width="120px"></a>
+             <a class="btn btn-lg my-font btn-light rounded" href="mailto:jpa@uc.pt"><img src="assets/myimgs/eml.png" alt="Email: jpa@uc.pt" class="icon" width="120"></a>
          </div>
      </div> <!-- end of row -->
  </div> <!-- end of container -->
@@ -482,11 +417,27 @@
 <!--        
     <p class="mb-0">Copyright <script>document.write(new Date().getFullYear())</script> &copy; <a href="http://www.devcrud.com">DevCRUD</a></p>
 -->
-<div class="social-links text-right m-auto ml-sm-auto">
-    <a href="javascript:void(0)" class="link"><i class="ti-google"></i></a>
-</div>
+<p class="mb-0 text-center text-muted">&copy; Joel P. Arrais</p>
 </footer>
 </div> <!-- end of page footer -->
+
+
+<!-- analytics consent -->
+<div id="consent" role="dialog" aria-label="Cookie consent" hidden style="position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#222;color:#fff;padding:12px 16px;text-align:center;font-size:14px">
+    This site uses Google Analytics cookies to count visits.
+    <button id="consent-yes" class="btn btn-sm btn-light mx-2">Accept</button>
+    <button id="consent-no" class="btn btn-sm btn-outline-light">Decline</button>
+</div>
+<script>
+(function(){
+  var box=document.getElementById('consent'), v=null;
+  try { v=localStorage.getItem('analytics-consent'); } catch(e) {}
+  if(!v) box.hidden=false;
+  function set(val){ try{localStorage.setItem('analytics-consent',val);}catch(e){} box.hidden=true; if(val==='yes') loadAnalytics(); }
+  document.getElementById('consent-yes').onclick=function(){set('yes');};
+  document.getElementById('consent-no').onclick=function(){set('no');};
+})();
+</script>
 
 <!-- core  -->
 <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>

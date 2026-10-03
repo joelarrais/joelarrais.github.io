@@ -32,7 +32,8 @@ $(document).ready(function(){
 });
 
 // navbar toggle
-$('#nav-toggle').click(function(){
+$('#nav-toggle').click(function(e){
+    e.preventDefault();
     $(this).toggleClass('is-active')
     $('ul.nav').toggleClass('show');
 });
