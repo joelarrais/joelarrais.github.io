@@ -6,6 +6,9 @@
   <title>Joel P. Arrais</title>
   <meta name="author" content="Joel P. Arrais">
   <meta name="description" content="Joel P. Arrais - Associate Professor and Researcher in Deep Learning for Computational Biology at the University of Coimbra.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#15131b" media="(prefers-color-scheme: dark)">
 
   <!-- link previews (LinkedIn, Facebook, X...) -->
   <meta property="og:title" content="Joel P. Arrais - Computational Biology & Bioinformatics">
@@ -15,9 +18,13 @@
   <meta property="og:image" content="https://joelarrais.github.io/assets/img/profile.jpg">
   <meta name="twitter:card" content="summary">
 
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Paaji&family=Open+Sans:wght@300;400&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600&family=Open+Sans:wght@300;400;600&display=swap">
   <link rel="stylesheet" href="assets/css/style.css">
 
   <!-- navbar, menu and Google Analytics (loaded only after the visitor accepts) -->
@@ -51,24 +58,26 @@
 
     <!-- ===== About ===== -->
     <section class="section pt-0" id="about">
-      <div class="container text-center">
+      <div class="container">
         <div class="about">
           <div class="about-img-holder">
             <img class="about-img" src="assets/img/profile.jpg" width="507" height="600" alt="Joel P. Arrais">
           </div>
           <div class="about-caption">
-            <h1 class="section-title mb-3">Joel P. Arrais</h1>
+            <h1 class="about-name">Joel P. Arrais</h1>
             <p class="lead"><b>Deep Learning | Drug Discovery | Computational Biology</b></p>
             <p>
               Associate Professor at the Department of Informatics Engineering, University of Coimbra, and Researcher at CISUC.
               I lead research efforts in applying AI to solve complex biological challenges, specifically in molecular generation and genomic analysis.
             </p>
-            <div class="social-links mt-4">
-              <a href="https://www.linkedin.com/in/joelarrais/" target="_blank" rel="noopener">
-                <img src="assets/img/icons/linkedin.png" width="86" height="84" alt="LinkedIn">
+            <div class="social-links">
+              <a class="social-link" href="https://www.linkedin.com/in/joelarrais/" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                LinkedIn
               </a>
-              <a href="https://scholar.google.pt/citations?user=0pEkBdwAAAAJ" target="_blank" rel="noopener">
-                <img src="assets/img/icons/scholar.png" width="150" height="60" alt="Google Scholar">
+              <a class="social-link" href="https://scholar.google.pt/citations?user=0pEkBdwAAAAJ" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
+                Google Scholar
               </a>
             </div>
           </div>
@@ -77,49 +86,37 @@
     </section>
 
     <!-- ===== Highlights ===== -->
-    <section class="section" id="highlights">
-      <div class="container text-center">
-        <h2 class="section-title mb-6">Highlights</h2>
-        <div class="row">
+    <section class="section section--tint" id="highlights">
+      <div class="container">
+        <h2 class="section-title">Highlights</h2>
+        <div class="row card-grid">
 
           <div class="col-md-4">
-            <div class="testimonial-card">
-              <div class="testimonial-card-img-holder">
-                <img class="testimonial-card-icon" src="assets/img/icons/winner.png" width="130" height="130" alt="">
-              </div>
-              <div class="testimonial-card-body">
-                <h3 class="testimonial-card-title"><a href="https://www.nature.com/articles/s41467-025-65869-8" target="_blank" rel="noopener">Publication in Nature Communications!</a></h3>
-                <p>AI model for Enhancing kinase-inhibitor activity and selectivity. Joint work with <a href="https://mpusite.mpu.edu.mo/esca/en/liuhuanxiang.php" target="_blank" rel="noopener">Liu Huanxiang</a> from MPU</p>
-              </div>
+            <div class="card feature">
+              <span class="feature-icon icon-award" aria-hidden="true"></span>
+              <h3 class="feature-title"><a href="https://www.nature.com/articles/s41467-025-65869-8" target="_blank" rel="noopener">Publication in Nature Communications!</a></h3>
+              <p>AI model for Enhancing kinase-inhibitor activity and selectivity. Joint work with <a href="https://mpusite.mpu.edu.mo/esca/en/liuhuanxiang.php" target="_blank" rel="noopener">Liu Huanxiang</a> from MPU</p>
             </div>
           </div>
 
           <div class="col-md-4">
-            <div class="testimonial-card">
-              <div class="testimonial-card-img-holder">
-                <img class="testimonial-card-icon" src="assets/img/icons/newspaper.png" width="130" height="130" alt="">
-              </div>
-              <div class="testimonial-card-body">
-                <h3 class="testimonial-card-title">In the news!</h3>
-                <p>
-                  Our work was promoted by the main Portuguese media, such as
-                  <a href="https://www.publico.pt/2022/09/12/ciencia/noticia/usar-inteligencia-artificial-acelerar-descoberta-farmacos-2020228" target="_blank" rel="noopener">Jornal Público</a>,
-                  <a href="https://observador.pt/2022/09/12/universidade-de-coimbra-cria-modelo-para-acelerar-descoberta-de-novos-farmacos" target="_blank" rel="noopener">Jornal Observador</a> and
-                  <a href="https://expresso.pt/sociedade/2022-09-12-A-Universidade-de-Coimbra-recorreu-a-Inteligencia-Artificial-para-acelerar-a-descoberta-de-novos-farmacos-3a136078" target="_blank" rel="noopener">Jornal Expresso</a>.
-                </p>
-              </div>
+            <div class="card feature">
+              <span class="feature-icon icon-news" aria-hidden="true"></span>
+              <h3 class="feature-title">In the news!</h3>
+              <p>
+                Our work was promoted by the main Portuguese media, such as
+                <a href="https://www.publico.pt/2022/09/12/ciencia/noticia/usar-inteligencia-artificial-acelerar-descoberta-farmacos-2020228" target="_blank" rel="noopener">Jornal Público</a>,
+                <a href="https://observador.pt/2022/09/12/universidade-de-coimbra-cria-modelo-para-acelerar-descoberta-de-novos-farmacos" target="_blank" rel="noopener">Jornal Observador</a> and
+                <a href="https://expresso.pt/sociedade/2022-09-12-A-Universidade-de-Coimbra-recorreu-a-Inteligencia-Artificial-para-acelerar-a-descoberta-de-novos-farmacos-3a136078" target="_blank" rel="noopener">Jornal Expresso</a>.
+              </p>
             </div>
           </div>
 
           <div class="col-md-4">
-            <div class="testimonial-card">
-              <div class="testimonial-card-img-holder">
-                <img class="testimonial-card-icon" src="assets/img/icons/medal.png" width="130" height="130" alt="">
-              </div>
-              <div class="testimonial-card-body">
-                <h3 class="testimonial-card-title">Three funded research projects!</h3>
-                <p>CHAFT, VIBES and IA4FARMA projects funded!</p>
-              </div>
+            <div class="card feature">
+              <span class="feature-icon icon-funding" aria-hidden="true"></span>
+              <h3 class="feature-title">Three funded research projects!</h3>
+              <p>CHAFT, VIBES and IA4FARMA projects funded!</p>
             </div>
           </div>
 
@@ -129,39 +126,39 @@
 
     <!-- ===== Research interests ===== -->
     <section class="section" id="interests">
-      <div class="container text-center">
-        <h2 class="section-title mb-6">Research interests</h2>
-        <div class="row">
+      <div class="container">
+        <h2 class="section-title">Research interests</h2>
+        <div class="row card-grid">
 
           <div class="col-md-6 col-lg-3">
-            <div class="service-card">
-              <img class="icon" src="assets/img/research/drug-target-prediction.png" width="150" height="150" alt="">
-              <h3 class="title">Drug–target prediction</h3>
-              <p class="subtitle">Deep Learning models for prediction of Protein-Drug interactions.</p>
+            <div class="card feature">
+              <span class="feature-icon icon-drug-target" aria-hidden="true"></span>
+              <h3 class="feature-title">Drug–target prediction</h3>
+              <p>Deep Learning models for prediction of Protein-Drug interactions.</p>
             </div>
           </div>
 
           <div class="col-md-6 col-lg-3">
-            <div class="service-card">
-              <img class="icon" src="assets/img/research/generative-models.png" width="150" height="150" alt="">
-              <h3 class="title">Drug Generative models</h3>
-              <p class="subtitle">Language models for de novo generation of SMILES of molecules with desired properties.</p>
+            <div class="card feature">
+              <span class="feature-icon icon-generative" aria-hidden="true"></span>
+              <h3 class="feature-title">Drug Generative models</h3>
+              <p>Language models for de novo generation of SMILES of molecules with desired properties.</p>
             </div>
           </div>
 
           <div class="col-md-6 col-lg-3">
-            <div class="service-card">
-              <img class="icon" src="assets/img/research/genetic-variants.png" width="150" height="150" alt="">
-              <h3 class="title">Genetic variants analysis</h3>
-              <p class="subtitle">Analysis of genetic variants to find those associated with a specific trait or disease.</p>
+            <div class="card feature">
+              <span class="feature-icon icon-variants" aria-hidden="true"></span>
+              <h3 class="feature-title">Genetic variants analysis</h3>
+              <p>Analysis of genetic variants to find those associated with a specific trait or disease.</p>
             </div>
           </div>
 
           <div class="col-md-6 col-lg-3">
-            <div class="service-card">
-              <img class="icon" src="assets/img/research/pharmacogenomics.png" width="150" height="150" alt="">
-              <h3 class="title">Pharmacogenomics</h3>
-              <p class="subtitle">Computational models of how genetic profiles influence the effect of drugs.</p>
+            <div class="card feature">
+              <span class="feature-icon icon-pharmacogenomics" aria-hidden="true"></span>
+              <h3 class="feature-title">Pharmacogenomics</h3>
+              <p>Computational models of how genetic profiles influence the effect of drugs.</p>
             </div>
           </div>
 
@@ -169,33 +166,46 @@
       </div>
     </section>
 
-    <!-- ===== Featured publications ===== -->
-    <section class="section" id="publications">
-      <div class="container text-center">
-        <h2 class="section-title mb-6">Featured Publications</h2>
-        <div class="row">
+    <!-- ===== Featured publications =====
+         Figures: assets/img/publications/*.svg (800x390, editable by hand) -->
+    <section class="section section--tint" id="publications">
+      <div class="container">
+        <h2 class="section-title">Featured Publications</h2>
+        <div class="row card-grid">
 
           <div class="col-md-6">
-            <a class="portfolio-card" href="https://doi.org/10.1186/s13321-022-00623-6" target="_blank" rel="noopener">
-              <img class="portfolio-card-img" src="assets/img/publications/01-feedback-gan-drug-design.svg" width="1160" height="1160" loading="lazy" alt="Visual abstract: Designing optimized drug candidates with generative adversarial network, Journal of Cheminformatics 2022">
+            <a class="card pub" href="https://doi.org/10.1186/s13321-022-00623-6" target="_blank" rel="noopener">
+              <img class="pub-figure" src="assets/img/publications/01-feedback-gan-drug-design.svg" width="800" height="390" loading="lazy" alt="Method: autoencoder, GAN and affinity predictor in a feedback loop. Results: 99.2% exact reconstruction; valid molecules from 30.2% to 62.3%; mean predicted pIC50 from 5.98 to 7.28.">
+              <p class="pub-meta">Journal of Cheminformatics · 2022</p>
+              <h3 class="pub-title">Designing optimized drug candidates with generative adversarial network</h3>
+              <span class="pub-more">Read the paper <span aria-hidden="true">→</span></span>
             </a>
           </div>
 
           <div class="col-md-6">
-            <a class="portfolio-card" href="https://doi.org/10.1016/j.jpha.2025.101533" target="_blank" rel="noopener">
-              <img class="portfolio-card-img" src="assets/img/publications/02-deep-learning-review.svg" width="1160" height="1160" loading="lazy" alt="Visual abstract: Deep learning for small-molecule drug discovery, Journal of Pharmaceutical Analysis 2025">
+            <a class="card pub" href="https://doi.org/10.1016/j.jpha.2025.101533" target="_blank" rel="noopener">
+              <img class="pub-figure" src="assets/img/publications/02-deep-learning-review.svg" width="800" height="390" loading="lazy" alt="From data to deep learning models to tasks. Drug development takes 10 to 15 years and over 1 billion dollars per approved drug; about 90% of candidates fail beyond phase I.">
+              <p class="pub-meta">Journal of Pharmaceutical Analysis · 2025</p>
+              <h3 class="pub-title">Deep learning for small-molecule drug discovery: from molecular design to clinical translation</h3>
+              <span class="pub-more">Read the paper <span aria-hidden="true">→</span></span>
             </a>
           </div>
 
           <div class="col-md-6">
-            <a class="portfolio-card" href="https://doi.org/10.1038/s41467-025-65869-8" target="_blank" rel="noopener">
-              <img class="portfolio-card-img" src="assets/img/publications/03-mmclkin-kinase-inhibitor.svg" width="1160" height="1160" loading="lazy" alt="Visual abstract: Enhancing kinase-inhibitor activity and selectivity prediction through contrastive learning, Nature Communications 2025">
+            <a class="card pub" href="https://doi.org/10.1038/s41467-025-65869-8" target="_blank" rel="noopener">
+              <img class="pub-figure" src="assets/img/publications/03-mmclkin-kinase-inhibitor.svg" width="800" height="390" loading="lazy" alt="Method: kinase and inhibitor encoders aligned by contrastive attention to predict activity and selectivity. Results: mean absolute error 0.381; selectivity correlation 0.898; best IC50 2.08 nM on LRRK2 G2019S.">
+              <p class="pub-meta">Nature Communications · 2025</p>
+              <h3 class="pub-title">Enhancing kinase-inhibitor activity and selectivity prediction through contrastive learning</h3>
+              <span class="pub-more">Read the paper <span aria-hidden="true">→</span></span>
             </a>
           </div>
 
           <div class="col-md-6">
-            <a class="portfolio-card" href="https://doi.org/10.1016/j.compbiomed.2025.109740" target="_blank" rel="noopener">
-              <img class="portfolio-card-img" src="assets/img/publications/04-abiet-explainable-transformer.svg" width="1160" height="1160" loading="lazy" alt="Visual abstract: ABIET, an explainable transformer for identifying functional groups in bioactive molecules, Computers in Biology and Medicine 2025">
+            <a class="card pub" href="https://doi.org/10.1016/j.compbiomed.2025.109740" target="_blank" rel="noopener">
+              <img class="pub-figure" src="assets/img/publications/04-abiet-explainable-transformer.svg" width="800" height="390" loading="lazy" alt="Method: a pre-trained Transformer turns attention into atom importance. Results: 1.18 million ChEMBL molecules; functional groups rank highest in 85.8% (standard SMILES) and 93.3% (stereochemical SMILES) of molecules.">
+              <p class="pub-meta">Computers in Biology and Medicine · 2025</p>
+              <h3 class="pub-title">ABIET: an explainable transformer for identifying functional groups in bioactive molecules</h3>
+              <span class="pub-more">Read the paper <span aria-hidden="true">→</span></span>
             </a>
           </div>
 
@@ -204,16 +214,10 @@
     </section>
 
     <!-- ===== Call to action: full publication list ===== -->
-    <section class="section-sm bg-primary">
-      <div class="container text-center text-sm-left">
-        <div class="row align-items-center">
-          <div class="col-sm offset-md-1">
-            <h2 class="title text-light">Complete and updated list of Publications</h2>
-          </div>
-          <div class="col-sm offset-sm-2 offset-md-0">
-            <a class="btn btn-lg btn-light my-font rounded" href="https://scholar.google.pt/citations?hl=en&amp;user=0pEkBdwAAAAJ&amp;view_op=list_works&amp;sortby=pubdate" target="_blank" rel="noopener">Google Scholar</a>
-          </div>
-        </div>
+    <section class="cta cta--primary">
+      <div class="container cta-inner">
+        <h2 class="cta-title">Complete and updated list of Publications</h2>
+        <a class="btn btn-lg btn-light" href="https://scholar.google.pt/citations?hl=en&amp;user=0pEkBdwAAAAJ&amp;view_op=list_works&amp;sortby=pubdate" target="_blank" rel="noopener">Google Scholar</a>
       </div>
     </section>
 
@@ -221,144 +225,128 @@
          To add someone: copy one "col-md-6" block and put the photo
          (square, 180x180 px) in assets/img/team/firstname-lastname.jpg -->
     <section class="section" id="team">
-      <div class="container text-center">
-        <h2 class="section-title mb-6">Team</h2>
-        <div class="row">
+      <div class="container">
+        <h2 class="section-title">Team</h2>
+        <div class="row card-grid">
 
           <div class="col-md-6">
-            <div class="testimonial-card">
-              <div class="testimonial-card-img-holder">
-                <img class="testimonial-card-img" src="assets/img/team/maryam-abbasi.jpg" width="180" height="180" loading="lazy" alt="Maryam Abbasi">
-              </div>
-              <div class="testimonial-card-body">
-                <p><b>Collaborator</b><br>Invited Adjunct Professor at Polytechnic Institute of Santarém</p>
-                <h3 class="testimonial-card-title"><a href="https://www.cisuc.uc.pt/en/people/maryam-abbasi" target="_blank" rel="noopener">Maryam Abbasi</a></h3>
+            <div class="card person">
+              <img class="person-photo" src="assets/img/team/maryam-abbasi.jpg" width="180" height="180" loading="lazy" alt="">
+              <div>
+                <h3 class="person-name"><a href="https://www.cisuc.uc.pt/en/people/maryam-abbasi" target="_blank" rel="noopener">Maryam Abbasi</a></h3>
+                <p class="person-role">Collaborator</p>
+                <p class="person-topic">Invited Adjunct Professor at Polytechnic Institute of Santarém</p>
               </div>
             </div>
           </div>
 
           <div class="col-md-6">
-            <div class="testimonial-card">
-              <div class="testimonial-card-img-holder">
-                <img class="testimonial-card-img" src="assets/img/team/yousef-khan.jpg" width="180" height="180" loading="lazy" alt="Yousef Khan">
-              </div>
-              <div class="testimonial-card-body">
-                <p><b>PhD student</b><br>AI-Driven Knowledge Graphs: Automating Adaptive Rule Discovery for Intelligent Systems</p>
-                <h3 class="testimonial-card-title"><a href="https://www.cisuc.uc.pt/en/people/y-khan" target="_blank" rel="noopener">Yousef Khan</a></h3>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <div class="testimonial-card">
-              <div class="testimonial-card-img-holder">
-                <img class="testimonial-card-img" src="assets/img/team/sofia-monteiro.jpg" width="180" height="180" loading="lazy" alt="Sofia Monteiro">
-              </div>
-              <div class="testimonial-card-body">
-                <p><b>PhD student</b><br>Classifying Functional Impairments in Foot Clinic Patients using Plantar Pressure Distributions</p>
-                <h3 class="testimonial-card-title"><a href="https://www.linkedin.com/in/sofia-lopes-monteiro/" target="_blank" rel="noopener">Sofia Monteiro</a></h3>
+            <div class="card person">
+              <img class="person-photo" src="assets/img/team/yousef-khan.jpg" width="180" height="180" loading="lazy" alt="">
+              <div>
+                <h3 class="person-name"><a href="https://www.cisuc.uc.pt/en/people/y-khan" target="_blank" rel="noopener">Yousef Khan</a></h3>
+                <p class="person-role">PhD student</p>
+                <p class="person-topic">AI-Driven Knowledge Graphs: Automating Adaptive Rule Discovery for Intelligent Systems</p>
               </div>
             </div>
           </div>
 
           <div class="col-md-6">
-            <div class="testimonial-card">
-              <div class="testimonial-card-img-holder">
-                <img class="testimonial-card-img" src="assets/img/team/hayder-fadhil-ali.jpg" width="180" height="180" loading="lazy" alt="Hayder Fadhil Ali">
-              </div>
-              <div class="testimonial-card-body">
-                <p><b>PhD student</b><br>Machine Learning Models for Predicting Biodegradability in Bio-Based Polyesters</p>
-                <h3 class="testimonial-card-title"><a href="https://www.linkedin.com/in/hayder-fadhil-ali/" target="_blank" rel="noopener">Hayder Fadhil Ali</a></h3>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <div class="testimonial-card">
-              <div class="testimonial-card-img-holder">
-                <img class="testimonial-card-img" src="assets/img/team/mohammed-khedr.jpg" width="180" height="180" loading="lazy" alt="Mohammed Khedr">
-              </div>
-              <div class="testimonial-card-body">
-                <p><b>PhD student</b><br>Multi-agent framework for target-conditioned drug discovery.</p>
-                <h3 class="testimonial-card-title"><a href="https://www.cisuc.uc.pt/en/people/mohammed-khedr" target="_blank" rel="noopener">Mohammed Khedr</a></h3>
+            <div class="card person">
+              <img class="person-photo" src="assets/img/team/sofia-monteiro.jpg" width="180" height="180" loading="lazy" alt="">
+              <div>
+                <h3 class="person-name"><a href="https://www.linkedin.com/in/sofia-lopes-monteiro/" target="_blank" rel="noopener">Sofia Monteiro</a></h3>
+                <p class="person-role">PhD student</p>
+                <p class="person-topic">Classifying Functional Impairments in Foot Clinic Patients using Plantar Pressure Distributions</p>
               </div>
             </div>
           </div>
 
           <div class="col-md-6">
-            <div class="testimonial-card">
-              <div class="testimonial-card-img-holder">
-                <img class="testimonial-card-img" src="assets/img/team/joaquim-santos.jpg" width="180" height="180" loading="lazy" alt="Joaquim Santos">
-              </div>
-              <div class="testimonial-card-body">
-                <p><b>PhD student</b><br>Knowledge Graph for improved gene disease association</p>
-                <h3 class="testimonial-card-title">Joaquim Santos</h3>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <div class="testimonial-card">
-              <div class="testimonial-card-img-holder">
-                <img class="testimonial-card-img" src="assets/img/team/paulo-correia.jpg" width="180" height="180" loading="lazy" alt="Paulo Correia">
-              </div>
-              <div class="testimonial-card-body">
-                <p><b>PhD student</b><br>Interpretable SE(3)-Equivariant Models for Structure-Based Drug Discovery</p>
-                <h3 class="testimonial-card-title">Paulo Correia</h3>
+            <div class="card person">
+              <img class="person-photo" src="assets/img/team/hayder-fadhil-ali.jpg" width="180" height="180" loading="lazy" alt="">
+              <div>
+                <h3 class="person-name"><a href="https://www.linkedin.com/in/hayder-fadhil-ali/" target="_blank" rel="noopener">Hayder Fadhil Ali</a></h3>
+                <p class="person-role">PhD student</p>
+                <p class="person-topic">Machine Learning Models for Predicting Biodegradability in Bio-Based Polyesters</p>
               </div>
             </div>
           </div>
 
           <div class="col-md-6">
-            <div class="testimonial-card">
-              <div class="testimonial-card-img-holder">
-                <img class="testimonial-card-img" src="assets/img/team/edgar-vicente.jpg" width="180" height="180" loading="lazy" alt="Edgar Vicente">
+            <div class="card person">
+              <img class="person-photo" src="assets/img/team/mohammed-khedr.jpg" width="180" height="180" loading="lazy" alt="">
+              <div>
+                <h3 class="person-name"><a href="https://www.cisuc.uc.pt/en/people/mohammed-khedr" target="_blank" rel="noopener">Mohammed Khedr</a></h3>
+                <p class="person-role">PhD student</p>
+                <p class="person-topic">Multi-agent framework for target-conditioned drug discovery.</p>
               </div>
-              <div class="testimonial-card-body">
-                <p><b>PhD student</b><br>Multi-Objective Alignment of Generative AI for the Design of Broad-Spectrum Antimicrobial Peptides</p>
-                <h3 class="testimonial-card-title">Edgar Vicente</h3>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card person">
+              <img class="person-photo" src="assets/img/team/joaquim-santos.jpg" width="180" height="180" loading="lazy" alt="">
+              <div>
+                <h3 class="person-name">Joaquim Santos</h3>
+                <p class="person-role">PhD student</p>
+                <p class="person-topic">Knowledge Graph for improved gene disease association</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card person">
+              <img class="person-photo" src="assets/img/team/paulo-correia.jpg" width="180" height="180" loading="lazy" alt="">
+              <div>
+                <h3 class="person-name">Paulo Correia</h3>
+                <p class="person-role">PhD student</p>
+                <p class="person-topic">Interpretable SE(3)-Equivariant Models for Structure-Based Drug Discovery</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card person">
+              <img class="person-photo" src="assets/img/team/edgar-vicente.jpg" width="180" height="180" loading="lazy" alt="">
+              <div>
+                <h3 class="person-name">Edgar Vicente</h3>
+                <p class="person-role">PhD student</p>
+                <p class="person-topic">Multi-Objective Alignment of Generative AI for the Design of Broad-Spectrum Antimicrobial Peptides</p>
               </div>
             </div>
           </div>
 
           <div class="col-12">
-            <div class="testimonial-card testimonial-card--text">
-              <div class="testimonial-card-body">
-                <h3 class="testimonial-card-title">Former PhD Students</h3>
-                <ul class="alumni-list">
-                  <li><b>Edgar Coelho</b>, Lead Data Scientist at MarketerHire</li>
-                  <li><b>Fernanda Correia</b>, Adjunct Professor at ISEP, IPC</li>
-                  <li><b>António Cruz</b>, Researcher at CISUC, UC</li>
-                  <li><b>Nelson Monteiro</b>, Data Scientist at Orbis Medicines</li>
-                  <li><b>Tiago Pereira</b>, Researcher at CNC, UC</li>
-                  <li><b>Daniel Martins</b>, Researcher at MIA, UC</li>
-                  <li><b>Luis Torres</b>, Artificial Intelligence Scientist at Sanofi</li>
-                  <li><b>Anuschka da Silva Spínola</b>, Researcher at CNC, UC</li>
-                  <li><b>Fabiano Papaiz</b>, Professor at IFRN, Brazil</li>
-                  <li><b>Yanan Tian</b>, Researcher</li>
-                  <li><b>Jianxiu Cai</b>, Researcher</li>
-                </ul>
-              </div>
+            <div class="card">
+              <h3 class="alumni-title">Former PhD Students</h3>
+              <ul class="alumni-list">
+                <li><b>Edgar Coelho</b>, Lead Data Scientist at MarketerHire</li>
+                <li><b>Fernanda Correia</b>, Adjunct Professor at ISEP, IPC</li>
+                <li><b>António Cruz</b>, Researcher at CISUC, UC</li>
+                <li><b>Nelson Monteiro</b>, Data Scientist at Orbis Medicines</li>
+                <li><b>Tiago Pereira</b>, Researcher at CNC, UC</li>
+                <li><b>Daniel Martins</b>, Researcher at MIA, UC</li>
+                <li><b>Luis Torres</b>, Artificial Intelligence Scientist at Sanofi</li>
+                <li><b>Anuschka da Silva Spínola</b>, Researcher at CNC, UC</li>
+                <li><b>Fabiano Papaiz</b>, Professor at IFRN, Brazil</li>
+                <li><b>Yanan Tian</b>, Researcher</li>
+                <li><b>Jianxiu Cai</b>, Researcher</li>
+              </ul>
             </div>
           </div>
 
         </div>
 
-        <img class="group-photo" src="assets/img/group.jpg" width="1600" height="384" loading="lazy" alt="Research group photo">
+        <img class="group-photo" src="assets/img/group.jpg" width="1594" height="380" loading="lazy" alt="Research group photo">
       </div>
     </section>
 
     <!-- ===== Call to action: join the group ===== -->
-    <section class="section-sm bg-secondary">
-      <div class="container text-center text-sm-left">
-        <div class="row align-items-center">
-          <div class="col-sm offset-md-1">
-            <h2 class="title text-light">Interested in joining?</h2>
-          </div>
-          <div class="col-sm offset-sm-2 offset-md-0">
-            <a class="btn btn-lg btn-light my-font rounded" href="mailto:jpa@uc.pt">jpa@uc.pt</a>
-          </div>
-        </div>
+    <section class="cta cta--dark">
+      <div class="container cta-inner">
+        <h2 class="cta-title">Interested in joining?</h2>
+        <a class="btn btn-lg btn-light" href="mailto:jpa@uc.pt">jpa@uc.pt</a>
       </div>
     </section>
 
@@ -367,15 +355,17 @@
   <!-- ===== Footer ===== -->
   <footer class="container">
     <div class="footer">
-      <p class="text-center text-muted">&copy; Joel P. Arrais</p>
+      <p>&copy; Joel P. Arrais</p>
     </div>
   </footer>
 
   <!-- analytics consent (shown by site.js until the visitor answers) -->
   <div id="consent" class="consent" role="dialog" aria-label="Cookie consent" hidden>
-    This site uses Google Analytics cookies to count visits.
-    <button type="button" id="consent-yes" class="btn btn-sm btn-light mx-2">Accept</button>
-    <button type="button" id="consent-no" class="btn btn-sm btn-outline-light">Decline</button>
+    <span>This site uses Google Analytics cookies to count visits.</span>
+    <span class="consent-actions">
+      <button type="button" id="consent-yes" class="btn btn-sm btn-primary">Accept</button>
+      <button type="button" id="consent-no" class="btn btn-sm btn-outline">Decline</button>
+    </span>
   </div>
 
 </body>
