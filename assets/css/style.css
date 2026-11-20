@@ -675,7 +675,7 @@ p {
   justify-content: center;
   height: 24vh;
   min-height: 80px;
-  background: url(../imgs/header.jpg) center / cover no-repeat;
+  background: url(../img/header.jpg) center / cover no-repeat;
 }
 
 .header .overlay {
