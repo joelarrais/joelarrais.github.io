@@ -1,0 +1,915 @@
+/*!
+ * Joel P. Arrais - site styles
+ *
+ * Based on the Meyawo landing page by DevCRUD (https://devcrud.com,
+ * license: https://devcrud.com/licenses) and Bootstrap v4.3.1
+ * (https://getbootstrap.com, MIT license), trimmed to the rules this site uses.
+ * Menu icon: Hamburgers by Jonathan Suh (https://jonsuh.com/hamburgers, MIT license).
+ */
+
+/* Contents
+   1. Variables
+   2. Base (Bootstrap reboot)
+   3. Typography
+   4. Grid (Bootstrap)
+   5. Buttons (Bootstrap)
+   6. Utilities (Bootstrap)
+   7. Navbar
+   8. Hamburger icon
+   9. Header and sections
+   10. About
+   11. Cards: research interests, publications, highlights/team
+   12. Footer
+   13. Print and reduced motion
+*/
+
+/* ---------- 1. Variables ---------- */
+
+:root {
+  --primary: #695aa6;
+  --dark: #393e46;
+  --text: #212529;
+  --muted: #6c757d;
+  --light: #f8f9fa;
+  --border: #dee2e6;
+  --font-body: "Open Sans", sans-serif;
+  --font-heading: "Baloo Paaji", cursive;
+}
+
+/* ---------- 2. Base (Bootstrap reboot) ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text);
+  text-align: left;
+  background-color: #fff;
+}
+
+p,
+ul {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+b {
+  font-weight: bolder;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  background-color: transparent;
+}
+
+a:hover {
+  color: #493f75;
+  text-decoration: none;
+}
+
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+
+button {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  text-transform: none;
+  border-radius: 0;
+  overflow: visible;
+  -webkit-appearance: button;
+}
+
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border-style: none;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+::selection {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* ---------- 3. Typography ---------- */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--primary);
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+h6,
+.h6 {
+  font-size: 1rem;
+}
+
+/* fluid size: 13px on a 300px screen up to 15px on a 1300px screen */
+p {
+  font-size: calc(13px + (15 - 13) * ((100vw - 300px) / (1300 - 300)));
+  font-weight: 300;
+  color: #111;
+  letter-spacing: 0.6px;
+}
+
+.lead {
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+.title {
+  font-size: calc(15px + (20 - 15) * ((100vw - 300px) / (1300 - 300)));
+}
+
+.my-font {
+  font-family: var(--font-heading);
+}
+
+/* ---------- 4. Grid (Bootstrap) ---------- */
+
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.col-12,
+.col-sm,
+.col-md-4,
+.col-md-6,
+.col-md-12,
+.col-lg-3 {
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.col-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 576px) {
+  .col-sm {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+  }
+  .offset-sm-2 {
+    margin-left: 16.66667%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-md-4 {
+    flex: 0 0 33.33333%;
+    max-width: 33.33333%;
+  }
+  .col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  .col-md-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .offset-md-0 {
+    margin-left: 0;
+  }
+  .offset-md-1 {
+    margin-left: 8.33333%;
+  }
+}
+
+@media (min-width: 992px) {
+  .col-lg-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
+
+/* ---------- 5. Buttons (Bootstrap) ---------- */
+
+.btn {
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text);
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.1rem;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+
+.btn:hover {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.btn:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(105, 90, 166, 0.25);
+}
+
+.btn-light {
+  color: var(--text);
+  background-color: var(--light);
+  border-color: var(--light);
+}
+
+.btn-light:hover {
+  color: var(--text);
+  background-color: #e2e6ea;
+  border-color: #dae0e5;
+}
+
+.btn-light:active {
+  background-color: #dae0e5;
+  border-color: #d3d9df;
+}
+
+.btn-light:focus {
+  box-shadow: 0 0 0 0.2rem rgba(216, 217, 219, 0.5);
+}
+
+.btn-outline-light {
+  color: var(--light);
+  border-color: var(--light);
+}
+
+.btn-outline-light:hover,
+.btn-outline-light:active {
+  color: var(--text);
+  background-color: var(--light);
+  border-color: var(--light);
+}
+
+.btn-outline-light:focus {
+  box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5);
+}
+
+.btn-lg {
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: 0.3rem;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.05rem;
+}
+
+/* ---------- 6. Utilities (Bootstrap) ---------- */
+
+.bg-primary {
+  background-color: var(--primary) !important;
+}
+
+.bg-secondary {
+  background-color: var(--dark) !important;
+}
+
+.rounded {
+  border-radius: 0.25rem !important;
+}
+
+.align-items-center {
+  align-items: center !important;
+}
+
+.m-0 {
+  margin: 0 !important;
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.mx-2 {
+  margin-right: 0.5rem !important;
+  margin-left: 0.5rem !important;
+}
+
+.mb-3 {
+  margin-bottom: 1rem !important;
+}
+
+.mt-4 {
+  margin-top: 1.5rem !important;
+}
+
+.mb-6 {
+  margin-bottom: 4rem !important;
+}
+
+.pt-0 {
+  padding-top: 0 !important;
+}
+
+@media (min-width: 768px) {
+  .mb-md-0 {
+    margin-bottom: 0 !important;
+  }
+  .mb-md-2 {
+    margin-bottom: 0.5rem !important;
+  }
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+@media (min-width: 576px) {
+  .text-sm-left {
+    text-align: left !important;
+  }
+}
+
+.text-light {
+  color: var(--light) !important;
+}
+
+.text-muted {
+  color: var(--muted) !important;
+}
+
+/* ---------- 7. Navbar ---------- */
+
+/* Transparent over the header; .affix (added by site.js on scroll) makes it white. */
+.custom-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-family: var(--font-heading);
+  transition: all 0.3s;
+}
+
+.custom-navbar .container {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  min-height: 100px;
+  transition: all 0.3s;
+}
+
+.custom-navbar .logo {
+  font-size: calc(20px + (30 - 20) * ((100vw - 300px) / (1300 - 300)));
+  color: #fff;
+  text-decoration: none;
+}
+
+.custom-navbar .hamburger {
+  margin-left: 20px;
+  padding-top: 5px;
+}
+
+.custom-navbar .hamburger .hamburger-inner,
+.custom-navbar .hamburger .hamburger-inner::before,
+.custom-navbar .hamburger .hamburger-inner::after {
+  background: #fff;
+}
+
+.custom-navbar .nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0 0 0 auto;
+  padding-left: 0;
+  list-style: none;
+}
+
+.custom-navbar .nav .item {
+  margin: 0 10px;
+}
+
+.custom-navbar .nav .item .link {
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+}
+
+.custom-navbar .nav .item .link:hover {
+  color: var(--primary);
+}
+
+.custom-navbar.affix {
+  background: #fff;
+  border-bottom: 1px solid rgba(222, 226, 230, 0.34);
+}
+
+.custom-navbar.affix .logo {
+  color: var(--primary);
+}
+
+.custom-navbar.affix .container {
+  min-height: 65px;
+}
+
+.custom-navbar.affix .nav .item .link {
+  color: var(--muted);
+}
+
+.custom-navbar.affix .hamburger-inner,
+.custom-navbar.affix .hamburger-inner::before,
+.custom-navbar.affix .hamburger-inner::after {
+  background: var(--muted);
+}
+
+/* Wide screens: the menu items are hidden and slide in one after another
+   when the hamburger is clicked (.show is toggled by site.js). */
+@media (min-width: 768px) {
+  .custom-navbar .nav .item {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  .custom-navbar .nav .item:nth-child(1) { transition: all 0.9s 0.4s; }
+  .custom-navbar .nav .item:nth-child(2) { transition: all 0.8s 0.35s; }
+  .custom-navbar .nav .item:nth-child(3) { transition: all 0.7s 0.3s; }
+  .custom-navbar .nav .item:nth-child(4) { transition: all 0.6s 0.25s; }
+  .custom-navbar .nav .item:nth-child(5) { transition: all 0.5s 0.2s; }
+  .custom-navbar .nav .item:nth-child(6) { transition: all 0.4s 0.15s; }
+  .custom-navbar .nav .item:nth-child(7) { transition: all 0.3s 0.1s; }
+  .custom-navbar .nav.show .item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Small screens: the menu is a white drop-down under the navbar. */
+@media (max-width: 991.98px) {
+  .custom-navbar .hamburger {
+    margin-left: auto;
+  }
+  .custom-navbar .nav {
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 0;
+    display: block;
+    width: 100%;
+    margin: auto;
+    padding: 13px;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: all 0.3s;
+  }
+  .custom-navbar .nav.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .custom-navbar .nav .item .link {
+    display: block;
+    padding: 7px 12px;
+    color: var(--muted);
+  }
+}
+
+/* Link of the section on screen (set by site.js). Kept last so it wins
+   over the affix and small-screen link colours above. */
+.custom-navbar .nav .item .link.active {
+  color: var(--primary);
+}
+
+/* ---------- 8. Hamburger icon ---------- */
+
+.hamburger {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-transform: none;
+  background-color: transparent;
+  border: 0;
+  overflow: visible;
+  cursor: pointer;
+  transition: opacity 0.9s linear, filter 0.9s linear;
+}
+
+.hamburger:hover {
+  opacity: 0.7;
+}
+
+.hamburger-box {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 21px;
+}
+
+.hamburger-inner {
+  display: block;
+  top: 50%;
+  margin-top: -1.5px;
+}
+
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+  position: absolute;
+  width: 30px;
+  height: 3px;
+  background-color: #444;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.hamburger-inner::before,
+.hamburger-inner::after {
+  content: "";
+  display: block;
+}
+
+.hamburger-inner::before {
+  top: -9px;
+}
+
+.hamburger-inner::after {
+  bottom: -9px;
+}
+
+/* "elastic" animation: the three bars turn into an X */
+.hamburger--elastic .hamburger-inner {
+  top: 1.5px;
+  transition-duration: 0.45s;
+  transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.hamburger--elastic .hamburger-inner::before {
+  top: 9px;
+  transition: opacity 0.43s 0.275s ease;
+}
+
+.hamburger--elastic .hamburger-inner::after {
+  top: 18px;
+  transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.hamburger--elastic.is-active .hamburger-inner {
+  transform: translate3d(0, 9px, 0) rotate(135deg);
+  transition-delay: 0.075s;
+}
+
+.hamburger--elastic.is-active .hamburger-inner::before {
+  opacity: 0;
+  transition-delay: 0s;
+}
+
+.hamburger--elastic.is-active .hamburger-inner::after {
+  transform: translate3d(0, -18px, 0) rotate(-270deg);
+  transition-delay: 0.075s;
+}
+
+/* ---------- 9. Header and sections ---------- */
+
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24vh;
+  min-height: 80px;
+  background: url(../imgs/header.jpg) center / cover no-repeat;
+}
+
+.header .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+    to top,
+    #fff 0%,
+    rgba(105, 90, 166, 0.35) 99%,
+    rgba(105, 90, 166, 0.5) 100%
+  );
+}
+
+.section {
+  padding: 70px 10px;
+}
+
+.section .section-title {
+  font-size: calc(20px + (35 - 20) * ((100vw - 300px) / (1300 - 300)));
+}
+
+.section .section-subtitle {
+  margin-bottom: 6px;
+  font-weight: 400;
+  opacity: 0.6;
+}
+
+.section-sm {
+  padding: 40px 0 !important;
+}
+
+/* ---------- 10. About ---------- */
+
+.about {
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+
+.about-img-holder {
+  min-width: 300px;
+  max-width: 300px;
+  margin-right: 20px;
+}
+
+.about-img-holder .about-img {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.about-caption {
+  flex-grow: 1;
+}
+
+@media (max-width: 767.98px) {
+  .about {
+    flex-direction: column;
+    text-align: center;
+  }
+  .about-img-holder {
+    width: 100%;
+    min-width: 100%;
+    max-width: 220px;
+    margin: auto;
+    margin-bottom: 20px;
+  }
+}
+
+/* ---------- 11. Cards ---------- */
+
+/* Research interests: icon on top, description revealed on hover */
+.service-card {
+  position: relative;
+  min-height: 230px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+}
+
+.service-card .body {
+  padding: 10px;
+}
+
+.service-card .body img.icon {
+  width: 75px;
+  margin-top: 30px;
+  margin-bottom: 25px;
+  transition: all 0.3s;
+}
+
+.service-card .body .subtitle {
+  position: absolute;
+  bottom: -100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+}
+
+.service-card:hover .body img.icon {
+  width: 45px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.service-card:hover .body .subtitle {
+  bottom: 7px;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Featured publications: clickable visual abstracts */
+.portfolio-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.portfolio-card .portfolio-card-img {
+  width: 100%;
+}
+
+@media (max-width: 767.98px) {
+  .portfolio-card,
+  .service-card {
+    margin-bottom: 30px;
+  }
+}
+
+/* Highlights and team: round picture overlapping a bordered box */
+.testimonial-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+/* equal-height cards within a row */
+.row > [class*="col-"] > .testimonial-card {
+  height: 100%;
+}
+
+.testimonial-card-img-holder {
+  z-index: 999;
+  min-width: 45px;
+  max-width: 45px;
+}
+
+.testimonial-card-img {
+  width: 90px;
+  height: 90px;
+  padding: 4px;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.testimonial-card-img2 {
+  width: 65px;
+  height: 65px;
+  padding: 4px;
+  background: #fff;
+}
+
+.testimonial-card-body {
+  min-height: 220px;
+  padding: 20px 20px 20px 60px;
+  text-align: left;
+  background: #fff;
+  border: 1px solid var(--border);
+}
+
+.testimonial-card-title {
+  margin-top: 20px;
+  font-size: calc(14px + (18 - 14) * ((100vw - 300px) / (1300 - 300)));
+}
+
+/* ---------- 12. Footer ---------- */
+
+.footer {
+  display: flex;
+  align-items: center;
+  min-height: 70px;
+  border-top: 1px solid var(--border);
+}
+
+.footer p {
+  display: inline-block;
+  flex-grow: 1;
+  flex-basis: 0;
+  margin: 0;
+  padding: 4px 0;
+  color: var(--dark);
+}
+
+@media (max-width: 767.98px) {
+  .footer {
+    flex-direction: column;
+    padding: 15px 0;
+  }
+}
+
+/* ---------- 13. Print and reduced motion ---------- */
+
+@media print {
+  *,
+  *::before,
+  *::after {
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
+  a:not(.btn) {
+    text-decoration: underline;
+  }
+  img {
+    page-break-inside: avoid;
+  }
+  p,
+  h2 {
+    orphans: 3;
+    widows: 3;
+  }
+  h2 {
+    page-break-after: avoid;
+  }
+  .custom-navbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}
