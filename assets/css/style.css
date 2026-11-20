@@ -710,6 +710,12 @@ p {
   padding: 40px 0 !important;
 }
 
+/* team photo below the team cards: never wider than the page */
+.group-photo {
+  width: 100%;
+  height: auto;
+}
+
 /* ---------- 10. About ---------- */
 
 .about {
@@ -749,44 +755,33 @@ p {
 
 /* ---------- 11. Cards ---------- */
 
-/* Research interests: icon on top, description revealed on hover */
+/* Research interests: icon, title and description. Cards in a row share
+   the height of the tallest; the 30px bottom margin separates rows when
+   the cards wrap (below 992px). */
 .service-card {
-  position: relative;
+  height: calc(100% - 30px);
   min-height: 230px;
-  overflow: hidden;
+  margin-bottom: 30px;
+  padding: 10px 10px 20px;
   border: 1px solid var(--border);
   border-radius: 3px;
 }
 
-.service-card .body {
-  padding: 10px;
+@media (min-width: 992px) {
+  .service-card {
+    height: 100%;
+    margin-bottom: 0;
+  }
 }
 
-.service-card .body img.icon {
+.service-card .icon {
   width: 75px;
   margin-top: 30px;
   margin-bottom: 25px;
-  transition: all 0.3s;
 }
 
-.service-card .body .subtitle {
-  position: absolute;
-  bottom: -100%;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s;
-}
-
-.service-card:hover .body img.icon {
-  width: 45px;
-  margin-top: 5px;
-  margin-bottom: 15px;
-}
-
-.service-card:hover .body .subtitle {
-  bottom: 7px;
-  opacity: 1;
-  visibility: visible;
+.service-card .subtitle {
+  margin-bottom: 0;
 }
 
 /* Featured publications: clickable visual abstracts */
@@ -801,8 +796,7 @@ p {
 }
 
 @media (max-width: 767.98px) {
-  .portfolio-card,
-  .service-card {
+  .portfolio-card {
     margin-bottom: 30px;
   }
 }
@@ -829,6 +823,7 @@ p {
   width: 90px;
   height: 90px;
   padding: 4px;
+  object-fit: cover;
   background: #fff;
   border-radius: 50%;
 }
