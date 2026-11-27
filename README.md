@@ -45,10 +45,10 @@ follows the visitor's system setting.
 
 ## Bioinformatics quiz
 
-`bioinformatica/quiz.html` is a multiple-choice training quiz for the Bioinformatics course,
-published at <https://joelarrais.github.io/bioinformatica/quiz.html>. It is a single file
+`ai4biology/quiz.html` is a multiple-choice training quiz for the Bioinformatics course,
+published at <https://joelarrais.github.io/ai4biology/quiz.html>. It is a single file
 (HTML, CSS and JavaScript together). It is deliberately not linked from the personal
-page; the quiz links back to it ("Página inicial"). `bioinformatica/` is reserved for a
+page; the quiz links back to it ("Página inicial"). `ai4biology/` is reserved for a
 future course page.
 
 - The question bank, scoring, XP, Phred levels and class ranking live in a Google Apps
@@ -66,6 +66,6 @@ future course page.
 python3 -m http.server 8000
 ```
 
-Then open <http://localhost:8000> (and <http://localhost:8000/bioinformatica/quiz.html>).
+Then open <http://localhost:8000> (and <http://localhost:8000/ai4biology/quiz.html>).
 Use the local server rather than opening the files directly: icons and the quiz's
 calls need a real web address.
