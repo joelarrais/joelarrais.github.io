@@ -45,14 +45,15 @@ follows the visitor's system setting.
 
 ## Bioinformatics quiz
 
-`bioinformatica/quiz/` is a multiple-choice training quiz for the Bioinformatics course,
-published at <https://joelarrais.github.io/bioinformatica/quiz/>. It is deliberately not
-linked from the personal page; the quiz links back to it. `bioinformatica/` is reserved
-for a future course page.
+`bioinformatica/quiz.html` is a multiple-choice training quiz for the Bioinformatics course,
+published at <https://joelarrais.github.io/bioinformatica/quiz.html>. It is a single file
+(HTML, CSS and JavaScript together). It is deliberately not linked from the personal
+page; the quiz links back to it ("Página inicial"). `bioinformatica/` is reserved for a
+future course page.
 
 - The question bank, scoring, XP, Phred levels and class ranking live in a Google Apps
-  Script web app; its URL is `APPS_SCRIPT_URL` at the top of `bioinformatica/quiz/quiz.js`.
-  Without it the quiz runs in demo mode with 4 sample questions.
+  Script web app; its URL is `APPS_SCRIPT_URL` near the top of the `<script>` in
+  `quiz.html`. Without it the quiz runs in demo mode with 4 sample questions.
 - Achievements, personal best, days in a row and the theme are kept in the student's
   browser (per device and pseudonym), not on the server.
 - Google Analytics uses the same property and the same consent answer as the personal
@@ -65,6 +66,6 @@ for a future course page.
 python3 -m http.server 8000
 ```
 
-Then open <http://localhost:8000> (and <http://localhost:8000/bioinformatica/quiz/>).
+Then open <http://localhost:8000> (and <http://localhost:8000/bioinformatica/quiz.html>).
 Use the local server rather than opening the files directly: icons and the quiz's
 calls need a real web address.
