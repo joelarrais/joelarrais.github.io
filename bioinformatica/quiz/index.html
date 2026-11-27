@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bioinformática UC — Treino de Escolha Múltipla</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-alt: #f1f5f9;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --text-soft: #64748b;
+      --primary: #1d4ed8;
+      --primary-hover: #1e40af;
+      --primary-soft: #eff6ff;
+      --accent: #0f766e;
+      --accent-soft: #f0fdfa;
+      --success: #15803d;
+      --success-bg: #f0fdf4;
+      --danger: #b91c1c;
+      --danger-bg: #fef2f2;
+      --warn: #b45309;
+      --warn-bg: #fffbeb;
+      --radius: 12px;
+      --shadow: 0 1px 3px rgba(15,23,42,.06), 0 4px 14px rgba(15,23,42,.04);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 20px 16px 56px;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+      border-bottom: 1px solid var(--border);
+    }
+    .brand h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    .brand p {
+      font-size: 0.84rem;
+      color: var(--text-soft);
+    }
+    .header-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .phred-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: var(--primary-soft);
+      color: var(--primary);
+      border: 1px solid #bfdbfe;
+    }
+    .phred-pill.q30 { background: var(--accent-soft); color: var(--accent); border-color: #99f6e4; }
+    .phred-pill.q40 { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
+
+    /* Cards */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+    .card h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    .card h3 {
+      font-size: 0.94rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+    }
+    @media (max-width: 760px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    /* Notice banner */
+    .banner {
+      padding: 12px 15px;
+      border-radius: 10px;
+      font-size: 0.86rem;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .banner.warn { background: var(--warn-bg); border: 1px solid #fde68a; color: #78350f; }
+    .banner.info { background: var(--primary-soft); border: 1px solid #bfdbfe; color: #1e3a8a; }
+
+    /* Inputs & Buttons */
+    label.field-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    input[type="text"], textarea, select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border-strong);
+      border-radius: 8px;
+      font-size: 0.94rem;
+      font-family: inherit;
+      background: #fff;
+      color: var(--text);
+      transition: border-color .15s, box-shadow .15s;
+    }
+    input[type="text"]:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(29,78,216,.12);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all .15s ease;
+    }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover:not(:disabled) { background: var(--primary-hover); }
+    .btn-secondary { background: var(--surface); color: var(--text); border-color: var(--border-strong); }
+    .btn-secondary:hover:not(:disabled) { background: var(--surface-alt); }
+    .btn-ghost { background: transparent; color: var(--text-muted); padding: 7px 11px; font-size: 0.83rem; }
+    .btn-ghost:hover:not(:disabled) { background: var(--surface-alt); color: var(--text); }
+    .btn-warn { background: var(--warn-bg); color: var(--warn); border-color: #fde68a; }
+    .btn-warn:hover:not(:disabled) { background: #fef3c7; }
+    .btn-lg { width: 100%; padding: 12px 18px; font-size: 0.96rem; }
+
+    /* Mode selector */
+    .mode-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 14px 0;
+    }
+    @media (max-width: 520px) {
+      .mode-grid { grid-template-columns: 1fr; }
+    }
+    .mode-option {
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      cursor: pointer;
+      transition: all .15s;
+      background: var(--surface);
+    }
+    .mode-option:hover { border-color: var(--border-strong); }
+    .mode-option.selected {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+    .mode-option strong {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 3px;
+    }
+    .mode-option span {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin: 10px 0 16px;
+      cursor: pointer;
+    }
+
+    /* Mastery bars */
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .stat-box {
+      background: var(--surface-alt);
+      border-radius: 9px;
+      padding: 10px 12px;
+      text-align: center;
+    }
+    .stat-box .val {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .stat-box .lbl {
+      font-size: 0.74rem;
+      color: var(--text-soft);
+    }
+
+    .cap-bar-item {
+      margin-bottom: 10px;
+    }
+    .cap-bar-head {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      margin-bottom: 4px;
+    }
+    .cap-bar-track {
+      height: 8px;
+      background: var(--surface-alt);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .cap-bar-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 999px;
+      transition: width .4s ease;
+    }
+    .cap-bar-fill.weak { background: #dc2626; }
+    .cap-bar-fill.good { background: var(--accent); }
+
+    /* Leaderboard */
+    table.lb {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+    }
+    table.lb th, table.lb td {
+      padding: 7px 6px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    table.lb th {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--text-soft);
+    }
+    table.lb tr.me { background: var(--primary-soft); font-weight: 600; }
+
+    /* Quiz screen */
+    .quiz-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .progress-track {
+      height: 7px;
+      background: var(--surface-alt);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      transition: width .25s ease;
+    }
+    .q-badges {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: var(--surface-alt);
+      color: var(--text-muted);
+    }
+    .badge.cap { background: #e0e7ff; color: #3730a3; }
+    .badge.streak { background: #fef3c7; color: #92400e; }
+    .badge.timer { background: #fee2e2; color: #991b1b; font-variant-numeric: tabular-nums; }
+
+    .q-stem {
+      font-size: 1.06rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .opt-btn {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      text-align: left;
+      width: 100%;
+      padding: 13px 14px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.94rem;
+      line-height: 1.45;
+      cursor: pointer;
+      transition: all .14s ease;
+    }
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: #f8fbff;
+    }
+    .opt-btn.selected {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+    .opt-btn.correct {
+      border-color: var(--success);
+      background: var(--success-bg);
+    }
+    .opt-btn.wrong {
+      border-color: var(--danger);
+      background: var(--danger-bg);
+    }
+    .opt-letter {
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.82rem;
+      background: var(--surface-alt);
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+    .opt-btn.selected .opt-letter { background: var(--primary); color: #fff; }
+    .opt-btn.correct .opt-letter { background: var(--success); color: #fff; }
+    .opt-btn.wrong .opt-letter { background: var(--danger); color: #fff; }
+
+    .feedback-box {
+      padding: 14px 16px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+    }
+    .feedback-box.ok { background: var(--success-bg); border-color: #bbf7d0; color: #14532d; }
+    .feedback-box.err { background: var(--danger-bg); border-color: #fecaca; color: #7f1d1d; }
+
+    .quiz-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Dots nav in Frequência mode */
+    .q-dots {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .q-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      border: 1px solid var(--border-strong);
+      background: var(--surface);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+    .q-dot.active { border-color: var(--primary); color: var(--primary); box-shadow: 0 0 0 2px rgba(29,78,216,.15); }
+    .q-dot.answered { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+    /* Review items */
+    .review-item {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 12px;
+      background: var(--surface);
+    }
+    .review-item.certa { border-left: 4px solid var(--success); }
+    .review-item.errada { border-left: 4px solid var(--danger); }
+    .review-item.branco { border-left: 4px solid var(--text-soft); }
+    .review-exp {
+      margin-top: 8px;
+      padding: 10px 12px;
+      background: var(--surface-alt);
+      border-radius: 8px;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 100;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal {
+      background: var(--surface);
+      border-radius: var(--radius);
+      max-width: 460px;
+      width: 100%;
+      padding: 22px;
+      box-shadow: 0 20px 40px rgba(15,23,42,.2);
+    }
+    .modal h3 { margin-bottom: 10px; font-size: 1rem; }
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .hidden { display: none !important; }
+    .muted { color: var(--text-soft); font-size: 0.85rem; }
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--text);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all .2s ease;
+      pointer-events: none;
+      z-index: 200;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    .score-hero {
+      text-align: center;
+      padding: 14px 0 18px;
+    }
+    .score-hero .big {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+    .score-hero .sub {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .kbd-hint {
+      font-size: 0.76rem;
+      color: var(--text-soft);
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <h1>Bioinformática · Treino Grupo I</h1>
+        <p>DEI · Universidade de Coimbra · CAP1, CAP2, CAP3 e CAP5</p>
+      </div>
+      <div class="header-meta">
+        <span id="hdrPhred" class="phred-pill">Q10 · Basecalling Inicial</span>
+        <span id="hdrPseudo" class="badge">Sem pseudónimo</span>
+      </div>
+    </header>
+
+    <div id="demoBanner" class="banner warn hidden">
+      <div>
+        <strong>Modo Demonstração Local:</strong> O URL do Google Apps Script ainda não foi configurado em <code>APPS_SCRIPT_URL</code>.
+        Estão disponíveis apenas 4 perguntas de exemplo para testar a interface. Quando colar o URL da Web App, o banco completo (324 perguntas) e o registo no Google Sheets ficam ativos automaticamente.
+      </div>
+    </div>
+
+    <!-- ==================== ECRÃ INICIAL ==================== -->
+    <section id="viewHome">
+      <div class="grid-2">
+        <div class="card">
+          <h2>Iniciar Bloco de Treino (10 perguntas)</h2>
+          <p class="muted" style="margin-bottom:14px;">
+            Cada bloco sorteia aleatoriamente 10 perguntas equilibradas pelos quatro capítulos avaliados (2 a 3 por capítulo), com ordem de opções baralhada.
+          </p>
+
+          <label class="field-label" for="inputPseudo">Pseudónimo (usado no teu histórico e ranking)</label>
+          <input type="text" id="inputPseudo" maxlength="28" placeholder="Ex.: AlphaHelix, Crispr99, BRAF_V600E..." />
+
+          <div class="mode-grid">
+            <div class="mode-option selected" data-mode="frequencia" onclick="selectMode('frequencia')">
+              <strong>Modo Frequência</strong>
+              <span>+1 certa · −0,2 errada · 0 em branco · correção no fim.</span>
+            </div>
+            <div class="mode-option" data-mode="estudo" onclick="selectMode('estudo')">
+              <strong>Modo Estudo</strong>
+              <span>Feedback e explicação imediata após cada resposta.</span>
+            </div>
+          </div>
+
+          <label class="checkbox-row" id="timerOptRow">
+            <input type="checkbox" id="chkTimer" checked />
+            <span>Ativar temporizador de 10 minutos (ritmo de frequência)</span>
+          </label>
+
+          <button id="btnStart" class="btn btn-primary btn-lg" onclick="startBlock()">
+            Começar Bloco de 10 Perguntas
+          </button>
+          <p id="bankStatusMsg" class="muted" style="margin-top:10px; text-align:center;"></p>
+        </div>
+
+        <div>
+          <div class="card">
+            <h2>O Teu Progresso</h2>
+            <div class="stat-row">
+              <div class="stat-box">
+                <div class="val" id="stBlocks">0</div>
+                <div class="lbl">Blocos</div>
+              </div>
+              <div class="stat-box">
+                <div class="val" id="stAvg">0,0</div>
+                <div class="lbl">Média / 10</div>
+              </div>
+              <div class="stat-box">
+                <div class="val" id="stXp">0</div>
+                <div class="lbl">XP Total</div>
+              </div>
+            </div>
+
+            <div style="margin-bottom:14px;">
+              <div class="cap-bar-head">
+                <span id="phredLevelTxt" style="font-weight:600;">Q10 · Basecalling Inicial</span>
+                <span id="phredNextTxt" class="muted">Próx.: 200 XP</span>
+              </div>
+              <div class="cap-bar-track">
+                <div id="phredBar" class="cap-bar-fill good" style="width:0%"></div>
+              </div>
+            </div>
+
+            <h3>Domínio por Capítulo</h3>
+            <div id="capMasteryContainer"></div>
+            <p id="weakestHint" class="muted" style="margin-top:8px;"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+          <h2 style="margin:0;">Ranking da Turma (Top 10 por Pseudónimo)</h2>
+          <button class="btn btn-ghost" onclick="refreshStats()">Atualizar</button>
+        </div>
+        <div id="leaderboardWrap">
+          <p class="muted">A carregar estatísticas...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ECRÃ DO QUIZ ==================== -->
+    <section id="viewQuiz" class="hidden">
+      <div class="card">
+        <div class="quiz-topbar">
+          <div class="q-badges" style="margin:0;">
+            <span class="badge" id="qCounter">Pergunta 1 / 10</span>
+            <span class="badge cap" id="qCapBadge">CAP1</span>
+            <span class="badge" id="qSubtemaBadge">Subtema</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span id="streakBadge" class="badge streak hidden">Sequência: 0</span>
+            <span id="timerBadge" class="badge timer hidden">10:00</span>
+            <button class="btn btn-ghost" onclick="abortQuiz()">Sair</button>
+          </div>
+        </div>
+
+        <div class="progress-track">
+          <div id="quizProgress" class="progress-fill" style="width:10%"></div>
+        </div>
+
+        <div id="qDots" class="q-dots hidden"></div>
+
+        <div id="qStem" class="q-stem"></div>
+        <div id="optionsContainer" class="options-list"></div>
+
+        <div id="studyFeedback" class="feedback-box hidden"></div>
+
+        <div class="quiz-actions">
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="btn btn-warn" onclick="openFlagModal(currentQuestion())">
+              ⚑ Sinalizar pouco clara
+            </button>
+            <button id="btnBlank" class="btn btn-secondary hidden" onclick="leaveBlank()">
+              Deixar em branco (0)
+            </button>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button id="btnPrev" class="btn btn-secondary hidden" onclick="prevQuestion()">Anterior</button>
+            <button id="btnNext" class="btn btn-primary" onclick="nextAction()">Seguinte</button>
+          </div>
+        </div>
+
+        <div class="kbd-hint">
+          Atalhos: teclas <strong>A–D</strong> (ou <strong>1–4</strong>) para selecionar · <strong>0</strong> para deixar em branco · <strong>Enter</strong> para avançar.
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ECRÃ DE RESULTADOS ==================== -->
+    <section id="viewResults" class="hidden">
+      <div class="card">
+        <div class="score-hero">
+          <div class="big" id="resScore">0,0 / 10</div>
+          <div class="sub" id="resSummary"></div>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat-box">
+            <div class="val" style="color:var(--success)" id="resCertas">0</div>
+            <div class="lbl">Certas (+1)</div>
+          </div>
+          <div class="stat-box">
+            <div class="val" style="color:var(--danger)" id="resErradas">0</div>
+            <div class="lbl">Erradas (−0,2)</div>
+          </div>
+          <div class="stat-box">
+            <div class="val" style="color:var(--text-soft)" id="resBranco">0</div>
+            <div class="lbl">Em branco (0)</div>
+          </div>
+        </div>
+
+        <h3>Desempenho neste Bloco por Capítulo</h3>
+        <div id="resCapGrid" class="stat-row" style="grid-template-columns:repeat(4,1fr); margin-top:8px;"></div>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;">
+          <button class="btn btn-primary" onclick="startBlock()">Novo Bloco Aleatório (10 perguntas)</button>
+          <button class="btn btn-secondary" onclick="goHome()">Voltar ao Início e Ranking</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Revisão Detalhada das 10 Perguntas</h2>
+        <p class="muted" style="margin-bottom:14px;">
+          Revê cada justificação. Se alguma pergunta pareceu confusa ou demasiado longa, usa o botão de sinalização para ajudar a melhorar o banco.
+        </p>
+        <div id="reviewList"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==================== MODAL SINALIZAR PERGUNTA ==================== -->
+  <div id="flagModal" class="modal-backdrop">
+    <div class="modal">
+      <h3>Sinalizar pergunta pouco clara</h3>
+      <p class="muted" id="flagQInfo" style="margin-bottom:12px;"></p>
+
+      <label class="field-label" for="flagReason">Motivo principal</label>
+      <select id="flagReason" style="margin-bottom:12px;">
+        <option value="Enunciado ambíguo ou confuso">Enunciado ambíguo ou confuso</option>
+        <option value="Pergunta ou opções demasiado longas">Pergunta ou opções demasiado longas</option>
+        <option value="Duas opções parecem corretas">Duas opções parecem corretas</option>
+        <option value="Possível erro na chave de resposta">Possível erro na chave de resposta</option>
+        <option value="Outro / Sugestão de melhoria">Outro / Sugestão de melhoria</option>
+      </select>
+
+      <label class="field-label" for="flagComment">Comentário opcional (ajuda o docente a rever)</label>
+      <textarea id="flagComment" rows="3" maxlength="450" placeholder="Ex.: A diferença entre a opção B e C não ficou clara..."></textarea>
+
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="closeFlagModal()">Cancelar</button>
+        <button id="btnSendFlag" class="btn btn-primary" onclick="submitFlag()">Enviar sinalização</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    // =========================================================================
+    // CONFIGURAÇÃO: Cole aqui o URL da Web App gerada no Google Apps Script
+    // =========================================================================
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyYlzNrDjnYpspI3CHS4Fw1Z9Vo2huO_dnYy7XE99NSDn8vNVRnsrkwMjp1QUis0W_51A/exec";
+
+    const IS_DEMO = !APPS_SCRIPT_URL || APPS_SCRIPT_URL.indexOf("https://script.google.com/") !== 0;
+
+    const CAP_LABELS = {
+      CAP1: "CAP1 · Fundamentos e ML",
+      CAP2: "CAP2 · Genómica",
+      CAP3: "CAP3 · Multi-Ómica",
+      CAP5: "CAP5 · Fármacos"
+    };
+
+    const DEMO_QUESTIONS = [
+      {
+        id: "DEMO_01", cap: "CAP1", subtema: "Primer de ML",
+        stem: "Normalizar a matriz de expressão e selecionar genes antes de dividir em treino e teste produz que problema?",
+        options: [
+          "Nenhum, desde que a normalização não use as etiquetas.",
+          "Sobreajuste do modelo final, corrigível com regularização.",
+          "Fuga de informação: o pré-processamento viu o conjunto de teste, tornando o desempenho otimista.",
+          "Desequilíbrio de classes entre as partições."
+        ],
+        _demoKey: 2,
+        _demoExp: "O pré-processamento e a seleção de variáveis têm de ser ajustados apenas dentro do treino para não haver data leakage."
+      },
+      {
+        id: "DEMO_02", cap: "CAP2", subtema: "Do sequenciador ao VCF",
+        stem: "Num ficheiro FASTQ, uma base tem qualidade Phred Q30. Qual é a probabilidade aproximada de erro nessa base?",
+        options: ["1 em 30", "1 em 100", "1 em 1 000", "1 em 10 000"],
+        _demoKey: 2,
+        _demoExp: "Q = −10 log₁₀(P), logo Q30 equivale a P = 10⁻³ (1 em 1 000)."
+      },
+      {
+        id: "DEMO_03", cap: "CAP3", subtema: "RNA-seq bulk",
+        stem: "Que unidade deve ser usada como entrada de um teste de expressão diferencial no DESeq2?",
+        options: [
+          "Contagens transformadas por VST.",
+          "TPM, por corrigir comprimento e profundidade.",
+          "CPM, por corrigir a profundidade.",
+          "Contagens brutas inteiras, para o modelo estimar corretamente a variância."
+        ],
+        _demoKey: 3,
+        _demoExp: "O modelo binomial negativo do DESeq2 exige contagens brutas inteiras."
+      },
+      {
+        id: "DEMO_04", cap: "CAP5", subtema: "Descoberta de hits",
+        stem: "A regra dos cinco de Lipinski prevê:",
+        options: [
+          "A afinidade de ligação de uma molécula ao seu alvo.",
+          "A probabilidade de absorção oral, e não a atividade sobre o alvo.",
+          "A toxicidade hepática de uma molécula.",
+          "A facilidade de síntese química."
+        ],
+        _demoKey: 1,
+        _demoExp: "Lipinski avalia permeabilidade/absorção oral; não mede nem prevê afinidade pelo alvo."
+      }
+    ];
+
+    // Estado da aplicação
+    let state = {
+      mode: "frequencia",
+      pseudonym: localStorage.getItem("bioinf_pseudo") || "",
+      seenIds: JSON.parse(localStorage.getItem("bioinf_seen") || "[]"),
+      blockToken: null,
+      questions: [],
+      answers: {},        // { qId: idx | null }
+      studyChecked: {},   // { qId: { correct, correctIdx, explicacao } }
+      currentIdx: 0,
+      streak: 0,
+      startedAt: 0,
+      timerHandle: null,
+      secondsLeft: 600,
+      flagTarget: null
+    };
+
+    // Inicialização
+    window.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("inputPseudo").value = state.pseudonym;
+      updateHeaderPseudo();
+      if (IS_DEMO) {
+        document.getElementById("demoBanner").classList.remove("hidden");
+        document.getElementById("bankStatusMsg").textContent = "Modo demonstração (4 perguntas de exemplo)";
+        renderDemoStats();
+      } else {
+        checkServerPing();
+        refreshStats();
+      }
+    });
+
+    document.getElementById("inputPseudo").addEventListener("input", (e) => {
+      state.pseudonym = e.target.value.trim();
+      localStorage.setItem("bioinf_pseudo", state.pseudonym);
+      updateHeaderPseudo();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (document.getElementById("viewQuiz").classList.contains("hidden")) return;
+      if (document.getElementById("flagModal").classList.contains("open")) return;
+      const k = e.key.toLowerCase();
+      if (k === "a" || k === "1") chooseOption(0);
+      else if (k === "b" || k === "2") chooseOption(1);
+      else if (k === "c" || k === "3") chooseOption(2);
+      else if (k === "d" || k === "4") chooseOption(3);
+      else if (k === "0" && state.mode === "frequencia") leaveBlank();
+      else if (e.key === "Enter") nextAction();
+    });
+
+    function updateHeaderPseudo() {
+      document.getElementById("hdrPseudo").textContent = state.pseudonym || "Sem pseudónimo";
+    }
+
+    function selectMode(m) {
+      state.mode = m;
+      document.querySelectorAll(".mode-option").forEach(el => {
+        el.classList.toggle("selected", el.dataset.mode === m);
+      });
+      document.getElementById("timerOptRow").classList.toggle("hidden", m !== "frequencia");
+    }
+
+    async function apiPost(payload) {
+      const resp = await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload)
+      });
+      if (!resp.ok) throw new Error("Erro HTTP " + resp.status);
+      return await resp.json();
+    }
+
+    async function checkServerPing() {
+      try {
+        const res = await fetch(APPS_SCRIPT_URL + "?action=ping");
+        const data = await res.json();
+        if (data.ok) {
+          document.getElementById("bankStatusMsg").textContent =
+            `Ligado ao banco (${data.counts.total} perguntas ativas · CAP1: ${data.counts.CAP1}, CAP2: ${data.counts.CAP2}, CAP3: ${data.counts.CAP3}, CAP5: ${data.counts.CAP5})`;
+        }
+      } catch (err) {
+        document.getElementById("bankStatusMsg").textContent = "Não foi possível contactar o servidor Google Sheets.";
+      }
+    }
+
+    async function refreshStats() {
+      if (IS_DEMO) { renderDemoStats(); return; }
+      try {
+        const q = encodeURIComponent(state.pseudonym || "");
+        const res = await fetch(APPS_SCRIPT_URL + "?action=stats&pseudonym=" + q);
+        const data = await res.json();
+        if (data.ok) renderStats(data);
+      } catch (err) {
+        document.getElementById("leaderboardWrap").innerHTML =
+          '<p class="muted">Ainda sem ligação ao ranking. Verifica o URL do Apps Script.</p>';
+      }
+    }
+
+    function renderDemoStats() {
+      const demo = {
+        user: {
+          pseudonym: state.pseudonym || "Visitante",
+          blocks: 0, xp: 0, avgScore: 0,
+          phred: { code: "Q10", label: "Basecalling Inicial", nextXp: 200 },
+          chapters: { CAP1: {c:0,t:0}, CAP2: {c:0,t:0}, CAP3: {c:0,t:0}, CAP5: {c:0,t:0} }
+        },
+        leaderboard: []
+      };
+      renderStats(demo);
+    }
+
+    function renderStats(data) {
+      const u = data.user;
+      document.getElementById("stBlocks").textContent = u.blocks;
+      document.getElementById("stAvg").textContent = Number(u.avgScore || 0).toFixed(1).replace(".", ",");
+      document.getElementById("stXp").textContent = u.xp;
+
+      const ph = u.phred || { code: "Q10", label: "Basecalling Inicial", nextXp: 200 };
+      const pill = document.getElementById("hdrPhred");
+      pill.textContent = `${ph.code} · ${ph.label}`;
+      pill.className = "phred-pill" + (ph.code === "Q30" ? " q30" : ph.code === "Q40" ? " q40" : "");
+
+      document.getElementById("phredLevelTxt").textContent = `${ph.code} · ${ph.label}`;
+      document.getElementById("phredNextTxt").textContent = ph.nextXp ? `${u.xp} / ${ph.nextXp} XP` : "Nível máximo atingido!";
+      const pct = ph.nextXp ? Math.min(100, Math.round((u.xp / ph.nextXp) * 100)) : 100;
+      document.getElementById("phredBar").style.width = pct + "%";
+
+      // Mastery bars
+      const cont = document.getElementById("capMasteryContainer");
+      cont.innerHTML = "";
+      let weakest = null;
+      let weakestPct = 101;
+
+      ["CAP1", "CAP2", "CAP3", "CAP5"].forEach(cap => {
+        const s = (u.chapters && u.chapters[cap]) ? u.chapters[cap] : { c: 0, t: 0 };
+        const p = s.t > 0 ? Math.round((s.c / s.t) * 100) : 0;
+        if (s.t >= 3 && p < weakestPct) { weakestPct = p; weakest = cap; }
+        const cls = s.t === 0 ? "" : (p < 55 ? "weak" : (p >= 75 ? "good" : ""));
+        cont.innerHTML += `
+          <div class="cap-bar-item">
+            <div class="cap-bar-head">
+              <span>${CAP_LABELS[cap]}</span>
+              <span class="muted">${s.t > 0 ? `${p}% (${s.c}/${s.t})` : "Sem dados"}</span>
+            </div>
+            <div class="cap-bar-track">
+              <div class="cap-bar-fill ${cls}" style="width:${p}%"></div>
+            </div>
+          </div>`;
+      });
+
+      document.getElementById("weakestHint").textContent = weakest
+        ? `Sugestão de revisão: foca atenção especial em ${CAP_LABELS[weakest]} (${weakestPct}% de acerto).`
+        : "Completa o teu primeiro bloco para veres o diagnóstico por capítulo.";
+
+      // Leaderboard
+      const lbWrap = document.getElementById("leaderboardWrap");
+      if (!data.leaderboard || data.leaderboard.length === 0) {
+        lbWrap.innerHTML = '<p class="muted">Ainda não há blocos registados. Sê o primeiro a entrar no ranking!</p>';
+        return;
+      }
+      const myLower = (state.pseudonym || "").toLowerCase();
+      let html = `<table class="lb"><thead><tr>
+        <th>#</th><th>Pseudónimo</th><th>Nível</th><th>XP</th><th>Média</th><th>Blocos</th>
+      </tr></thead><tbody>`;
+      data.leaderboard.forEach((row, i) => {
+        const isMe = myLower && row.pseudonym.toLowerCase() === myLower;
+        html += `<tr class="${isMe ? "me" : ""}">
+          <td>${i + 1}</td>
+          <td>${escapeHtml(row.pseudonym)}</td>
+          <td><strong>${row.phred.code}</strong></td>
+          <td>${row.xp}</td>
+          <td>${Number(row.avgScore).toFixed(1).replace(".", ",")}</td>
+          <td>${row.blocks}</td>
+        </tr>`;
+      });
+      html += "</tbody></table>";
+      lbWrap.innerHTML = html;
+    }
+
+    async function startBlock() {
+      const pseudo = document.getElementById("inputPseudo").value.trim();
+      if (!pseudo) {
+        showToast("Escolhe primeiro um pseudónimo para começar.");
+        document.getElementById("inputPseudo").focus();
+        return;
+      }
+      state.pseudonym = pseudo;
+      localStorage.setItem("bioinf_pseudo", pseudo);
+      updateHeaderPseudo();
+
+      const btn = document.getElementById("btnStart");
+      btn.disabled = true;
+      btn.textContent = "A preparar bloco aleatório...";
+
+      try {
+        let blockData;
+        if (IS_DEMO) {
+          blockData = {
+            ok: true,
+            blockToken: "DEMO_" + Date.now(),
+            mode: state.mode,
+            questions: DEMO_QUESTIONS.map(q => ({ ...q }))
+          };
+        } else {
+          blockData = await apiPost({
+            action: "get_block",
+            pseudonym: state.pseudonym,
+            mode: state.mode,
+            seenIds: state.seenIds
+          });
+        }
+
+        if (!blockData.ok) {
+          showToast(blockData.error || "Erro ao obter perguntas.");
+          return;
+        }
+
+        state.blockToken = blockData.blockToken;
+        state.questions = blockData.questions;
+        state.answers = {};
+        state.studyChecked = {};
+        state.currentIdx = 0;
+        state.streak = 0;
+        state.startedAt = Date.now();
+
+        // Registar IDs vistos localmente para reduzir repetições
+        const newIds = state.questions.map(q => q.id);
+        state.seenIds = Array.from(new Set(state.seenIds.concat(newIds))).slice(-180);
+        localStorage.setItem("bioinf_seen", JSON.stringify(state.seenIds));
+
+        showView("viewQuiz");
+        setupTimer();
+        renderQuestion();
+      } catch (err) {
+        showToast("Falha na ligação ao servidor: " + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Começar Bloco de 10 Perguntas";
+      }
+    }
+
+    function setupTimer() {
+      clearInterval(state.timerHandle);
+      const badge = document.getElementById("timerBadge");
+      if (state.mode === "frequencia" && document.getElementById("chkTimer").checked) {
+        state.secondsLeft = 600;
+        badge.classList.remove("hidden");
+        updateTimerLabel();
+        state.timerHandle = setInterval(() => {
+          state.secondsLeft--;
+          updateTimerLabel();
+          if (state.secondsLeft <= 0) {
+            clearInterval(state.timerHandle);
+            showToast("Tempo esgotado! A submeter bloco...");
+            finishBlock();
+          }
+        }, 1000);
+      } else {
+        badge.classList.add("hidden");
+      }
+    }
+
+    function updateTimerLabel() {
+      const m = Math.floor(Math.max(0, state.secondsLeft) / 60);
+      const s = Math.max(0, state.secondsLeft) % 60;
+      document.getElementById("timerBadge").textContent =
+        String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+    }
+
+    function currentQuestion() {
+      return state.questions[state.currentIdx];
+    }
+
+    function renderQuestion() {
+      const q = currentQuestion();
+      const total = state.questions.length;
+      const idx = state.currentIdx;
+
+      document.getElementById("qCounter").textContent = `Pergunta ${idx + 1} / ${total}`;
+      document.getElementById("qCapBadge").textContent = q.cap;
+      document.getElementById("qSubtemaBadge").textContent = q.subtema || "";
+      document.getElementById("quizProgress").style.width = `${Math.round(((idx + 1) / total) * 100)}%`;
+      document.getElementById("qStem").textContent = q.stem;
+
+      // Streak badge no modo estudo
+      const sb = document.getElementById("streakBadge");
+      if (state.mode === "estudo") {
+        sb.classList.remove("hidden");
+        sb.textContent = `Sequência: ${state.streak}`;
+      } else {
+        sb.classList.add("hidden");
+      }
+
+      // Dots de navegação no modo frequência
+      const dotsEl = document.getElementById("qDots");
+      if (state.mode === "frequencia") {
+        dotsEl.classList.remove("hidden");
+        dotsEl.innerHTML = "";
+        state.questions.forEach((item, i) => {
+          const answered = state.answers[item.id] !== undefined && state.answers[item.id] !== null;
+          const b = document.createElement("button");
+          b.className = "q-dot" + (i === idx ? " active" : "") + (answered ? " answered" : "");
+          b.textContent = i + 1;
+          b.onclick = () => { state.currentIdx = i; renderQuestion(); };
+          dotsEl.appendChild(b);
+        });
+      } else {
+        dotsEl.classList.add("hidden");
+      }
+
+      // Opções A–D
+      const optWrap = document.getElementById("optionsContainer");
+      optWrap.innerHTML = "";
+      const letters = ["A", "B", "C", "D"];
+      const sel = state.answers[q.id];
+      const checked = state.studyChecked[q.id];
+
+      q.options.forEach((optText, i) => {
+        const btn = document.createElement("button");
+        btn.className = "opt-btn";
+        if (checked) {
+          btn.disabled = true;
+          if (i === checked.correctIdx) btn.classList.add("correct");
+          else if (i === sel && !checked.correct) btn.classList.add("wrong");
+        } else if (sel === i) {
+          btn.classList.add("selected");
+        }
+        btn.innerHTML = `<span class="opt-letter">${letters[i]}</span><span>${escapeHtml(optText)}</span>`;
+        btn.onclick = () => chooseOption(i);
+        optWrap.appendChild(btn);
+      });
+
+      // Feedback do modo estudo
+      const fb = document.getElementById("studyFeedback");
+      if (state.mode === "estudo" && checked) {
+        fb.classList.remove("hidden");
+        fb.className = "feedback-box " + (checked.correct ? "ok" : "err");
+        fb.innerHTML = `<strong>${checked.correct ? "Correto! (+1)" : "Incorreto (−0,2)"}</strong><br>${escapeHtml(checked.explicacao || "")}`;
+      } else {
+        fb.classList.add("hidden");
+      }
+
+      // Botões de navegação
+      document.getElementById("btnBlank").classList.toggle("hidden", state.mode !== "frequencia");
+      document.getElementById("btnPrev").classList.toggle("hidden", state.mode !== "frequencia" || idx === 0);
+
+      const btnNext = document.getElementById("btnNext");
+      if (state.mode === "estudo") {
+        if (!checked) {
+          btnNext.textContent = "Verificar Resposta";
+          btnNext.disabled = (sel === undefined || sel === null);
+        } else {
+          btnNext.disabled = false;
+          btnNext.textContent = (idx === total - 1) ? "Ver Resumo e Guardar" : "Próxima Pergunta";
+        }
+      } else {
+        btnNext.disabled = false;
+        btnNext.textContent = (idx === total - 1) ? "Submeter Bloco" : "Seguinte";
+      }
+    }
+
+    function chooseOption(optIdx) {
+      const q = currentQuestion();
+      if (state.mode === "estudo" && state.studyChecked[q.id]) return;
+      state.answers[q.id] = optIdx;
+      renderQuestion();
+    }
+
+    function leaveBlank() {
+      const q = currentQuestion();
+      state.answers[q.id] = null;
+      if (state.currentIdx < state.questions.length - 1) {
+        state.currentIdx++;
+      }
+      renderQuestion();
+    }
+
+    function prevQuestion() {
+      if (state.currentIdx > 0) {
+        state.currentIdx--;
+        renderQuestion();
+      }
+    }
+
+    async function nextAction() {
+      const q = currentQuestion();
+      const isLast = state.currentIdx === state.questions.length - 1;
+
+      if (state.mode === "estudo") {
+        if (!state.studyChecked[q.id]) {
+          const sel = state.answers[q.id];
+          if (sel === undefined || sel === null) return;
+          await verifyStudyQuestion(q, sel);
+          return;
+        }
+        if (isLast) await finishBlock();
+        else { state.currentIdx++; renderQuestion(); }
+      } else {
+        if (isLast) await finishBlock();
+        else { state.currentIdx++; renderQuestion(); }
+      }
+    }
+
+    async function verifyStudyQuestion(q, selectedIdx) {
+      const btn = document.getElementById("btnNext");
+      btn.disabled = true;
+      btn.textContent = "A verificar...";
+      try {
+        let res;
+        if (IS_DEMO) {
+          res = {
+            ok: true,
+            correct: selectedIdx === q._demoKey,
+            correctIdx: q._demoKey,
+            explicacao: q._demoExp
+          };
+        } else {
+          res = await apiPost({
+            action: "check_one",
+            blockToken: state.blockToken,
+            qId: q.id,
+            selectedIdx: selectedIdx
+          });
+        }
+        if (!res.ok) {
+          showToast(res.error || "Erro ao verificar resposta.");
+          return;
+        }
+        state.studyChecked[q.id] = res;
+        state.streak = res.correct ? state.streak + 1 : 0;
+        renderQuestion();
+      } catch (err) {
+        showToast("Erro de rede: " + err.message);
+        renderQuestion();
+      }
+    }
+
+    async function finishBlock() {
+      clearInterval(state.timerHandle);
+      const elapsedSec = Math.round((Date.now() - state.startedAt) / 1000);
+      const btn = document.getElementById("btnNext");
+      btn.disabled = true;
+      btn.textContent = "A corrigir e guardar...";
+
+      try {
+        let res;
+        if (IS_DEMO) {
+          res = gradeDemoLocally();
+        } else {
+          res = await apiPost({
+            action: "submit_block",
+            blockToken: state.blockToken,
+            answers: state.answers,
+            elapsedSec: elapsedSec
+          });
+        }
+        if (!res.ok) {
+          showToast(res.error || "Erro ao submeter bloco.");
+          btn.disabled = false;
+          return;
+        }
+        renderResults(res, elapsedSec);
+        if (res.stats) renderStats(res.stats);
+        showView("viewResults");
+      } catch (err) {
+        showToast("Falha ao submeter: " + err.message);
+        btn.disabled = false;
+      }
+    }
+
+    function gradeDemoLocally() {
+      let certas = 0, erradas = 0, branco = 0;
+      const capStats = { CAP1:{c:0,t:0}, CAP2:{c:0,t:0}, CAP3:{c:0,t:0}, CAP5:{c:0,t:0} };
+      const review = {};
+      state.questions.forEach(q => {
+        capStats[q.cap].t++;
+        const sel = state.answers[q.id];
+        let status = "branco";
+        if (sel === undefined || sel === null) branco++;
+        else if (sel === q._demoKey) { certas++; status = "certa"; capStats[q.cap].c++; }
+        else { erradas++; status = "errada"; }
+        review[q.id] = {
+          status, selectedIdx: sel ?? null, correctIdx: q._demoKey,
+          explicacao: q._demoExp, cap: q.cap, subtema: q.subtema
+        };
+      });
+      const score = Math.max(0, Math.round((certas - erradas * 0.2) * 100) / 100);
+      return { ok: true, score, certas, erradas, branco, capStats, review };
+    }
+
+    function renderResults(res, elapsedSec) {
+      const total = state.questions.length;
+      document.getElementById("resScore").textContent =
+        `${Number(res.score).toFixed(1).replace(".", ",")} / ${total}`;
+      const mins = Math.floor(elapsedSec / 60);
+      const secs = elapsedSec % 60;
+      document.getElementById("resSummary").textContent =
+        `Pseudónimo: ${state.pseudonym} · Tempo: ${mins}m ${String(secs).padStart(2,"0")}s · +${Math.round(res.score * 10)} XP`;
+
+      document.getElementById("resCertas").textContent = res.certas;
+      document.getElementById("resErradas").textContent = res.erradas;
+      document.getElementById("resBranco").textContent = res.branco;
+
+      const capGrid = document.getElementById("resCapGrid");
+      capGrid.innerHTML = "";
+      ["CAP1", "CAP2", "CAP3", "CAP5"].forEach(c => {
+        const s = res.capStats[c] || { c: 0, t: 0 };
+        capGrid.innerHTML += `
+          <div class="stat-box">
+            <div class="val">${s.c}/${s.t}</div>
+            <div class="lbl">${c}</div>
+          </div>`;
+      });
+
+      const list = document.getElementById("reviewList");
+      list.innerHTML = "";
+      const letters = ["A", "B", "C", "D"];
+      state.questions.forEach((q, idx) => {
+        const r = res.review[q.id];
+        const statusLabel = r.status === "certa" ? "Certa (+1)" : r.status === "errada" ? "Errada (−0,2)" : "Em branco (0)";
+        const yourAns = (r.selectedIdx !== null && r.selectedIdx !== undefined)
+          ? `${letters[r.selectedIdx]}) ${q.options[r.selectedIdx]}`
+          : "Sem resposta";
+        const corrAns = `${letters[r.correctIdx]}) ${q.options[r.correctIdx]}`;
+
+        const div = document.createElement("div");
+        div.className = "review-item " + r.status;
+        div.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:6px;">
+            <div>
+              <span class="badge cap">${q.cap}</span>
+              <span class="badge">${escapeHtml(q.subtema || "")}</span>
+              <span class="badge">${statusLabel}</span>
+            </div>
+            <button class="btn btn-ghost" onclick="openFlagModal(state.questions[${idx}])">
+              ⚑ Sinalizar
+            </button>
+          </div>
+          <p style="font-weight:600; margin-bottom:6px;">${idx + 1}. ${escapeHtml(q.stem)}</p>
+          <p style="font-size:0.86rem;"><strong>Tua resposta:</strong> ${escapeHtml(yourAns)}</p>
+          ${r.status !== "certa" ? `<p style="font-size:0.86rem; color:var(--success);"><strong>Resposta certa:</strong> ${escapeHtml(corrAns)}</p>` : ""}
+          <div class="review-exp"><strong>Explicação:</strong> ${escapeHtml(r.explicacao || "")}</div>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    function openFlagModal(qObj) {
+      if (!qObj) return;
+      state.flagTarget = qObj;
+      document.getElementById("flagQInfo").textContent =
+        `Pergunta ${qObj.id} (${qObj.cap}): "${qObj.stem.slice(0, 110)}${qObj.stem.length > 110 ? "..." : ""}"`;
+      document.getElementById("flagComment").value = "";
+      document.getElementById("flagModal").classList.add("open");
+    }
+
+    function closeFlagModal() {
+      document.getElementById("flagModal").classList.remove("open");
+      state.flagTarget = null;
+    }
+
+    async function submitFlag() {
+      if (!state.flagTarget) return;
+      const motivo = document.getElementById("flagReason").value;
+      const comentario = document.getElementById("flagComment").value.trim();
+      const btn = document.getElementById("btnSendFlag");
+      btn.disabled = true;
+      btn.textContent = "A enviar...";
+
+      try {
+        if (IS_DEMO) {
+          showToast("Demo: sinalização simulada com sucesso.");
+          closeFlagModal();
+          return;
+        }
+        const res = await apiPost({
+          action: "flag_question",
+          pseudonym: state.pseudonym || "Estudante",
+          qId: state.flagTarget.id,
+          cap: state.flagTarget.cap,
+          motivo,
+          comentario
+        });
+        if (res.ok) {
+          showToast("Sinalização enviada para o docente. Obrigado!");
+          closeFlagModal();
+        } else {
+          showToast(res.error || "Erro ao enviar sinalização.");
+        }
+      } catch (err) {
+        showToast("Falha ao enviar sinalização: " + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Enviar sinalização";
+      }
+    }
+
+    function abortQuiz() {
+      if (!confirm("Sair do bloco atual sem guardar o resultado?")) return;
+      clearInterval(state.timerHandle);
+      goHome();
+    }
+
+    function goHome() {
+      clearInterval(state.timerHandle);
+      showView("viewHome");
+      refreshStats();
+    }
+
+    function showView(id) {
+      ["viewHome", "viewQuiz", "viewResults"].forEach(v => {
+        document.getElementById(v).classList.toggle("hidden", v !== id);
+      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      clearTimeout(t._tm);
+      t._tm = setTimeout(() => t.classList.remove("show"), 3200);
+    }
+
+    function escapeHtml(s) {
+      return String(s || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+  </script>
+</body>
+</html>
