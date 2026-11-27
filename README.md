@@ -43,10 +43,28 @@ Colours, corner radius, shadows and fonts are defined once at the top of
 `assets/css/style.css` (section 1), with a second set of colours for dark mode, which
 follows the visitor's system setting.
 
+## Bioinformatics quiz
+
+`bioinformatica/quiz/` is a multiple-choice training quiz for the Bioinformatics course,
+published at <https://joelarrais.github.io/bioinformatica/quiz/>. It is deliberately not
+linked from the personal page; the quiz links back to it. `bioinformatica/` is reserved
+for a future course page.
+
+- The question bank, scoring, XP, Phred levels and class ranking live in a Google Apps
+  Script web app; its URL is `APPS_SCRIPT_URL` at the top of `bioinformatica/quiz/quiz.js`.
+  Without it the quiz runs in demo mode with 4 sample questions.
+- Achievements, personal best, days in a row and the theme are kept in the student's
+  browser (per device and pseudonym), not on the server.
+- Google Analytics uses the same property and the same consent answer as the personal
+  page. Events sent: block started and completed (mode, score) and question flagged;
+  never the pseudonym.
+
 ## Preview locally
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Then open <http://localhost:8000>.
+Then open <http://localhost:8000> (and <http://localhost:8000/bioinformatica/quiz/>).
+Use the local server rather than opening the files directly: icons and the quiz's
+calls need a real web address.
